@@ -11,6 +11,8 @@ main.o: code/utility.h code/main.cpp
 utility.o: code/utility.h code/utility.cpp
 	$(CC) -c code/utility.cpp -o make/utility.o
 
+User.o: code/utility.h code/User.h code/User.cpp
+	$(CC) -c code/User.cpp -o make/User.cpp
 
 .PHONY: clean
 clean:
