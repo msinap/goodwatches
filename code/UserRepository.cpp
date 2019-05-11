@@ -2,16 +2,16 @@
 
 void UserRepository::addUser(vector<string> &remainingWordsOfLine) {
     if(getAndPopBack(remainingWordsOfLine) != "email")
-        throw NotFoundError();
+        throw BadRequestError();
     string email = getAndPopBack(remainingWordsOfLine);
     if (getAndPopBack(remainingWordsOfLine) != "username")
-        throw NotFoundError();
+        throw BadRequestError();
     string username = getAndPopBack(remainingWordsOfLine);
     if (getAndPopBack(remainingWordsOfLine) != "password")
-        throw NotFoundError();
+        throw BadRequestError();
     string password = getAndPopBack(remainingWordsOfLine);
     if (getAndPopBack(remainingWordsOfLine) != "age")
-        throw NotFoundError();
+        throw BadRequestError();
     string age = getAndPopBack(remainingWordsOfLine);
 
     if (remainingWordsOfLine.empty()) {
@@ -20,13 +20,13 @@ void UserRepository::addUser(vector<string> &remainingWordsOfLine) {
     }
 
     if (getAndPopBack(remainingWordsOfLine) != "publisher")
-        throw NotFoundError();
+        throw BadRequestError();
     string isPublisher = getAndPopBack(remainingWordsOfLine);
     if (isPublisher == "true") {
         users.push_back(new Publisher(email, username, password, age, users.size()+1));
     }else if(isPublisher == "false"){
         users.push_back(new User(email, username, password, age, users.size()+1));
     }else {
-        throw NotFoundError();
+        throw BadRequestError();
     }
 }

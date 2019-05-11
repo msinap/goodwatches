@@ -2,7 +2,7 @@
 
 string getAndPopBack(vector<string> &vec) {
     if (vec.empty())
-        throw NotFoundError();
+        throw BadRequestError();
     string ret = vec.back();
     vec.pop_back();
     return ret;

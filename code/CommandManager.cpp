@@ -37,12 +37,11 @@ void CommandManager::inputCommands() {
 void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
     if (word == "signup") {
-        string questionMark = getAndPopBack(remainingWordsOfLine);
-        if (questionMark != "?")
-            throw NotFoundError();
+        if (getAndPopBack(remainingWordsOfLine) != "?")
+            throw BadRequestError();
         userRepository->addUser(remainingWordsOfLine);
     }else {
-
+        throw NotFoundError();
     }
 }
 
