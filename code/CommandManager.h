@@ -6,6 +6,7 @@
 
 class CommandManager {
 public:
+    CommandManager();
     void inputCommands();
 
 private:
@@ -14,6 +15,8 @@ private:
     void proccessPutCommands(vector<string> &remainingWordsOfLine);
     void proccessGetCommands(vector<string> &remainingWordsOfLine);
     void proccessDeleteCommands(vector<string> &remainingWordsOfLine);
+
+    UserRepository* userRepository;
 };
 
 #endif
