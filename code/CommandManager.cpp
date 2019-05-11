@@ -40,6 +40,10 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
         if (getAndPopBack(remainingWordsOfLine) != "?")
             throw BadRequestError();
         userRepository->addUser(remainingWordsOfLine);
+    }else if (word == "login"){
+        if (getAndPopBack(remainingWordsOfLine) != "?")
+            throw BadRequestError();
+        // userRepository->login(remainingWordsOfLine);
     }else {
         throw NotFoundError();
     }

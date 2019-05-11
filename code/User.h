@@ -6,6 +6,7 @@
 class User {
 public:
     User(string _email, string _username, string _password, string _age, int _id);
+    string getUsername();
 protected:
     string email;
     string username;

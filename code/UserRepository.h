@@ -9,6 +9,8 @@ class UserRepository {
 public:
     void addUser(vector<string> &remainingWordsOfLine);
 private:
+    bool isUsernameExisted(string username);
+
     vector<User*> users;
 };
 
