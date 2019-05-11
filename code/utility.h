@@ -11,5 +11,6 @@ class BadRequestError {};
 class NotFoundError {};
 class PermissionDeniedError {};
 
+string getAndPopBack(vector<string> &vec);
 
 #endif

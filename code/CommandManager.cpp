@@ -12,17 +12,14 @@ void CommandManager::inputCommands() {
         if (wordsOfLine.empty())
             continue;
         try {
-            if (wordsOfLine.back() == "POST") {
-                wordsOfLine.pop_back();
+            string word = getAndPopBack(wordsOfLine);
+            if (word == "POST") {
                 proccessPostCommands(wordsOfLine);
-            }else if (wordsOfLine.back() == "PUT") {
-                wordsOfLine.pop_back();
+            }else if (word == "PUT") {
                 proccessPutCommands(wordsOfLine);
-            }else if (wordsOfLine.back() == "GET") {
-                wordsOfLine.pop_back();
+            }else if (word == "GET") {
                 proccessGetCommands(wordsOfLine);
-            }else if (wordsOfLine.back() == "DELETE") {
-                wordsOfLine.pop_back();
+            }else if (word == "DELETE") {
                 proccessDeleteCommands(wordsOfLine);
             }else {
                 throw BadRequestError();
@@ -38,10 +35,13 @@ void CommandManager::inputCommands() {
 }
 
 void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) {
-    if (remainingWordsOfLine.empty())
-        throw NotFoundError();
-    string word = remainingWordsOfLine.back();
+    string word = getAndPopBack(remainingWordsOfLine);
     if (word == "signup") {
+        string questionMark = getAndPopBack(remainingWordsOfLine);
+        if (questionMark != "?")
+            throw NotFoundError();
+        userRepository->addUser(remainingWordsOfLine);
+    }else {
 
     }
 }
