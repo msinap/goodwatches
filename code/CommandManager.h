@@ -9,6 +9,7 @@ public:
 
 private:
     vector<string> splitLine(string line);
+
 };
 
 #endif

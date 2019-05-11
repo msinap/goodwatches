@@ -4,6 +4,21 @@ void CommandManager::inputCommands() {
     string inputLine;
     while (getline(cin, inputLine)) {
         vector<string> wordsOfLine = splitLine(inputLine);
+
+        if (wordsOfLine.empty())
+            continue;
+
+        if (wordsOfLine[0] == "POST") {
+
+        }else if (wordsOfLine[0] == "PUT") {
+
+        }else if (wordsOfLine[0] == "GET") {
+
+        }else if (wordsOfLine[0] == "DELETE") {
+
+        }else {
+            cout << "Bad Request" << endl;
+        }
     }
 }
 
