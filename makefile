@@ -5,7 +5,7 @@ all: a.out
 a.out: main.o utility.o CommandManager.o User.o
 	$(CC) make/main.o make/utility.o make/User.o make/CommandManager.o -o a.out
 
-main.o: code/utility.h code/main.cpp
+main.o: code/utility.h code/CommandManager.h code/main.cpp
 	$(CC) -c code/main.cpp -o make/main.o
 
 utility.o: code/utility.h code/utility.cpp

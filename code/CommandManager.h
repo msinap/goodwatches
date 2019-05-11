@@ -5,7 +5,10 @@
 
 class CommandManager {
 public:
-    void getCommands();
+    void inputCommands();
+
+private:
+    vector<string> splitLine(string line);
 };
 
 #endif
