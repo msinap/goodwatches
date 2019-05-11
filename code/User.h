@@ -5,9 +5,13 @@
 
 class User {
 public:
-
+    User(string _email, string _username, string _password, string _age, int _id);
 protected:
-
+    string email;
+    string username;
+    string password;
+    string age;
+    int id;
 };
 
 #endif
