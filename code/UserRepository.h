@@ -11,14 +11,16 @@ class UserRepository {
 public:
     UserRepository(CommandManager* _commandManager);
     void addUser(vector<string> &remainingWordsOfLine);
+    void login(vector<string> &remainingWordsOfLine);
 private:
     User* findUserWithUsername(string username);
 
     CommandManager* commandManager;
     vector<User*> users;
+    User* loggedinUser;
 
-    const static vector<string> validKeysForSignup;
-    const static vector<bool> shouldExistKeysForSignup;
+    const static vector<string> validKeysForSignup, validKeysForLogin;
+    const static vector<bool> shouldExistKeysForSignup, shouldExistKeysForLogin;
 };
 
 #endif

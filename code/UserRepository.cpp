@@ -3,6 +3,8 @@
 
 const vector<string> UserRepository::validKeysForSignup = {"email", "username", "password", "age", "publisher"};
 const vector<bool> UserRepository::shouldExistKeysForSignup = {true, true, true, true, false};
+const vector<string> UserRepository::validKeysForLogin = {"username", "password"};
+const vector<bool> UserRepository::shouldExistKeysForLogin = {true, true};
 
 UserRepository::UserRepository(CommandManager* _commandManager)
     : commandManager(_commandManager) {
@@ -21,6 +23,17 @@ void UserRepository::addUser(vector<string> &remainingWordsOfLine) {
     }else {
         throw BadRequestError();
     }
+}
+
+void UserRepository::login(vector<string> &remainingWordsOfLine) {
+    map<string, string> map = commandManager->setValuesInKeys(remainingWordsOfLine, validKeysForLogin,
+                                                              shouldExistKeysForLogin);
+    User* user = findUserWithUsername(map["username"]);
+    if (user == NULL)
+        throw BadRequestError();
+    if (user->getPassword() != map["password"])
+        throw BadRequestError();
+    loggedinUser = user;
 }
 
 User* UserRepository::findUserWithUsername(string username) {

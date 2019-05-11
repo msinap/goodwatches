@@ -7,3 +7,7 @@ User::User(string _email, string _username, string _password, string _age, int _
 string User::getUsername() {
     return username;
 }
+
+string User::getPassword() {
+    return password;
+}
