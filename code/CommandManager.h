@@ -2,6 +2,7 @@
 #define COMMANDMANAGER_H
 
 #include "utility.h"
+#include "User.h"
 
 class CommandManager {
 public:
