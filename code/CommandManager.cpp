@@ -1,7 +1,8 @@
 #include "CommandManager.h"
 
 CommandManager::CommandManager() {
-    userRepository = new UserRepository(this);
+    filmRepository = new FilmRepository(this);
+    userRepository = new UserRepository(this, filmRepository);
 }
 
 void CommandManager::inputCommands() {
@@ -40,10 +41,14 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
         if (getAndPopBack(remainingWordsOfLine) != "?")
             throw BadRequestError();
         userRepository->addUser(remainingWordsOfLine);
-    }else if (word == "login"){
+    }else if (word == "login") {
         if (getAndPopBack(remainingWordsOfLine) != "?")
             throw BadRequestError();
         userRepository->login(remainingWordsOfLine);
+    }else if (word == "films") {
+        if (getAndPopBack(remainingWordsOfLine) != "?")
+            throw BadRequestError();
+        userRepository->postFilm(remainingWordsOfLine);
     }else {
         throw NotFoundError();
     }
@@ -100,6 +105,5 @@ vector<string> CommandManager::splitLine(string line) {
             currentWord += line[i];
         }
     }
-
     return ret;
 }

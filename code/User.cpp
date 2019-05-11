@@ -11,3 +11,7 @@ string User::getUsername() {
 string User::getPassword() {
     return password;
 }
+
+UserType User::getType() {
+    return UserType::Normal;
+}

@@ -3,6 +3,7 @@
 
 #include "utility.h"
 #include "UserRepository.h"
+#include "FilmRepository.h"
 
 class CommandManager {
 public:
@@ -18,6 +19,7 @@ private:
     void proccessDeleteCommands(vector<string> &remainingWordsOfLine);
 
     UserRepository* userRepository;
+    FilmRepository* filmRepository;
 };
 
 #endif

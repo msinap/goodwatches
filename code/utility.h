@@ -14,5 +14,6 @@ class PermissionDeniedError {};
 
 string getAndPopBack(vector<string> &vec);
 
+int stringToInt(string s);
 
 #endif
