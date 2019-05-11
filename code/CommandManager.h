@@ -8,7 +8,8 @@ class CommandManager {
 public:
     CommandManager();
     void inputCommands();
-
+    map<string, string> setValuesInKeys(vector<string> &remainingWordsOfLine, const vector<string> &validKeys,
+                                        const vector<bool> &shouldExistKeys);
 private:
     vector<string> splitLine(string line);
     void proccessPostCommands(vector<string> &remainingWordsOfLine);

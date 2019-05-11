@@ -1,7 +1,7 @@
 #include "CommandManager.h"
 
 CommandManager::CommandManager() {
-    userRepository = new UserRepository();
+    userRepository = new UserRepository(this);
 }
 
 void CommandManager::inputCommands() {
@@ -59,6 +59,31 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 
 void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine) {
 
+}
+
+map<string, string> CommandManager::setValuesInKeys(vector<string> &remainingWordsOfLine, const vector<string> &validKeys,
+                                                    const vector<bool> &shouldExistKeys) {
+    map<string, string> ret;
+    int index = 0;
+    while (!remainingWordsOfLine.empty()) {
+        string key = getAndPopBack(remainingWordsOfLine);
+        string value = getAndPopBack(remainingWordsOfLine);
+
+        while (key != validKeys[index] && index < validKeys.size()) {
+            if (shouldExistKeys[index])
+                throw BadRequestError();
+            index ++;
+        }
+        if (index == validKeys.size())
+            throw BadRequestError();
+
+        ret[key] = value;
+        index ++;
+    }
+    for (; index < validKeys.size(); index ++)
+        if (shouldExistKeys[index])
+            throw BadRequestError();
+    return ret;
 }
 
 vector<string> CommandManager::splitLine(string line) {
