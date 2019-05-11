@@ -3,6 +3,7 @@
 
 #include "utility.h"
 #include "User.h"
+#include "Publisher.h"
 
 class UserRepository {
 public:

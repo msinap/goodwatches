@@ -23,7 +23,7 @@ void UserRepository::addUser(vector<string> &remainingWordsOfLine) {
         throw NotFoundError();
     string isPublisher = getAndPopBack(remainingWordsOfLine);
     if (isPublisher == "true") {
-
+        users.push_back(new Publisher(email, username, password, age, users.size()+1));
     }else if(isPublisher == "false"){
         users.push_back(new User(email, username, password, age, users.size()+1));
     }else {
