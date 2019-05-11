@@ -2,7 +2,7 @@
 #define COMMANDMANAGER_H
 
 #include "utility.h"
-#include "User.h"
+#include "UserRepository.h"
 
 class CommandManager {
 public:
@@ -10,7 +10,10 @@ public:
 
 private:
     vector<string> splitLine(string line);
-
+    void proccessPostCommands(vector<string> &remainingWordsOfLine);
+    void proccessPutCommands(vector<string> &remainingWordsOfLine);
+    void proccessGetCommands(vector<string> &remainingWordsOfLine);
+    void proccessDeleteCommands(vector<string> &remainingWordsOfLine);
 };
 
 #endif
