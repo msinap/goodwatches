@@ -37,18 +37,15 @@ void CommandManager::inputCommands() {
 
 void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
+    if (getAndPopBack(remainingWordsOfLine) != "?")
+        throw BadRequestError();
+    Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "signup") {
-        if (getAndPopBack(remainingWordsOfLine) != "?")
-            throw BadRequestError();
-        userRepository->addUser(remainingWordsOfLine);
+        userRepository->addUser(parameters);
     }else if (word == "login") {
-        if (getAndPopBack(remainingWordsOfLine) != "?")
-            throw BadRequestError();
-        userRepository->login(remainingWordsOfLine);
+        userRepository->login(parameters);
     }else if (word == "films") {
-        if (getAndPopBack(remainingWordsOfLine) != "?")
-            throw BadRequestError();
-        userRepository->postFilm(remainingWordsOfLine);
+        userRepository->postFilm(parameters);
     }else {
         throw NotFoundError();
     }
@@ -66,28 +63,14 @@ void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine
 
 }
 
-map<string, string> CommandManager::setValuesInKeys(vector<string> &remainingWordsOfLine, const vector<string> &validKeys,
-                                                    const vector<bool> &shouldExistKeys) {
+map<string, string> CommandManager::setValuesInKeys(vector<string> &remainingWordsOfLine) {
+    if (remainingWordsOfLine.size() % 2 == 1)
+        throw BadRequestError();
     map<string, string> ret;
-    int index = 0;
-    while (!remainingWordsOfLine.empty()) {
-        string key = getAndPopBack(remainingWordsOfLine);
-        string value = getAndPopBack(remainingWordsOfLine);
-
-        while (key != validKeys[index] && index < validKeys.size()) {
-            if (shouldExistKeys[index])
-                throw BadRequestError();
-            index ++;
-        }
-        if (index == validKeys.size())
-            throw BadRequestError();
-
-        ret[key] = value;
-        index ++;
-    }
-    for (; index < validKeys.size(); index ++)
-        if (shouldExistKeys[index])
-            throw BadRequestError();
+    for (int i = 0; i < remainingWordsOfLine.size(); i += 2)
+        ret[remainingWordsOfLine[i+1]] = remainingWordsOfLine[i];
+    if (ret.size() * 2 != remainingWordsOfLine.size())
+        throw BadRequestError();
     return ret;
 }
 

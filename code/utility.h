@@ -8,6 +8,8 @@
 #include <map>
 using namespace std;
 
+typedef map<string, string> Map;
+
 class BadRequestError {};
 class NotFoundError {};
 class PermissionDeniedError {};
@@ -15,5 +17,11 @@ class PermissionDeniedError {};
 string getAndPopBack(vector<string> &vec);
 
 int stringToInt(string s);
+
+void checkMustHave(const vector<string> &mayHaveList, map<string, string> &parameters);
+void checkMayHave(const vector<string> &mayHaveList, map<string, string> &parameters);
+
+void checkNumeric(string s);
+void addLeadingZeros(string &num);
 
 #endif

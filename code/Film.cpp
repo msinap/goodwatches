@@ -1,19 +1,13 @@
 #include "Film.h"
-#include "CommandManager.h"
 
-const vector<string> Film::validKeysForPost = {"name", "year", "length", "price", "summary", "director"};
-const vector<bool> Film::shouldExistKeysForPost = {true, true, true, true, true};
+Film::Film(Map &parameters, Publisher* _owner, int _id)
+    : data(parameters), owner(_owner), id(_id) {
+    checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
 
-Film::Film(vector<string> &remainingWordsOfLine, Publisher* _owner, CommandManager* _commandManager)
-    : owner(_owner), commandManager(_commandManager) {
-    map<string, string> map = commandManager->setValuesInKeys(remainingWordsOfLine, validKeysForPost,
-                                                              shouldExistKeysForPost);
-    name = map["name"];
-    summary = map["summary"];
-    director = map["director"];
-    year = stringToInt(map["year"]);
-    length = stringToInt(map["length"]);
-    price = stringToInt(map["price"]);
-
-    cout << year << ' ' << price << ' ' << length << endl;
+    checkNumeric(parameters["year"]);
+    addLeadingZeros(parameters["year"]);
+    checkNumeric(parameters["length"]);
+    addLeadingZeros(parameters["length"]);
+    checkNumeric(parameters["price"]);
+    addLeadingZeros(parameters["price"]);
 }

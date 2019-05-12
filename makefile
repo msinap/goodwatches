@@ -14,7 +14,7 @@ utility.o: code/utility.h code/utility.cpp
 CommandManager.o: code/utility.h code/UserRepository.h code/FilmRepository.h code/CommandManager.h code/CommandManager.cpp
 	$(CC) -c code/CommandManager.cpp -o make/CommandManager.o
 
-UserRepository.o: code/utility.h code/CommandManager.h code/User.h code/Publisher.h code/UserRepository.h code/UserRepository.cpp
+UserRepository.o: code/utility.h code/User.h code/Publisher.h code/UserRepository.h code/UserRepository.cpp
 	$(CC) -c code/UserRepository.cpp -o make/UserRepository.o
 
 User.o: code/utility.h code/User.h code/User.cpp

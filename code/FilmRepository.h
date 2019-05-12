@@ -10,7 +10,7 @@ class Publisher;
 class FilmRepository {
 public:
     FilmRepository(CommandManager* _commandManager);
-    void addFilm(vector<string> &remainingWordsOfLine, Publisher* _owner);
+    void addFilm(Map &parameters, Publisher* _owner);
 private:
     vector<Film*> films;
     CommandManager* commandManager;

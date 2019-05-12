@@ -9,8 +9,7 @@ class CommandManager {
 public:
     CommandManager();
     void inputCommands();
-    map<string, string> setValuesInKeys(vector<string> &remainingWordsOfLine, const vector<string> &validKeys,
-                                        const vector<bool> &shouldExistKeys);
+    map<string, string> setValuesInKeys(vector<string> &remainingWordsOfLine);
 private:
     vector<string> splitLine(string line);
     void proccessPostCommands(vector<string> &remainingWordsOfLine);

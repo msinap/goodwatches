@@ -5,18 +5,18 @@
 
 enum class UserType {Normal, Publisher};
 
+class UserRepository;
+
 class User {
 public:
-    User(string _email, string _username, string _password, string _age, int _id);
+    User(Map &parameters, int _id, UserRepository* r);
     string getUsername();
     string getPassword();
     virtual UserType getType();
 protected:
-    string email;
-    string username;
-    string password;
-    string age;
+    Map data;
     int id;
+    UserRepository* userRepository;
 };
 
 #endif

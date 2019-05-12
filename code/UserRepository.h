@@ -11,19 +11,15 @@ class CommandManager;
 class UserRepository {
 public:
     UserRepository(CommandManager* _commandManager, FilmRepository* _filmRepository);
-    void addUser(vector<string> &remainingWordsOfLine);
-    void login(vector<string> &remainingWordsOfLine);
-    void postFilm(vector<string> &remainingWordsOfLine);
-private:
+    void addUser(Map &parameters);
+    void login(Map &parameters);
+    void postFilm(Map &parameters);
     User* findUserWithUsername(string username);
-
+private:
     CommandManager* commandManager;
     FilmRepository* filmRepository;
     vector<User*> users;
     User* loggedinUser;
-
-    const static vector<string> validKeysForSignup, validKeysForLogin;
-    const static vector<bool> shouldExistKeysForSignup, shouldExistKeysForLogin;
 };
 
 #endif

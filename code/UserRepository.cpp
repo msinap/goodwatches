@@ -1,53 +1,44 @@
 #include "UserRepository.h"
 #include "CommandManager.h"
 
-const vector<string> UserRepository::validKeysForSignup = {"email", "username", "password", "age", "publisher"};
-const vector<bool> UserRepository::shouldExistKeysForSignup = {true, true, true, true, false};
-const vector<string> UserRepository::validKeysForLogin = {"username", "password"};
-const vector<bool> UserRepository::shouldExistKeysForLogin = {true, true};
-
 UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* _filmRepository)
     : commandManager(_commandManager), filmRepository(_filmRepository) {
+    users.push_back(NULL);
 }
 
-void UserRepository::addUser(vector<string> &remainingWordsOfLine) {
-    map<string, string> map = commandManager->setValuesInKeys(remainingWordsOfLine, validKeysForSignup,
-                                                              shouldExistKeysForSignup);
-    if(findUserWithUsername(map["username"]) != NULL)
-        throw BadRequestError();
-
-    if (map.find("publisher") == map.end() || map["publisher"] == "false") {
-        users.push_back(new User(map["email"], map["username"], map["password"], map["age"], users.size()+1));
-    }else if(map["publisher"] == "true"){
-        users.push_back(new Publisher(map["email"], map["username"], map["password"], map["age"], users.size()+1));
-    }else {
+void UserRepository::addUser(Map &parameters) {
+    if (parameters.find("publisher") == parameters.end() || parameters["publisher"] == "false") {
+        users.push_back(new User(parameters, users.size(), this));
+    } else if (parameters["publisher"] == "true") {
+        users.push_back(new Publisher(parameters, users.size(), this));
+    } else {
         throw BadRequestError();
     }
+    loggedinUser = users.back();
 }
 
-void UserRepository::login(vector<string> &remainingWordsOfLine) {
-    map<string, string> map = commandManager->setValuesInKeys(remainingWordsOfLine, validKeysForLogin,
-                                                              shouldExistKeysForLogin);
-    User* user = findUserWithUsername(map["username"]);
+void UserRepository::login(Map &parameters) {
+    checkMustHave({"username", "password"}, parameters);
+    User* user = findUserWithUsername(parameters["username"]);
     if (user == NULL)
-        throw BadRequestError();
-    if (user->getPassword() != map["password"])
+        throw PermissionDeniedError();
+    if (user->getPassword() != parameters["password"])
         throw BadRequestError();
     loggedinUser = user;
 }
 
-void UserRepository::postFilm(vector<string> &remainingWordsOfLine) {
+void UserRepository::postFilm(Map &parameters) {
     if (loggedinUser == NULL)
         throw BadRequestError();
     if (loggedinUser->getType() == UserType::Normal)
         throw PermissionDeniedError();
     Publisher* loggedinPublisher = dynamic_cast<Publisher*> (loggedinUser);
-    filmRepository->addFilm(remainingWordsOfLine, loggedinPublisher);
+    filmRepository->addFilm(parameters, loggedinPublisher);
 }
 
 User* UserRepository::findUserWithUsername(string username) {
-    for (User* user : users)
-        if (user->getUsername() == username)
-            return user;
+    for (int id = 1; id < users.size(); id ++)
+        if (users[id]->getUsername() == username)
+            return users[id];
     return NULL;
 }

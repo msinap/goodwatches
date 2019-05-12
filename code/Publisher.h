@@ -4,9 +4,11 @@
 #include "utility.h"
 #include "User.h"
 
+class UserRepository;
+
 class Publisher : public User {
 public:
-    Publisher(string _email, string _username, string _password, string _age, int _id);
+    Publisher(Map &parameters, int _id, UserRepository* r);
     virtual UserType getType();
 protected:
 
