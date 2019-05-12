@@ -6,6 +6,7 @@
 #include <string>
 #include <algorithm>
 #include <map>
+#include <set>
 using namespace std;
 
 typedef map<string, string> Map;

@@ -8,11 +8,11 @@ class Publisher;
 
 class Film {
 public:
-    Film(Map &parameters, Publisher* _owner, int _id);
+    Film(Map &parameters);
+    void edit(Map &parameters);
 private:
     Map data;
-    int id;
-    Publisher* owner;
+    bool isForSale;
 };
 
 #endif

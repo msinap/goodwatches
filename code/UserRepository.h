@@ -13,7 +13,7 @@ public:
     UserRepository(CommandManager* _commandManager, FilmRepository* _filmRepository);
     void addUser(Map &parameters);
     void login(Map &parameters);
-    void postFilm(Map &parameters);
+    User* getLoggedinUser();
     User* findUserWithUsername(string username);
 private:
     CommandManager* commandManager;

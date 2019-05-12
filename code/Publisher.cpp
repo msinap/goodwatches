@@ -10,5 +10,13 @@ UserType Publisher::getType() {
 }
 
 void Publisher::postFilm(Map &parameters) {
-    filmRepository->addFilm(parameters, this);
+    filmRepository->addFilm(parameters);
+    filmsId.insert(filmRepository->getLastId());
+}
+
+void Publisher::editFilm(Map &parameters) {
+    int id = stringToInt(parameters["film_id"]);
+    if (filmsId.find(id) == filmsId.end())
+        throw PermissionDeniedError();
+    filmRepository->getFilmWithId(id)->edit(parameters);
 }

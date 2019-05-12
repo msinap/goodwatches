@@ -27,17 +27,11 @@ void UserRepository::login(Map &parameters) {
     loggedinUser = user;
 }
 
-void UserRepository::postFilm(Map &parameters) {
+User* UserRepository::getLoggedinUser() {
     if (loggedinUser == NULL)
         throw PermissionDeniedError();
-    loggedinUser->postFilm(parameters);
+    return loggedinUser;
 }
-
-/*void UserRepository::editFilm(Map &parameters) {
-    if (loggedinUser == NULL || loggedinUser->getType() == UserType::Normal)
-        throw PermissionDeniedError();
-
-}*/
 
 User* UserRepository::findUserWithUsername(string username) {
     for (int id = 1; id < users.size(); id ++)

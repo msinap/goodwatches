@@ -28,3 +28,7 @@ UserType User::getType() {
 void User::postFilm(Map &parameters) {
     throw PermissionDeniedError();
 }
+
+void User::editFilm(Map &parameters) {
+    throw PermissionDeniedError();
+}

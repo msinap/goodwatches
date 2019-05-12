@@ -45,7 +45,7 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
     }else if (word == "login") {
         userRepository->login(parameters);
     }else if (word == "films") {
-        userRepository->postFilm(parameters);
+        userRepository->getLoggedinUser()->postFilm(parameters);
     }else {
         throw NotFoundError();
     }
@@ -58,10 +58,11 @@ void CommandManager::proccessPutCommands(vector<string> &remainingWordsOfLine) {
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "films") {
-        //userRepository->editFilm(parameters);
-    } else {
+        userRepository->getLoggedinUser()->editFilm(parameters);
+    }else {
         throw NotFoundError();
     }
+    cout << "OK" << endl;
 }
 
 void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {

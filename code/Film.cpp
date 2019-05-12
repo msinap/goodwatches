@@ -1,7 +1,7 @@
 #include "Film.h"
 
-Film::Film(Map &parameters, Publisher* _owner, int _id)
-    : data(parameters), owner(_owner), id(_id) {
+Film::Film(Map &parameters)
+    : data(parameters), isForSale(true) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
 
     checkNumeric(parameters["year"]);
@@ -10,4 +10,10 @@ Film::Film(Map &parameters, Publisher* _owner, int _id)
     addLeadingZeros(parameters["length"]);
     checkNumeric(parameters["price"]);
     addLeadingZeros(parameters["price"]);
+}
+
+void Film::edit(Map &parameters) {
+    checkMayHave({"film_id", "name", "year", "length", "price", "summary", "director"}, parameters);
+    for (auto x : parameters)
+        data.insert(x);
 }
