@@ -10,6 +10,7 @@ class Film {
 public:
     Film(Map &parameters);
     void edit(Map &parameters);
+    void stopSale(Map &parameters);
 private:
     Map data;
     bool isForSale;

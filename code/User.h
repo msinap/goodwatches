@@ -16,6 +16,7 @@ public:
     virtual UserType getType();
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
+    virtual void deleteFilm(Map &parameters);
 protected:
     Map data;
     int id;

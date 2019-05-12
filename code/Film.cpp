@@ -17,3 +17,10 @@ void Film::edit(Map &parameters) {
     for (auto x : parameters)
         data.insert(x);
 }
+
+void Film::stopSale(Map &parameters) {
+    checkMayHave({"film_id"}, parameters);
+    if (isForSale == false)
+        throw BadRequestError();
+    isForSale = false;
+}

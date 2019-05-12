@@ -15,8 +15,16 @@ void Publisher::postFilm(Map &parameters) {
 }
 
 void Publisher::editFilm(Map &parameters) {
+    filmRepository->getFilmWithId(getAndCheckFilmIdFrom(parameters))->edit(parameters);
+}
+
+void Publisher::deleteFilm(Map &parameters) {
+    filmRepository->getFilmWithId(getAndCheckFilmIdFrom(parameters))->stopSale(parameters);
+}
+
+int Publisher::getAndCheckFilmIdFrom(Map &parameters) {
     int id = stringToInt(parameters["film_id"]);
     if (filmsId.find(id) == filmsId.end())
         throw PermissionDeniedError();
-    filmRepository->getFilmWithId(id)->edit(parameters);
+    return id;
 }

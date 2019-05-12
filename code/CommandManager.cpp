@@ -70,7 +70,16 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 }
 
 void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine) {
-
+    string word = getAndPopBack(remainingWordsOfLine);
+    if (getAndPopBack(remainingWordsOfLine) != "?")
+        throw BadRequestError();
+    Map parameters = setValuesInKeys(remainingWordsOfLine);
+    if (word == "films") {
+        userRepository->getLoggedinUser()->deleteFilm(parameters);
+    }else {
+        throw NotFoundError();
+    }
+    cout << "OK" << endl;
 }
 
 map<string, string> CommandManager::setValuesInKeys(vector<string> &remainingWordsOfLine) {
