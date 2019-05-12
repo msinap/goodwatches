@@ -49,10 +49,19 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
     }else {
         throw NotFoundError();
     }
+    cout << "OK" << endl;
 }
 
 void CommandManager::proccessPutCommands(vector<string> &remainingWordsOfLine) {
-
+    string word = getAndPopBack(remainingWordsOfLine);
+    if (getAndPopBack(remainingWordsOfLine) != "?")
+        throw BadRequestError();
+    Map parameters = setValuesInKeys(remainingWordsOfLine);
+    if (word == "films") {
+        //userRepository->editFilm(parameters);
+    } else {
+        throw NotFoundError();
+    }
 }
 
 void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {

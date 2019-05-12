@@ -8,9 +8,9 @@ UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* 
 
 void UserRepository::addUser(Map &parameters) {
     if (parameters.find("publisher") == parameters.end() || parameters["publisher"] == "false") {
-        users.push_back(new User(parameters, users.size(), this));
+        users.push_back(new User(parameters, users.size(), this, filmRepository));
     } else if (parameters["publisher"] == "true") {
-        users.push_back(new Publisher(parameters, users.size(), this));
+        users.push_back(new Publisher(parameters, users.size(), this, filmRepository));
     } else {
         throw BadRequestError();
     }
@@ -29,12 +29,15 @@ void UserRepository::login(Map &parameters) {
 
 void UserRepository::postFilm(Map &parameters) {
     if (loggedinUser == NULL)
-        throw BadRequestError();
-    if (loggedinUser->getType() == UserType::Normal)
         throw PermissionDeniedError();
-    Publisher* loggedinPublisher = dynamic_cast<Publisher*> (loggedinUser);
-    filmRepository->addFilm(parameters, loggedinPublisher);
+    loggedinUser->postFilm(parameters);
 }
+
+/*void UserRepository::editFilm(Map &parameters) {
+    if (loggedinUser == NULL || loggedinUser->getType() == UserType::Normal)
+        throw PermissionDeniedError();
+
+}*/
 
 User* UserRepository::findUserWithUsername(string username) {
     for (int id = 1; id < users.size(); id ++)

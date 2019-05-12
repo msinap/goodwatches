@@ -1,8 +1,9 @@
 #include "User.h"
 #include "UserRepository.h"
+#include "FilmRepository.h"
 
-User::User(Map &parameters, int _id, UserRepository* r)
-    : data(parameters), id(_id), userRepository(r) {
+User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
+    : data(parameters), id(_id), userRepository(ur), filmRepository(fr) {
     checkMustHave({"email", "username", "password", "age"}, data);
     checkMayHave ({"email", "username", "password", "age", "publisher"}, data);
     //TODO checkEmail(parameters["email"]);
@@ -22,4 +23,8 @@ string User::getPassword() {
 
 UserType User::getType() {
     return UserType::Normal;
+}
+
+void User::postFilm(Map &parameters) {
+    throw PermissionDeniedError();
 }

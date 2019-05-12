@@ -6,17 +6,20 @@
 enum class UserType {Normal, Publisher};
 
 class UserRepository;
+class FilmRepository;
 
 class User {
 public:
-    User(Map &parameters, int _id, UserRepository* r);
+    User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr);
     string getUsername();
     string getPassword();
     virtual UserType getType();
+    virtual void postFilm(Map &parameters);
 protected:
     Map data;
     int id;
     UserRepository* userRepository;
+    FilmRepository* filmRepository;
 };
 
 #endif
