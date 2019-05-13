@@ -22,6 +22,8 @@ vector<string> Film::getOutput() {
 }
 
 bool Film::areFiltersPassed(Map &parameters) {
+    if (!forSale)
+        return false;
     for (auto &x : parameters) {
         string key = x.first, value = x.second;
         if (key == "name" || key == "price" || key == "director") {

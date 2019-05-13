@@ -15,6 +15,7 @@ public:
     string getPassword();
     string getEmail();
     void follow(Map &parameters);
+    void findFilms(Map &parameters);
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);

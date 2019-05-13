@@ -72,11 +72,21 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
     if (word == "followers") {
         Map parameters = setValuesInKeys(remainingWordsOfLine);
         userRepository->getLoggedinUser()->outputFollowers(parameters);
-    }else if(word == "published") {
-        if (getAndPopBack(remainingWordsOfLine) != "?")
-            throw BadRequestError();
-        Map parameters = setValuesInKeys(remainingWordsOfLine);
+        return;
+    }
+
+    if (getAndPopBack(remainingWordsOfLine) != "?")
+        throw BadRequestError();
+    Map parameters = setValuesInKeys(remainingWordsOfLine);
+
+    if(word == "published") {
         userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
+    }else if (word == "films") {
+        if (parameters.find("film_id") != parameters.end()) {
+            //userRepository->getLoggedinUser()->showFilm(parameters);
+        }else {
+            userRepository->getLoggedinUser()->findFilms(parameters);
+        }
     }else {
         throw NotFoundError();
     }

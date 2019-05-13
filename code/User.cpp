@@ -17,6 +17,12 @@ void User::follow(Map &parameters) {
     userRepository->getUserWithId(stringToInt(parameters["user_id"]))->addFollower(id);
 }
 
+void User::findFilms(Map &parameters) {
+    checkMayHave({"name", "min_year", "max_year", "min_rate", "price", "director"}, parameters);
+    set<int> filteredFilmsId = filmRepository->filterAllFilms(parameters);
+    filmRepository->printAndMakeOutput(filteredFilmsId);
+}
+
 string User::getUsername() {
     return data["username"];
 }

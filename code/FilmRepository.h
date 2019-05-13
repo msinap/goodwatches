@@ -12,7 +12,8 @@ public:
     FilmRepository(CommandManager* _commandManager);
     void addFilm(Map &parameters);
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
-    set<vector<string>> makeOutput(set<int> filmsId);
+    set<int> filterAllFilms(Map &parameters);
+    void printAndMakeOutput(set<int> filmsId);
     Film* getFilmWithId(int id);
     int getLastId();
 private:

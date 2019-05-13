@@ -15,14 +15,25 @@ set<int> FilmRepository::filterFilms(Map &parameters, set<int> &filmsId) {
     return filteredFilmsId;
 }
 
-set<vector<string>> FilmRepository::makeOutput(set<int> filmsId) {
+set<int> FilmRepository::filterAllFilms(Map &parameters) {
+    set<int> filteredFilmsId;
+    for (int filmId = 1; filmId < films.size(); filmId ++) {
+        Film* film = getFilmWithId(filmId);
+        if (film->areFiltersPassed(parameters))
+            filteredFilmsId.insert(filmId);
+    }
+    return filteredFilmsId;
+}
+
+void FilmRepository::printAndMakeOutput(set<int> filmsId) {
     set<vector<string>> output;
     for (int filmId : filmsId) {
         Film* film = getFilmWithId(filmId);
         vector<string> filmOutput = film->getOutput();
         output.insert(filmOutput);
     }
-    return output;
+    print({"Film Id", "Film Name", "Film Length", "Film Price", "Rate", "Production Year", "Film Director"},
+          output, "");
 }
 
 int FilmRepository::getLastId() {
