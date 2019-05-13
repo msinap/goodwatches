@@ -13,7 +13,7 @@ public:
     void addFilm(Map &parameters);
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);
-    void printAndMakeOutput(set<int> filmsId);
+    void outputFilmsById(set<int> filmsId);
     Film* getFilmWithId(int id);
     int getLastId();
 private:

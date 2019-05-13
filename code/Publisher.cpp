@@ -38,7 +38,7 @@ void Publisher::outputPublishedFilms(Map &parameters) {
         checkNumeric(parameters["min_year"]);
 
     set<int> filteredFilmsId = filmRepository->filterFilms(parameters, filmsId);
-    filmRepository->printAndMakeOutput(filteredFilmsId);
+    filmRepository->outputFilmsById(filteredFilmsId);
 }
 
 void Publisher::postFilm(Map &parameters) {

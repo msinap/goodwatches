@@ -25,7 +25,7 @@ set<int> FilmRepository::filterAllFilms(Map &parameters) {
     return filteredFilmsId;
 }
 
-void FilmRepository::printAndMakeOutput(set<int> filmsId) {
+void FilmRepository::outputFilmsById(set<int> filmsId) {
     set<vector<string>> output;
     for (int filmId : filmsId) {
         Film* film = getFilmWithId(filmId);
