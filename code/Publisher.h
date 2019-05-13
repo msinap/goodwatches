@@ -14,6 +14,7 @@ public:
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);
     virtual void addFollower(int id);
+    virtual void outputFollowers(Map &parameters);
 protected:
     int getAndCheckFilmIdFrom(Map &parameters);
 

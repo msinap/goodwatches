@@ -8,6 +8,28 @@ string getAndPopBack(vector<string> &vec) {
     return ret;
 }
 
+void print(const vector<string> &header, set<vector<string>> output, const string &title) {
+    if (title != "")
+        cout << title << endl;
+    for (int i = 0; i < header.size(); i++) {
+        cout << header[i];
+        if (i != header.size()-1)
+            cout << " | ";
+    }
+    cout << endl;
+    int lineNumber = 1;
+    for (vector<string> vec : output) {
+        cout << lineNumber << ". ";
+        for (int i = 0; i < vec.size(); i++) {
+            cout << vec[i];
+            if (i != vec.size()-1)
+                cout << " | ";
+        }
+        cout << endl;
+        lineNumber ++;
+    }
+}
+
 int stringToInt(string s) {
     int ret = 0;
     for (int i = 0; i < s.size(); i++) {
@@ -16,6 +38,19 @@ int stringToInt(string s) {
             throw BadRequestError();
         ret += s[i] - '0';
     }
+    return ret;
+}
+
+string intToString(int n) {
+    string ret = "";
+    while (n > 0) {
+        ret += char(n % 10 + '0');
+        n /= 10;
+    }
+    for (int i = 0; i < ret.size()/2; i++)
+        swap(ret[i] , ret[ret.size()-i-1]);
+    if (!ret.size())
+        ret += '0';
     return ret;
 }
 

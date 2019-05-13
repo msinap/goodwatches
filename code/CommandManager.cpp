@@ -68,7 +68,13 @@ void CommandManager::proccessPutCommands(vector<string> &remainingWordsOfLine) {
 }
 
 void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
-
+    string word = getAndPopBack(remainingWordsOfLine);
+    Map parameters = setValuesInKeys(remainingWordsOfLine);
+    if (word == "followers") {
+        userRepository->getLoggedinUser()->outputFollowers(parameters);
+    }else {
+        throw NotFoundError();
+    }
 }
 
 void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine) {

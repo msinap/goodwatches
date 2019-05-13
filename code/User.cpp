@@ -21,11 +21,12 @@ void User::follow(Map &parameters) {
 string User::getUsername() {
     return data["username"];
 }
-
 string User::getPassword() {
     return data["password"];
 }
-
+string User::getEmail() {
+    return data["email"];
+}
 UserType User::getType() {
     return UserType::Normal;
 }
@@ -33,7 +34,6 @@ UserType User::getType() {
 void User::addFollower(int id) {
     throw BadRequestError();
 }
-
 void User::postFilm(Map &parameters) {
     throw PermissionDeniedError();
 }
@@ -41,5 +41,8 @@ void User::editFilm(Map &parameters) {
     throw PermissionDeniedError();
 }
 void User::deleteFilm(Map &parameters) {
+    throw PermissionDeniedError();
+}
+void User::outputFollowers(Map &parameters) {
     throw PermissionDeniedError();
 }

@@ -13,11 +13,13 @@ public:
     User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr);
     string getUsername();
     string getPassword();
+    string getEmail();
     void follow(Map &parameters);
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);
     virtual void addFollower(int id);
+    virtual void outputFollowers(Map &parameters);
     virtual UserType getType();
 protected:
     Map data;
