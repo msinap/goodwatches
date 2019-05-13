@@ -9,27 +9,20 @@ set<int> FilmRepository::filterFilms(Map &parameters, set<int> &filmsId) {
     set<int> filteredFilmsId;
     for (int filmId : filmsId) {
         Film* film = getFilmWithId(filmId);
-        Map filmData = film->getData();
-        bool passFilter = true;
-        for (auto &x : parameters) {
-            string key = x.first, value = x.second;
-            if (key == "name" || key == "price" || key == "director") {
-                if (filmData[key] != value)
-                    passFilter = false;
-            }else if (key == "min_year") {
-                if (filmData["year"] < addLeadingZeros(value))
-                    passFilter = false;
-            }else if (key == "max_year") {
-                if (filmData["year"] > addLeadingZeros(value))
-                    passFilter = false;
-            }else if (key == "min_rate") {
-                //TODO
-            }
-        }
-        if (passFilter)
+        if (film->areFiltersPassed(parameters))
             filteredFilmsId.insert(filmId);
     }
     return filteredFilmsId;
+}
+
+set<vector<string>> FilmRepository::makeOutput(set<int> filmsId) {
+    set<vector<string>> output;
+    for (int filmId : filmsId) {
+        Film* film = getFilmWithId(filmId);
+        vector<string> filmOutput = film->getOutput();
+        output.insert(filmOutput);
+    }
+    return output;
 }
 
 int FilmRepository::getLastId() {
@@ -43,5 +36,5 @@ Film* FilmRepository::getFilmWithId(int id) {
 }
 
 void FilmRepository::addFilm(Map &parameters) {
-    films.push_back(new Film(parameters));
+    films.push_back(new Film(parameters, films.size()));
 }

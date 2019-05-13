@@ -8,13 +8,15 @@ class Publisher;
 
 class Film {
 public:
-    Film(Map &parameters);
+    Film(Map &parameters, int _id);
     void edit(Map &parameters);
     void stopSale(Map &parameters);
-    Map getData();
+    vector<string> getOutput();
+    bool areFiltersPassed(Map &parameters);
     bool isForSale();
 private:
     Map data;
+    int id;
     bool forSale;
 };
 

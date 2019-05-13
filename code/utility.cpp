@@ -11,6 +11,7 @@ string getAndPopBack(vector<string> &vec) {
 void print(const vector<string> &header, set<vector<string>> output, const string &title) {
     if (title != "")
         cout << title << endl;
+    cout << "#. ";
     for (int i = 0; i < header.size(); i++) {
         cout << header[i];
         if (i != header.size()-1)

@@ -38,19 +38,7 @@ void Publisher::outputPublishedFilms(Map &parameters) {
         checkNumeric(parameters["min_year"]);
 
     set<int> filteredFilmsId = filmRepository->filterFilms(parameters, filmsId);
-    set<vector<string>> output;
-    for (int filmId : filteredFilmsId) {
-        Map filmData = filmRepository->getFilmWithId(filmId)->getData();
-        vector<string> filmOutput;
-        filmOutput.push_back(intToString(filmId));
-        filmOutput.push_back(filmData["name"]);
-        filmOutput.push_back(filmData["length"]);
-        filmOutput.push_back(filmData["price"]);
-        // TODO rate
-        filmOutput.push_back(deleteLeadingZeros(filmData["year"]));
-        filmOutput.push_back(filmData["director"]);
-        output.insert(filmOutput);
-    }
+    set<vector<string>> output = filmRepository->makeOutput(filteredFilmsId);
     print({"Film Id", "Film Name", "Film Length", "Film Price", "Rate", "Production Year", "Film Director"},
           output, "");
 }
