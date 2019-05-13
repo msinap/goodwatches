@@ -6,7 +6,6 @@ Film::Film(Map &parameters)
 
     checkNumeric(data["year"]);
     data["year"] = addLeadingZeros(data["year"]);
-    cout << "! " << data["year"] << endl;
     checkNumeric(data["length"]);
     checkNumeric(data["price"]);
 }

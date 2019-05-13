@@ -41,7 +41,6 @@ void Publisher::outputPublishedFilms(Map &parameters) {
     set<vector<string>> output;
     for (int filmId : filteredFilmsId) {
         Map filmData = filmRepository->getFilmWithId(filmId)->getData();
-        cout << "! " << parameters["year"] << endl;
         vector<string> filmOutput;
         filmOutput.push_back(intToString(filmId));
         filmOutput.push_back(filmData["name"]);

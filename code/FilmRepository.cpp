@@ -10,7 +10,6 @@ set<int> FilmRepository::filterFilms(Map &parameters, set<int> &filmsId) {
     for (int filmId : filmsId) {
         Film* film = getFilmWithId(filmId);
         Map filmData = film->getData();
-        cout << "! " << filmData["year"] << endl;
         bool passFilter = true;
         for (auto &x : parameters) {
             string key = x.first, value = x.second;
@@ -18,7 +17,6 @@ set<int> FilmRepository::filterFilms(Map &parameters, set<int> &filmsId) {
                 if (filmData[key] != value)
                     passFilter = false;
             }else if (key == "min_year") {
-                cout << addLeadingZeros(value) << "   :   " << filmData["year"] << endl;
                 if (filmData["year"] < addLeadingZeros(value))
                     passFilter = false;
             }else if (key == "max_year") {
