@@ -87,16 +87,3 @@ string addLeadingZeros(string num) {
         num = "0" + num;
     return num;
 }
-
-string deleteLeadingZeros(string num) {
-    int firstNonZero = 0;
-    for (; firstNonZero < num.size(); firstNonZero ++)
-        if (num[firstNonZero] != '0')
-            break;
-    string ret = "";
-    for (int i = firstNonZero; i < num.size(); i++)
-        ret += num[i];
-    if (ret.size() == 0)
-        ret += '0';
-    return ret;
-}

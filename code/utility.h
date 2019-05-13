@@ -25,7 +25,6 @@ void checkMayHave(const vector<string> &mayHaveList, map<string, string> &parame
 
 void checkNumeric(string s);
 string addLeadingZeros(string num);
-string deleteLeadingZeros(string num);
 
 void print(const vector<string> &header, set<vector<string>> output, const string &title);
 
