@@ -1,15 +1,14 @@
 #include "Film.h"
 
 Film::Film(Map &parameters)
-    : data(parameters), isForSale(true) {
+    : data(parameters), forSale(true) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
 
-    checkNumeric(parameters["year"]);
-    addLeadingZeros(parameters["year"]);
-    checkNumeric(parameters["length"]);
-    addLeadingZeros(parameters["length"]);
-    checkNumeric(parameters["price"]);
-    addLeadingZeros(parameters["price"]);
+    checkNumeric(data["year"]);
+    data["year"] = addLeadingZeros(data["year"]);
+    cout << "! " << data["year"] << endl;
+    checkNumeric(data["length"]);
+    checkNumeric(data["price"]);
 }
 
 void Film::edit(Map &parameters) {
@@ -20,7 +19,15 @@ void Film::edit(Map &parameters) {
 
 void Film::stopSale(Map &parameters) {
     checkMayHave({"film_id"}, parameters);
-    if (isForSale == false)
+    if (forSale == false)
         throw BadRequestError();
-    isForSale = false;
+    forSale = false;
+}
+
+bool Film::isForSale() {
+    return forSale;
+}
+
+Map Film::getData() {
+    return data;
 }

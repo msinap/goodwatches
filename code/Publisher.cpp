@@ -28,6 +28,34 @@ void Publisher::outputFollowers(Map &parameters) {
     print({"User Id", "User Username", "User Email"}, output, "List of Followers");
 }
 
+void Publisher::outputPublishedFilms(Map &parameters) {
+    checkMayHave({"name", "min_rate", "price", "min_year", "max_year", "director"}, parameters);
+    if (parameters.find("price") != parameters.end())
+        checkNumeric(parameters["price"]);
+    if (parameters.find("max_year") != parameters.end())
+        checkNumeric(parameters["max_year"]);
+    if (parameters.find("min_year") != parameters.end())
+        checkNumeric(parameters["min_year"]);
+
+    set<int> filteredFilmsId = filmRepository->filterFilms(parameters, filmsId);
+    set<vector<string>> output;
+    for (int filmId : filteredFilmsId) {
+        Map filmData = filmRepository->getFilmWithId(filmId)->getData();
+        cout << "! " << parameters["year"] << endl;
+        vector<string> filmOutput;
+        filmOutput.push_back(intToString(filmId));
+        filmOutput.push_back(filmData["name"]);
+        filmOutput.push_back(filmData["length"]);
+        filmOutput.push_back(filmData["price"]);
+        // TODO rate
+        filmOutput.push_back(deleteLeadingZeros(filmData["year"]));
+        filmOutput.push_back(filmData["director"]);
+        output.insert(filmOutput);
+    }
+    print({"Film Id", "Film Name", "Film Length", "Film Price", "Rate", "Production Year", "Film Director"},
+          output, "");
+}
+
 void Publisher::postFilm(Map &parameters) {
     filmRepository->addFilm(parameters);
     filmsId.insert(filmRepository->getLastId());

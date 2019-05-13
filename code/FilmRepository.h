@@ -11,6 +11,7 @@ class FilmRepository {
 public:
     FilmRepository(CommandManager* _commandManager);
     void addFilm(Map &parameters);
+    set<int> filterFilms(Map &parameters, set<int> &filmsId);
     Film* getFilmWithId(int id);
     int getLastId();
 private:

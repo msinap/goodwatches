@@ -11,9 +11,11 @@ public:
     Film(Map &parameters);
     void edit(Map &parameters);
     void stopSale(Map &parameters);
+    Map getData();
+    bool isForSale();
 private:
     Map data;
-    bool isForSale;
+    bool forSale;
 };
 
 #endif

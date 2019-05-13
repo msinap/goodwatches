@@ -69,9 +69,14 @@ void CommandManager::proccessPutCommands(vector<string> &remainingWordsOfLine) {
 
 void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
-    Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "followers") {
+        Map parameters = setValuesInKeys(remainingWordsOfLine);
         userRepository->getLoggedinUser()->outputFollowers(parameters);
+    }else if(word == "published") {
+        if (getAndPopBack(remainingWordsOfLine) != "?")
+            throw BadRequestError();
+        Map parameters = setValuesInKeys(remainingWordsOfLine);
+        userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
     }else {
         throw NotFoundError();
     }

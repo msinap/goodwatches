@@ -10,7 +10,6 @@ User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
     if(userRepository->findUserWithUsername(data["username"]) != NULL)
         throw BadRequestError();
     checkNumeric(parameters["age"]);
-    addLeadingZeros(parameters["age"]);
 }
 
 void User::follow(Map &parameters) {
@@ -44,5 +43,8 @@ void User::deleteFilm(Map &parameters) {
     throw PermissionDeniedError();
 }
 void User::outputFollowers(Map &parameters) {
+    throw PermissionDeniedError();
+}
+void User::outputPublishedFilms(Map &parameters) {
     throw PermissionDeniedError();
 }

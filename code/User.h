@@ -20,6 +20,7 @@ public:
     virtual void deleteFilm(Map &parameters);
     virtual void addFollower(int id);
     virtual void outputFollowers(Map &parameters);
+    virtual void outputPublishedFilms(Map &parameters);
     virtual UserType getType();
 protected:
     Map data;
