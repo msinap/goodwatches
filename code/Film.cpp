@@ -5,7 +5,6 @@ Film::Film(Map &parameters, int _id)
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
 
     checkNumeric(data["year"]);
-    data["year"] = addLeadingZeros(data["year"]);
     checkNumeric(data["length"]);
     checkNumeric(data["price"]);
 }
@@ -17,7 +16,7 @@ vector<string> Film::getOutput() {
     output.push_back(data["length"]);
     output.push_back(data["price"]);
     // TODO rate
-    output.push_back(deleteLeadingZeros(data["year"]));
+    output.push_back(data["year"]);
     output.push_back(data["director"]);
     return output;
 }
@@ -29,10 +28,10 @@ bool Film::areFiltersPassed(Map &parameters) {
             if (data[key] != value)
                 return false;
         }else if (key == "min_year") {
-            if (data["year"] < addLeadingZeros(value))
+            if (addLeadingZeros(data["year"]) < addLeadingZeros(value))
                 return false;
         }else if (key == "max_year") {
-            if (data["year"] > addLeadingZeros(value))
+            if (addLeadingZeros(data["year"]) > addLeadingZeros(value))
                 return false;
         }else if (key == "min_rate") {
             //TODO
