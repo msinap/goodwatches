@@ -15,6 +15,7 @@ public:
     void login(Map &parameters);
     User* getLoggedinUser();
     User* findUserWithUsername(string username);
+    User* getUserWithId(int id);
 private:
     CommandManager* commandManager;
     FilmRepository* filmRepository;

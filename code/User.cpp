@@ -13,6 +13,11 @@ User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
     addLeadingZeros(parameters["age"]);
 }
 
+void User::follow(Map &parameters) {
+    checkMustHave({"user_id"}, parameters);
+    userRepository->getUserWithId(stringToInt(parameters["user_id"]))->addFollower(id);
+}
+
 string User::getUsername() {
     return data["username"];
 }
@@ -23,6 +28,10 @@ string User::getPassword() {
 
 UserType User::getType() {
     return UserType::Normal;
+}
+
+void User::addFollower(int id) {
+    throw BadRequestError();
 }
 
 void User::postFilm(Map &parameters) {

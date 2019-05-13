@@ -33,6 +33,12 @@ User* UserRepository::getLoggedinUser() {
     return loggedinUser;
 }
 
+User* UserRepository::getUserWithId(int id) {
+    if (id < 1 || id >= users.size())
+        throw BadRequestError();
+    return users[id];
+}
+
 User* UserRepository::findUserWithUsername(string username) {
     for (int id = 1; id < users.size(); id ++)
         if (users[id]->getUsername() == username)

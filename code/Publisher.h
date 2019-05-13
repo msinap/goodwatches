@@ -13,10 +13,12 @@ public:
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);
+    virtual void addFollower(int id);
 protected:
     int getAndCheckFilmIdFrom(Map &parameters);
 
     set<int> filmsId;
+    set<int> followers;
 };
 
 #endif

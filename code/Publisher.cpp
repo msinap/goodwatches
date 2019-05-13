@@ -9,6 +9,10 @@ UserType Publisher::getType() {
     return UserType::Publisher;
 }
 
+void Publisher::addFollower(int id) {
+    followers.insert(id);
+}
+
 void Publisher::postFilm(Map &parameters) {
     filmRepository->addFilm(parameters);
     filmsId.insert(filmRepository->getLastId());
