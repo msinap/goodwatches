@@ -103,7 +103,9 @@ void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine
     Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "films") {
         userRepository->getLoggedinUser()->deleteFilm(parameters);
-    }else {
+    }else if (word == "comments") {
+		userRepository->getLoggedinUser()->deleteComment(parameters);
+	}else {
         throw NotFoundError();
     }
     cout << "OK" << endl;

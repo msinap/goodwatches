@@ -7,7 +7,7 @@ class Comment {
 public:
     Comment(string _message, int _id);
     void reply(Map &parameters);
-    void stopShowing();
+    void hide(Map &parameters);
     vector<string> getOutput();
 private:
     int id;

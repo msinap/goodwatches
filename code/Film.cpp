@@ -58,6 +58,13 @@ bool Film::areFiltersPassed(Map &parameters) {
     return true;
 }
 
+void Film::deleteComment(Map &parameters) {
+	if (parameters.find("comment_id") == parameters.end())
+		throw BadRequestError();
+	int id = stringToInt(parameters["comment_id"]);
+	commentRepository->getCommentWithId(id)->hide(parameters);
+}
+
 void Film::replyComment(Map &parameters) {
 	if (parameters.find("comment_id") == parameters.end())
 		throw BadRequestError();

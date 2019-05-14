@@ -11,6 +11,7 @@ public:
     void stopSale(Map &parameters);
 	void addComment(Map &parameters);
 	void replyComment(Map &parameters);
+	void deleteComment(Map &parameters);
 	void outputDetails(Map &parameters);
 	bool areFiltersPassed(Map &parameters);
 	bool isForSale();

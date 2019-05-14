@@ -10,7 +10,7 @@ void Comment::reply(Map &parameters) {
     replies.push_back(parameters["content"]);
 }
 
-void Comment::stopShowing() {
+void Comment::hide(Map &parameters) {
     if (!isShown)
         throw BadRequestError();
     isShown = false;

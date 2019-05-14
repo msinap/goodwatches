@@ -41,6 +41,11 @@ void Publisher::outputPublishedFilms(Map &parameters) {
     filmRepository->outputFilmsById(filteredFilmsId);
 }
 
+void Publisher::deleteComment(Map &parameters) {
+	int id = getAndCheckFilmId(parameters);
+	filmRepository->getFilmWithId(id)->deleteComment(parameters);
+}
+
 void Publisher::replyComment(Map &parameters) {
 	int id = getAndCheckFilmId(parameters);
 	filmRepository->getFilmWithId(id)->replyComment(parameters);

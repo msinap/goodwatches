@@ -23,6 +23,7 @@ public:
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);
 	virtual void replyComment(Map &parameters);
+	virtual void deleteComment(Map &parameters);
     virtual void outputFollowers(Map &parameters);
     virtual void outputPublishedFilms(Map &parameters);
     virtual UserType getType();
