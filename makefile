@@ -3,7 +3,7 @@ CC := g++ -std=c++11
 all: a.out
 
 a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o
-	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o -o a.out
+	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o -o a.out
 
 main.o: code/utility.h code/CommandManager.h code/main.cpp
 	$(CC) -c code/main.cpp -o make/main.o

@@ -1,8 +1,10 @@
 #include "Film.h"
 
 Film::Film(Map &parameters, int _id)
-    : data(parameters), forSale(true), id(_id), commentRepository() {
+    : data(parameters), forSale(true), id(_id), commentRepository(new CommentRepository()) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
+
+	cout << "!" << endl;
 
     checkNumeric(data["year"]);
     checkNumeric(data["length"]);
@@ -53,6 +55,12 @@ void Film::stopSale(Map &parameters) {
     if (forSale == false)
         throw BadRequestError();
     forSale = false;
+}
+
+void Film::addComment(Map &parameters) {
+	checkMustHave({"film_id", "content"}, parameters);
+	checkMayHave({"film_id", "content"}, parameters);
+	commentRepository->addComment(parameters["content"]);
 }
 
 bool Film::isForSale() {

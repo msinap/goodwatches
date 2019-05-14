@@ -9,6 +9,7 @@ public:
     Film(Map &parameters, int _id);
     void edit(Map &parameters);
     void stopSale(Map &parameters);
+	void addComment(Map &parameters);
     vector<string> getOutput();
     bool areFiltersPassed(Map &parameters);
     bool isForSale();

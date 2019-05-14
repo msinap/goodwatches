@@ -3,7 +3,6 @@
 CommandManager::CommandManager() {
     filmRepository = new FilmRepository(this);
     userRepository = new UserRepository(this, filmRepository);
-	
 }
 
 void CommandManager::inputCommands() {
