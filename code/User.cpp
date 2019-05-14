@@ -18,16 +18,16 @@ void User::follow(Map &parameters) {
 }
 
 void User::findFilms(Map &parameters) {
-    checkMayHave({"name", "min_year", "max_year", "min_rate", "price", "director"}, parameters);
-    if (parameters.find("price") != parameters.end())
-        checkNumeric(parameters["price"]);
-    if (parameters.find("max_year") != parameters.end())
-        checkNumeric(parameters["max_year"]);
-    if (parameters.find("min_year") != parameters.end())
-        checkNumeric(parameters["min_year"]);
-
     set<int> filteredFilmsId = filmRepository->filterAllFilms(parameters);
     filmRepository->outputFilmsById(filteredFilmsId);
+}
+
+void User::rateFilm(Map &parameters) {
+	int filmId = stringToInt(parameters["film_id"]);
+	// TODO
+	//if (purchasedFilmIds.find(filmId) == purchasedFilmIds.end())
+	//	throw PermissionDeniedError();
+	filmRepository->getFilmWithId(filmId)->newRate(parameters, id);
 }
 
 void User::postComment(Map &parameters) {

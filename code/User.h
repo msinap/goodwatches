@@ -15,6 +15,7 @@ public:
     string getPassword();
     string getEmail();
     void follow(Map &parameters);
+	void rateFilm(Map &parameters);
 	void showFilm(Map &parameters);
     void findFilms(Map &parameters);
     void postComment(Map &parameters);
@@ -30,6 +31,7 @@ public:
 protected:
     Map data;
     int id;
+	set<int> purchasedFilmIds;
     UserRepository* userRepository;
     FilmRepository* filmRepository;
 };

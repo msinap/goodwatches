@@ -52,6 +52,8 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
         userRepository->getLoggedinUser()->postComment(parameters);
     }else if (word == "replies") {
 		userRepository->getLoggedinUser()->replyComment(parameters);
+	}else if (word == "rate") {
+		userRepository->getLoggedinUser()->rateFilm(parameters);
 	}else {
         throw NotFoundError();
     }

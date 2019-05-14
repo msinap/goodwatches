@@ -15,7 +15,7 @@ vector<string> Film::getOutput() {
     output.push_back(data["name"]);
     output.push_back(data["length"]);
     output.push_back(data["price"]);
-    // TODO rate
+    output.push_back(to_string(getRate()));
     output.push_back(data["year"]);
     output.push_back(data["director"]);
     return output;
@@ -29,7 +29,7 @@ void Film::outputDetails(Map &parameters) {
 	output.push_back("Length = " + data["length"]);
 	output.push_back("Year = " + data["year"]);
 	output.push_back("Summary = " + data["summary"]);
-	// TODO rate
+	output.push_back("Rate = " + to_string(getRate()));
 	output.push_back("Price = " + data["price"]);
 	output.push_back("");
 	print(output);
@@ -52,22 +52,27 @@ bool Film::areFiltersPassed(Map &parameters) {
             if (addLeadingZeros(data["year"]) > addLeadingZeros(value))
                 return false;
         }else if (key == "min_rate") {
-            //TODO
+			if (addLeadingZeros(intToString(floor(getRate()))) < addLeadingZeros(value))
+				return false;
         }
     }
     return true;
 }
 
+void Film::newRate(Map &parameters, int userId) {
+	checkMustHave({"film_id", "score"}, parameters);
+	checkMayHave({"film_id", "score"}, parameters);
+	int score = stringToInt(parameters["score"]);
+	sumOfRates += score - userRates[userId];
+	userRates[userId] = score;
+}
+
 void Film::deleteComment(Map &parameters) {
-	if (parameters.find("comment_id") == parameters.end())
-		throw BadRequestError();
 	int id = stringToInt(parameters["comment_id"]);
 	commentRepository->getCommentWithId(id)->hide(parameters);
 }
 
 void Film::replyComment(Map &parameters) {
-	if (parameters.find("comment_id") == parameters.end())
-		throw BadRequestError();
 	int id = stringToInt(parameters["comment_id"]);
 	commentRepository->getCommentWithId(id)->reply(parameters);
 }
@@ -89,6 +94,12 @@ void Film::addComment(Map &parameters) {
 	checkMustHave({"film_id", "content"}, parameters);
 	checkMayHave({"film_id", "content"}, parameters);
 	commentRepository->addComment(parameters["content"]);
+}
+
+double Film::getRate() {
+	if (userRates.empty())
+		return 0.0;
+	return (1.0 * sumOfRates) / (1.0 * userRates.size());
 }
 
 bool Film::isForSale() {

@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <map>
 #include <set>
+#include <cmath>
 using namespace std;
 
 typedef map<string, string> Map;

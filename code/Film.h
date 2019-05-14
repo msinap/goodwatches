@@ -14,11 +14,15 @@ public:
 	void deleteComment(Map &parameters);
 	void outputDetails(Map &parameters);
 	bool areFiltersPassed(Map &parameters);
-	bool isForSale();
+	void newRate(Map &parameters, int userId);
 	vector<string> getOutput();
+	double getRate();
+	bool isForSale();
 private:
     Map data;
     bool forSale;
+	map<int, int> userRates;
+	int sumOfRates;
     CommentRepository* commentRepository;
 };
 

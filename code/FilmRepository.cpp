@@ -16,6 +16,16 @@ set<int> FilmRepository::filterFilms(Map &parameters, set<int> &filmsId) {
 }
 
 set<int> FilmRepository::filterAllFilms(Map &parameters) {
+	checkMayHave({"name", "min_year", "max_year", "min_rate", "price", "director"}, parameters);
+    if (parameters.find("price") != parameters.end())
+        checkNumeric(parameters["price"]);
+    if (parameters.find("max_year") != parameters.end())
+        checkNumeric(parameters["max_year"]);
+    if (parameters.find("min_year") != parameters.end())
+        checkNumeric(parameters["min_year"]);
+	if (parameters.find("min_rate") != parameters.end())
+        checkNumeric(parameters["min_rate"]);
+
     set<int> filteredFilmsId;
     for (int filmId = 1; filmId < films.size(); filmId ++) {
         Film* film = getFilmWithId(filmId);
