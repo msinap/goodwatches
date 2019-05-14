@@ -27,5 +27,6 @@ void checkNumeric(string s);
 string addLeadingZeros(string num);
 
 void print(const vector<string> &header, set<vector<string>> output, const string &title);
+void print(const vector<string> &vec);
 
 #endif

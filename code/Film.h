@@ -2,9 +2,7 @@
 #define FILM_H
 
 #include "utility.h"
-
-class CommandManager;
-class Publisher;
+#include "CommentRepository.h"
 
 class Film {
 public:
@@ -18,6 +16,7 @@ private:
     Map data;
     int id;
     bool forSale;
+    CommentRepository* commentRepository;
 };
 
 #endif

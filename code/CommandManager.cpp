@@ -48,6 +48,8 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
         userRepository->getLoggedinUser()->postFilm(parameters);
     }else if (word == "followers") {
         userRepository->getLoggedinUser()->follow(parameters);
+    }else if (word == "comments") {
+        userRepository->getLoggedinUser()->postComment(parameters);
     }else {
         throw NotFoundError();
     }

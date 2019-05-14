@@ -31,6 +31,11 @@ void print(const vector<string> &header, set<vector<string>> output, const strin
     }
 }
 
+void print(const vector<string> &vec) {
+    for (string line : vec)
+        cout << line << endl;
+}
+
 int stringToInt(string s) {
     int ret = 0;
     for (int i = 0; i < s.size(); i++) {

@@ -2,7 +2,7 @@ CC := g++ -std=c++11
 
 all: a.out
 
-a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o
+a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o
 	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o -o a.out
 
 main.o: code/utility.h code/CommandManager.h code/main.cpp
@@ -23,11 +23,17 @@ User.o: code/utility.h code/User.h code/User.cpp
 Publisher.o: code/utility.h code/User.h code/Publisher.h code/Publisher.cpp
 	$(CC) -c code/Publisher.cpp -o make/Publisher.o
 
-FilmRepository.o: code/utility.h code/CommandManager.h code/Film.h code/FilmRepository.h code/FilmRepository.cpp
+FilmRepository.o: code/utility.h code/Film.h code/FilmRepository.h code/FilmRepository.cpp
 	$(CC) -c code/FilmRepository.cpp -o make/FilmRepository.o
 
-Film.o: code/utility.h code/CommandManager.h code/Film.h code/Film.cpp
+Film.o: code/utility.h code/CommentRepository.h code/Film.h code/Film.cpp
 	$(CC) -c code/Film.cpp -o make/Film.o
+
+CommentRepository.o: code/utility.h code/Comment.h code/CommentRepository.h code/CommentRepository.cpp
+	$(CC) -c code/CommentRepository.cpp -o make/CommentRepository.o
+
+Comment.o: code/utility.h code/Comment.h code/Comment.cpp
+	$(CC) -c code/Comment.cpp -o make/Comment.o
 
 .PHONY: clean
 clean:

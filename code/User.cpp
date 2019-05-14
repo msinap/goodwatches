@@ -30,6 +30,11 @@ void User::findFilms(Map &parameters) {
     filmRepository->outputFilmsById(filteredFilmsId);
 }
 
+void User::postComment(Map &parameters) {
+    Film* film = filmRepository->getFilmWithId(stringToInt(parameters["film_id"]));
+    film->addComment(parameters);
+}
+
 string User::getUsername() {
     return data["username"];
 }

@@ -1,7 +1,7 @@
 #include "Film.h"
 
 Film::Film(Map &parameters, int _id)
-    : data(parameters), forSale(true), id(_id) {
+    : data(parameters), forSale(true), id(_id), commentRepository() {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
 
     checkNumeric(data["year"]);
