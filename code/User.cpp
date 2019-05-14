@@ -3,13 +3,30 @@
 #include "FilmRepository.h"
 
 User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
-    : data(parameters), id(_id), userRepository(ur), filmRepository(fr) {
+    : data(parameters), id(_id), userRepository(ur), filmRepository(fr), money(0) {
     checkMustHave({"email", "username", "password", "age"}, data);
     checkMayHave ({"email", "username", "password", "age", "publisher"}, data);
     //TODO checkEmail(parameters["email"]);
     if(userRepository->findUserWithUsername(data["username"]) != NULL)
         throw BadRequestError();
     checkNumeric(parameters["age"]);
+}
+
+void User::addMoney(Map &parameters) {
+	checkMustHave({"amount"}, parameters);
+	checkMayHave({"amount"}, parameters);
+	money += stringToInt(parameters["amount"]);
+}
+
+void User::buyFilm(Map &parameters) {
+	checkMustHave({"film_id"}, parameters);
+	checkMayHave({"film_id"}, parameters);
+	int filmId = stringToInt(parameters["film_id"]);
+	int price = filmRepository->getFilmWithId(filmId)->getPriceAndSell();
+	if (money - price < 0)
+		throw BadRequestError();
+	money -= price;
+	purchasedFilmIds.insert(filmId);
 }
 
 void User::follow(Map &parameters) {
@@ -49,9 +66,6 @@ string User::getPassword() {
 string User::getEmail() {
     return data["email"];
 }
-UserType User::getType() {
-    return UserType::Normal;
-}
 
 void User::addFollower(int id) {
     throw BadRequestError();
@@ -75,5 +89,8 @@ void User::replyComment(Map &parameters) {
 	throw PermissionDeniedError();
 }
 void User::deleteComment(Map &parameters) {
+	throw PermissionDeniedError();
+}
+void User::collectEarning() {
 	throw PermissionDeniedError();
 }

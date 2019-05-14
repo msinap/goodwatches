@@ -6,10 +6,6 @@ Publisher::Publisher(Map &parameters, int _id, UserRepository* ur, FilmRepositor
     : User(parameters, id, ur, fr) {
 }
 
-UserType Publisher::getType() {
-    return UserType::Publisher;
-}
-
 void Publisher::addFollower(int id) {
     followers.insert(id);
 }
@@ -39,6 +35,13 @@ void Publisher::outputPublishedFilms(Map &parameters) {
 
     set<int> filteredFilmsId = filmRepository->filterFilms(parameters, filmsId);
     filmRepository->outputFilmsById(filteredFilmsId);
+}
+
+void Publisher::collectEarning() {
+	for (int filmId : filmsId) {
+		Film* film = filmRepository->getFilmWithId(filmId);
+		money += film->getEarning();
+	}
 }
 
 void Publisher::deleteComment(Map &parameters) {

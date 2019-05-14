@@ -37,6 +37,11 @@ void CommandManager::inputCommands() {
 
 void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
+	if (word == "money" && remainingWordsOfLine.empty()) {
+		userRepository->getLoggedinUser()->collectEarning();
+		cout << "OK" << endl;
+		return;
+	}
     if (getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);
@@ -54,6 +59,10 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 		userRepository->getLoggedinUser()->replyComment(parameters);
 	}else if (word == "rate") {
 		userRepository->getLoggedinUser()->rateFilm(parameters);
+	}else if (word == "money") {
+		userRepository->getLoggedinUser()->addMoney(parameters);
+	}else if (word == "buy") {
+		userRepository->getLoggedinUser()->buyFilm(parameters);
 	}else {
         throw NotFoundError();
     }

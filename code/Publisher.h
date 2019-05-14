@@ -9,7 +9,7 @@ class UserRepository;
 class Publisher : public User {
 public:
     Publisher(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr);
-    virtual UserType getType();
+	virtual void collectEarning();
 	virtual void addFollower(int id);
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);

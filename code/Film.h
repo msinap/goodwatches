@@ -16,13 +16,16 @@ public:
 	bool areFiltersPassed(Map &parameters);
 	void newRate(Map &parameters, int userId);
 	vector<string> getOutput();
+	int getPriceAndSell();
 	double getRate();
 	bool isForSale();
+	int getEarning();
 private:
     Map data;
     bool forSale;
 	map<int, int> userRates;
 	int sumOfRates;
+	int uncollectedEarning;
     CommentRepository* commentRepository;
 };
 

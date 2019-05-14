@@ -3,8 +3,6 @@
 
 #include "utility.h"
 
-enum class UserType {Normal, Publisher};
-
 class UserRepository;
 class FilmRepository;
 
@@ -15,10 +13,13 @@ public:
     string getPassword();
     string getEmail();
     void follow(Map &parameters);
+	void buyFilm(Map &parameters);
+	void addMoney(Map &parameters);
 	void rateFilm(Map &parameters);
 	void showFilm(Map &parameters);
     void findFilms(Map &parameters);
     void postComment(Map &parameters);
+	virtual void collectEarning();
 	virtual void addFollower(int id);
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
@@ -27,10 +28,10 @@ public:
 	virtual void deleteComment(Map &parameters);
     virtual void outputFollowers(Map &parameters);
     virtual void outputPublishedFilms(Map &parameters);
-    virtual UserType getType();
 protected:
     Map data;
     int id;
+	int money;
 	set<int> purchasedFilmIds;
     UserRepository* userRepository;
     FilmRepository* filmRepository;

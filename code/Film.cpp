@@ -1,7 +1,7 @@
 #include "Film.h"
 
 Film::Film(Map &parameters, int _id)
-    : data(parameters), forSale(true), commentRepository(new CommentRepository()) {
+    : data(parameters), forSale(true), commentRepository(new CommentRepository()), uncollectedEarning(0) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
     checkNumeric(data["year"]);
     checkNumeric(data["length"]);
@@ -100,6 +100,24 @@ double Film::getRate() {
 	if (userRates.empty())
 		return 0.0;
 	return (1.0 * sumOfRates) / (1.0 * userRates.size());
+}
+
+int Film::getPriceAndSell() {
+	double rate = getRate();
+	int price = stringToInt(data["price"]);
+	if (rate < 5)
+		uncollectedEarning += 0.80 * price;
+	else if (rate < 8)
+		uncollectedEarning += 0.90 * price;
+	else
+		uncollectedEarning += 0.95 * price;
+	return price;
+}
+
+int Film::getEarning() {
+	int ret = uncollectedEarning;
+	uncollectedEarning = 0;
+	return ret;
 }
 
 bool Film::isForSale() {
