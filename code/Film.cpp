@@ -1,19 +1,17 @@
 #include "Film.h"
 
 Film::Film(Map &parameters, int _id)
-    : data(parameters), forSale(true), id(_id), commentRepository(new CommentRepository()) {
+    : data(parameters), forSale(true), commentRepository(new CommentRepository()) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
-
-	cout << "!" << endl;
-
     checkNumeric(data["year"]);
     checkNumeric(data["length"]);
     checkNumeric(data["price"]);
+	data["id"] = intToString(_id);
 }
 
 vector<string> Film::getOutput() {
     vector<string> output;
-    output.push_back(intToString(id));
+    output.push_back(data["id"]);
     output.push_back(data["name"]);
     output.push_back(data["length"]);
     output.push_back(data["price"]);
@@ -21,6 +19,22 @@ vector<string> Film::getOutput() {
     output.push_back(data["year"]);
     output.push_back(data["director"]);
     return output;
+}
+
+void Film::outputDetails(Map &parameters) {
+	vector<string> output;
+	output.push_back("Details of Film " + data["name"]);
+	output.push_back("Id = " + data["id"]);
+	output.push_back("Director = " + data["director"]);
+	output.push_back("Length = " + data["length"]);
+	output.push_back("Year = " + data["year"]);
+	output.push_back("Summary = " + data["summary"]);
+	// TODO rate
+	output.push_back("Price = " + data["price"]);
+	output.push_back("");
+	print(output);
+	commentRepository->outputAllComments();
+	// TODO recom
 }
 
 bool Film::areFiltersPassed(Map &parameters) {

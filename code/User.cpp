@@ -35,6 +35,11 @@ void User::postComment(Map &parameters) {
     film->addComment(parameters);
 }
 
+void User::showFilm(Map &parameters) {
+	Film* film = filmRepository->getFilmWithId(stringToInt(parameters["film_id"]));
+	film->outputDetails(parameters);
+}
+
 string User::getUsername() {
     return data["username"];
 }

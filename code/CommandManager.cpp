@@ -85,7 +85,7 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
         userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
     }else if (word == "films") {
         if (parameters.find("film_id") != parameters.end()) {
-            //userRepository->getLoggedinUser()->showFilm(parameters);
+            userRepository->getLoggedinUser()->showFilm(parameters);
         }else {
             userRepository->getLoggedinUser()->findFilms(parameters);
         }

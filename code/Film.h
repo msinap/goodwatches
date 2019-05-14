@@ -10,12 +10,12 @@ public:
     void edit(Map &parameters);
     void stopSale(Map &parameters);
 	void addComment(Map &parameters);
+	void outputDetails(Map &parameters);
     vector<string> getOutput();
     bool areFiltersPassed(Map &parameters);
     bool isForSale();
 private:
     Map data;
-    int id;
     bool forSale;
     CommentRepository* commentRepository;
 };

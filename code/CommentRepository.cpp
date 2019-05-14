@@ -26,7 +26,7 @@ void CommentRepository::outputAllComments() {
             if (lineNumber > 0)
                 line += intToString(lineNumber) + ".";
             line += " " + message;
-            output.push_back(message);
+            output.push_back(line);
         }
     }
     print(output);
