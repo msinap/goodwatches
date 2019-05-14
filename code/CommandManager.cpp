@@ -50,7 +50,9 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
         userRepository->getLoggedinUser()->follow(parameters);
     }else if (word == "comments") {
         userRepository->getLoggedinUser()->postComment(parameters);
-    }else {
+    }else if (word == "replies") {
+		userRepository->getLoggedinUser()->replyComment(parameters);
+	}else {
         throw NotFoundError();
     }
     cout << "OK" << endl;

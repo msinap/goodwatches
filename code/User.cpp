@@ -71,3 +71,6 @@ void User::outputFollowers(Map &parameters) {
 void User::outputPublishedFilms(Map &parameters) {
     throw PermissionDeniedError();
 }
+void User::replyComment(Map &parameters) {
+	throw PermissionDeniedError();
+}

@@ -4,8 +4,10 @@ Comment::Comment(string _message, int _id)
     : message(_message), id(_id), isShown(true) {
 }
 
-void Comment::reply(string message) {
-    replies.push_back(message);
+void Comment::reply(Map &parameters) {
+	checkMustHave({"comment_id", "film_id", "content"}, parameters);
+	checkMayHave({"comment_id", "film_id", "content"}, parameters);
+    replies.push_back(parameters["content"]);
 }
 
 void Comment::stopShowing() {

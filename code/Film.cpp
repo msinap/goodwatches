@@ -58,6 +58,13 @@ bool Film::areFiltersPassed(Map &parameters) {
     return true;
 }
 
+void Film::replyComment(Map &parameters) {
+	if (parameters.find("comment_id") == parameters.end())
+		throw BadRequestError();
+	int id = stringToInt(parameters["comment_id"]);
+	commentRepository->getCommentWithId(id)->reply(parameters);
+}
+
 void Film::edit(Map &parameters) {
     checkMayHave({"film_id", "name", "year", "length", "price", "summary", "director"}, parameters);
     for (auto x : parameters)

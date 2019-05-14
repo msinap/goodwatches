@@ -41,20 +41,27 @@ void Publisher::outputPublishedFilms(Map &parameters) {
     filmRepository->outputFilmsById(filteredFilmsId);
 }
 
+void Publisher::replyComment(Map &parameters) {
+	int id = getAndCheckFilmId(parameters);
+	filmRepository->getFilmWithId(id)->replyComment(parameters);
+}
+
 void Publisher::postFilm(Map &parameters) {
     filmRepository->addFilm(parameters);
     filmsId.insert(filmRepository->getLastId());
 }
 
 void Publisher::editFilm(Map &parameters) {
-    filmRepository->getFilmWithId(getAndCheckFilmIdFrom(parameters))->edit(parameters);
+	int id = getAndCheckFilmId(parameters);
+    filmRepository->getFilmWithId(id)->edit(parameters);
 }
 
 void Publisher::deleteFilm(Map &parameters) {
-    filmRepository->getFilmWithId(getAndCheckFilmIdFrom(parameters))->stopSale(parameters);
+	int id = getAndCheckFilmId(parameters);
+    filmRepository->getFilmWithId(id)->stopSale(parameters);
 }
 
-int Publisher::getAndCheckFilmIdFrom(Map &parameters) {
+int Publisher::getAndCheckFilmId(Map &parameters) {
     int id = stringToInt(parameters["film_id"]);
     if (filmsId.find(id) == filmsId.end())
         throw PermissionDeniedError();

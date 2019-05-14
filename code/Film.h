@@ -10,10 +10,11 @@ public:
     void edit(Map &parameters);
     void stopSale(Map &parameters);
 	void addComment(Map &parameters);
+	void replyComment(Map &parameters);
 	void outputDetails(Map &parameters);
-    vector<string> getOutput();
-    bool areFiltersPassed(Map &parameters);
-    bool isForSale();
+	bool areFiltersPassed(Map &parameters);
+	bool isForSale();
+	vector<string> getOutput();
 private:
     Map data;
     bool forSale;

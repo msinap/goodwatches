@@ -18,10 +18,11 @@ public:
 	void showFilm(Map &parameters);
     void findFilms(Map &parameters);
     void postComment(Map &parameters);
+	virtual void addFollower(int id);
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);
-    virtual void addFollower(int id);
+	virtual void replyComment(Map &parameters);
     virtual void outputFollowers(Map &parameters);
     virtual void outputPublishedFilms(Map &parameters);
     virtual UserType getType();

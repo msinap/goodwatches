@@ -27,6 +27,7 @@ void CommentRepository::outputAllComments() {
                 line += intToString(lineNumber) + ".";
             line += " " + message;
             output.push_back(line);
+			lineNumber ++;
         }
     }
     print(output);
