@@ -21,7 +21,7 @@ public:
 protected:
     int getAndCheckFilmId(Map &parameters);
 
-    set<int> filmsId;
+    set<int> publishedFilmIds;
     set<int> followers;
 };
 

@@ -63,6 +63,8 @@ void Film::newRate(Map &parameters, int userId) {
 	checkMustHave({"film_id", "score"}, parameters);
 	checkMayHave({"film_id", "score"}, parameters);
 	int score = stringToInt(parameters["score"]);
+	if (score < 0 || score > 10)
+		throw BadRequestError();
 	sumOfRates += score - userRates[userId];
 	userRates[userId] = score;
 }

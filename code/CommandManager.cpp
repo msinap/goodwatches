@@ -102,7 +102,9 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
         }else {
             userRepository->getLoggedinUser()->findFilms(parameters);
         }
-    }else {
+    }else if (word == "purchased") {
+		userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
+	}else {
         throw NotFoundError();
     }
 }

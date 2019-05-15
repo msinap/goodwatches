@@ -40,21 +40,40 @@ void User::findFilms(Map &parameters) {
 }
 
 void User::rateFilm(Map &parameters) {
-	int filmId = stringToInt(parameters["film_id"]);
-	// TODO
-	//if (purchasedFilmIds.find(filmId) == purchasedFilmIds.end())
-	//	throw PermissionDeniedError();
+	int filmId = getAndCheckFilmId(parameters);
 	filmRepository->getFilmWithId(filmId)->newRate(parameters, id);
 }
 
 void User::postComment(Map &parameters) {
-    Film* film = filmRepository->getFilmWithId(stringToInt(parameters["film_id"]));
+	int filmId = getAndCheckFilmId(parameters);
+    Film* film = filmRepository->getFilmWithId(filmId);
     film->addComment(parameters);
 }
 
 void User::showFilm(Map &parameters) {
-	Film* film = filmRepository->getFilmWithId(stringToInt(parameters["film_id"]));
+	int filmId = stringToInt(parameters["film_id"]);
+	Film* film = filmRepository->getFilmWithId(filmId);
 	film->outputDetails(parameters);
+}
+
+void User::outputPurchasedFilms(Map &parameters) {
+	checkMayHave({"name", "price", "min_year", "max_year", "director"}, parameters);
+    if (parameters.find("price") != parameters.end())
+        checkNumeric(parameters["price"]);
+    if (parameters.find("max_year") != parameters.end())
+        checkNumeric(parameters["max_year"]);
+    if (parameters.find("min_year") != parameters.end())
+        checkNumeric(parameters["min_year"]);
+
+    set<int> filteredFilmsId = filmRepository->filterFilms(parameters, purchasedFilmIds);
+    filmRepository->outputFilmsById(filteredFilmsId);
+}
+
+int User::getAndCheckFilmId(Map &parameters) {
+	int filmId = stringToInt(parameters["film_id"]);
+	if (purchasedFilmIds.find(filmId) == purchasedFilmIds.end())
+		throw PermissionDeniedError();
+	return filmId;
 }
 
 string User::getUsername() {

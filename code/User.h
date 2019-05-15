@@ -19,6 +19,7 @@ public:
 	void showFilm(Map &parameters);
     void findFilms(Map &parameters);
     void postComment(Map &parameters);
+	void outputPurchasedFilms(Map &parameters);
 	virtual void collectEarning();
 	virtual void addFollower(int id);
     virtual void postFilm(Map &parameters);
@@ -29,6 +30,8 @@ public:
     virtual void outputFollowers(Map &parameters);
     virtual void outputPublishedFilms(Map &parameters);
 protected:
+	int getAndCheckFilmId(Map &parameters);
+
     Map data;
     int id;
 	int money;

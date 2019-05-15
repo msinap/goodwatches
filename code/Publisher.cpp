@@ -32,13 +32,15 @@ void Publisher::outputPublishedFilms(Map &parameters) {
         checkNumeric(parameters["max_year"]);
     if (parameters.find("min_year") != parameters.end())
         checkNumeric(parameters["min_year"]);
+	if (parameters.find("min_rate") != parameters.end())
+        checkNumeric(parameters["min_rate"]);
 
-    set<int> filteredFilmsId = filmRepository->filterFilms(parameters, filmsId);
+    set<int> filteredFilmsId = filmRepository->filterFilms(parameters, publishedFilmIds);
     filmRepository->outputFilmsById(filteredFilmsId);
 }
 
 void Publisher::collectEarning() {
-	for (int filmId : filmsId) {
+	for (int filmId : publishedFilmIds) {
 		Film* film = filmRepository->getFilmWithId(filmId);
 		money += film->getEarning();
 	}
@@ -56,7 +58,7 @@ void Publisher::replyComment(Map &parameters) {
 
 void Publisher::postFilm(Map &parameters) {
     filmRepository->addFilm(parameters);
-    filmsId.insert(filmRepository->getLastId());
+    publishedFilmIds.insert(filmRepository->getLastId());
 }
 
 void Publisher::editFilm(Map &parameters) {
@@ -71,7 +73,7 @@ void Publisher::deleteFilm(Map &parameters) {
 
 int Publisher::getAndCheckFilmId(Map &parameters) {
     int id = stringToInt(parameters["film_id"]);
-    if (filmsId.find(id) == filmsId.end())
+    if (publishedFilmIds.find(id) == publishedFilmIds.end())
         throw PermissionDeniedError();
     return id;
 }
