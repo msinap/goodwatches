@@ -31,6 +31,29 @@ void print(const vector<string> &header, set<vector<string>> output, const strin
     }
 }
 
+void print(const vector<string> &header, vector<vector<string>> output, const string &title) {
+    if (title != "")
+        cout << title << endl;
+    cout << "#. ";
+    for (int i = 0; i < header.size(); i++) {
+        cout << header[i];
+        if (i != header.size()-1)
+            cout << " | ";
+    }
+    cout << endl;
+    int lineNumber = 1;
+    for (vector<string> vec : output) {
+        cout << lineNumber << ". ";
+        for (int i = 0; i < vec.size(); i++) {
+            cout << vec[i];
+            if (i != vec.size()-1)
+                cout << " | ";
+        }
+        cout << endl;
+        lineNumber ++;
+    }
+}
+
 void print(const vector<string> &vec) {
     for (string line : vec)
         cout << line << endl;

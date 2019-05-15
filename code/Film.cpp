@@ -9,19 +9,23 @@ Film::Film(Map &parameters, int _id)
 	data["id"] = intToString(_id);
 }
 
-vector<string> Film::getOutput() {
+vector<string> Film::getOutput(bool allDetails) {
     vector<string> output;
     output.push_back(data["id"]);
     output.push_back(data["name"]);
     output.push_back(data["length"]);
-    output.push_back(data["price"]);
-    output.push_back(makePrecisionTwo(to_string(getRate())));
-    output.push_back(data["year"]);
+    if (allDetails) {
+		output.push_back(data["price"]);
+    	output.push_back(makePrecisionTwo(to_string(getRate())));
+    	output.push_back(data["year"]);
+	}
     output.push_back(data["director"]);
     return output;
 }
 
 void Film::outputDetails(Map &parameters) {
+	checkMustHave({"film_id"}, parameters);
+	checkMayHave({"film_id"}, parameters);
 	vector<string> output;
 	output.push_back("Details of Film " + data["name"]);
 	output.push_back("Id = " + data["id"]);
@@ -34,7 +38,6 @@ void Film::outputDetails(Map &parameters) {
 	output.push_back("");
 	print(output);
 	commentRepository->outputAllComments();
-	// TODO recom
 }
 
 bool Film::areFiltersPassed(Map &parameters) {

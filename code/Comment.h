@@ -9,9 +9,10 @@ public:
     void reply(Map &parameters);
     void hide(Map &parameters);
     vector<string> getOutput();
+	bool isShown();
 private:
     int id;
-    bool isShown;
+    bool shown;
     string message;
     vector<string> replies;
 };

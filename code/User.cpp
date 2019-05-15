@@ -22,7 +22,7 @@ void User::buyFilm(Map &parameters) {
 	checkMustHave({"film_id"}, parameters);
 	checkMayHave({"film_id"}, parameters);
 	int filmId = stringToInt(parameters["film_id"]);
-	int price = filmRepository->getFilmWithId(filmId)->getPriceAndSell();
+	int price = filmRepository->getFilmById(filmId)->getPriceAndSell();
 	if (money - price < 0)
 		throw BadRequestError();
 	money -= price;
@@ -41,19 +41,20 @@ void User::findFilms(Map &parameters) {
 
 void User::rateFilm(Map &parameters) {
 	int filmId = getAndCheckFilmId(parameters);
-	filmRepository->getFilmWithId(filmId)->newRate(parameters, id);
+	filmRepository->getFilmById(filmId)->newRate(parameters, id);
 }
 
 void User::postComment(Map &parameters) {
 	int filmId = getAndCheckFilmId(parameters);
-    Film* film = filmRepository->getFilmWithId(filmId);
+    Film* film = filmRepository->getFilmById(filmId);
     film->addComment(parameters);
 }
 
 void User::showFilm(Map &parameters) {
 	int filmId = stringToInt(parameters["film_id"]);
-	Film* film = filmRepository->getFilmWithId(filmId);
+	Film* film = filmRepository->getFilmById(filmId);
 	film->outputDetails(parameters);
+	filmRepository->outputBestFilms(purchasedFilmIds);
 }
 
 void User::outputPurchasedFilms(Map &parameters) {

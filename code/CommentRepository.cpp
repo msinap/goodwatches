@@ -19,6 +19,8 @@ void CommentRepository::outputAllComments() {
     output.push_back("Comments");
     for (int id = 1; id < comments.size(); id++) {
         Comment* comment = getCommentWithId(id);
+		if (!comment->isShown())
+			continue;
         vector<string> commentOutput = comment->getOutput();
         int lineNumber = 0;
         for (string message : commentOutput) {

@@ -15,7 +15,7 @@ public:
 	void outputDetails(Map &parameters);
 	bool areFiltersPassed(Map &parameters);
 	void newRate(Map &parameters, int userId);
-	vector<string> getOutput();
+	vector<string> getOutput(bool allDetails = true);
 	int getPriceAndSell();
 	double getRate();
 	bool isForSale();

@@ -41,19 +41,19 @@ void Publisher::outputPublishedFilms(Map &parameters) {
 
 void Publisher::collectEarning() {
 	for (int filmId : publishedFilmIds) {
-		Film* film = filmRepository->getFilmWithId(filmId);
+		Film* film = filmRepository->getFilmById(filmId);
 		money += film->getEarning();
 	}
 }
 
 void Publisher::deleteComment(Map &parameters) {
 	int id = getAndCheckFilmId(parameters);
-	filmRepository->getFilmWithId(id)->deleteComment(parameters);
+	filmRepository->getFilmById(id)->deleteComment(parameters);
 }
 
 void Publisher::replyComment(Map &parameters) {
 	int id = getAndCheckFilmId(parameters);
-	filmRepository->getFilmWithId(id)->replyComment(parameters);
+	filmRepository->getFilmById(id)->replyComment(parameters);
 }
 
 void Publisher::postFilm(Map &parameters) {
@@ -63,12 +63,12 @@ void Publisher::postFilm(Map &parameters) {
 
 void Publisher::editFilm(Map &parameters) {
 	int id = getAndCheckFilmId(parameters);
-    filmRepository->getFilmWithId(id)->edit(parameters);
+    filmRepository->getFilmById(id)->edit(parameters);
 }
 
 void Publisher::deleteFilm(Map &parameters) {
 	int id = getAndCheckFilmId(parameters);
-    filmRepository->getFilmWithId(id)->stopSale(parameters);
+    filmRepository->getFilmById(id)->stopSale(parameters);
 }
 
 int Publisher::getAndCheckFilmId(Map &parameters) {

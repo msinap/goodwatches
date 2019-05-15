@@ -1,7 +1,7 @@
 #include "Comment.h"
 
 Comment::Comment(string _message, int _id)
-    : message(_message), id(_id), isShown(true) {
+    : message(_message), id(_id), shown(true) {
 }
 
 void Comment::reply(Map &parameters) {
@@ -11,17 +11,19 @@ void Comment::reply(Map &parameters) {
 }
 
 void Comment::hide(Map &parameters) {
-    if (!isShown)
+    if (!shown)
         throw BadRequestError();
-    isShown = false;
+    shown = false;
 }
 
 vector<string> Comment::getOutput() {
     vector<string> output;
-    if (!isShown)
-        return output;
     output.push_back(message);
     for (string reply : replies)
         output.push_back(reply);
     return output;
+}
+
+bool Comment::isShown() {
+	return shown;
 }

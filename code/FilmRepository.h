@@ -14,7 +14,8 @@ public:
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);
     void outputFilmsById(set<int> filmsId);
-    Film* getFilmWithId(int id);
+	void outputBestFilms(set<int> excludedIds);
+    Film* getFilmById(int id);
     int getLastId();
 private:
     vector<Film*> films;
