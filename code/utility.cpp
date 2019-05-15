@@ -60,6 +60,17 @@ string intToString(int n) {
     return ret;
 }
 
+string makePrecisionTwo(string num) {
+	string ret = "";
+	int pointPlace;
+	for (pointPlace = 0; pointPlace < num.size(); pointPlace ++)
+		if (num[pointPlace] == '.')
+			break;
+	for (int i = 0; i <= pointPlace + 2; i++)
+		ret += num[i];
+	return ret;
+}
+
 void checkMustHave(const vector<string> &mustHaveList, Map &parameters) {
     for (string str : mustHaveList)
         if (parameters.find(str) == parameters.end())

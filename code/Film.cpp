@@ -15,7 +15,7 @@ vector<string> Film::getOutput() {
     output.push_back(data["name"]);
     output.push_back(data["length"]);
     output.push_back(data["price"]);
-    output.push_back(to_string(getRate()));
+    output.push_back(makePrecisionTwo(to_string(getRate())));
     output.push_back(data["year"]);
     output.push_back(data["director"]);
     return output;
@@ -29,7 +29,7 @@ void Film::outputDetails(Map &parameters) {
 	output.push_back("Length = " + data["length"]);
 	output.push_back("Year = " + data["year"]);
 	output.push_back("Summary = " + data["summary"]);
-	output.push_back("Rate = " + to_string(getRate()));
+	output.push_back("Rate = " + makePrecisionTwo(to_string(getRate())));
 	output.push_back("Price = " + data["price"]);
 	output.push_back("");
 	print(output);

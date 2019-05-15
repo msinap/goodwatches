@@ -20,6 +20,7 @@ string getAndPopBack(vector<string> &vec);
 
 int stringToInt(string s);
 string intToString(int n);
+string makePrecisionTwo(string num);
 
 void checkMustHave(const vector<string> &mayHaveList, map<string, string> &parameters);
 void checkMayHave(const vector<string> &mayHaveList, map<string, string> &parameters);
