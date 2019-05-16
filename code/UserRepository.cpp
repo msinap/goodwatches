@@ -14,17 +14,23 @@ void UserRepository::addUser(Map &parameters) {
     } else {
         throw BadRequestError();
     }
-    loggedinUser = users.back();
+	changeLoggedinUserTo(users.back());
 }
 
 void UserRepository::login(Map &parameters) {
     checkMustHave({"username", "password"}, parameters);
     User* user = findUserWithUsername(parameters["username"]);
     if (user == NULL)
-        throw PermissionDeniedError();
+        throw BadRequestError();
     if (user->getPassword() != parameters["password"])
         throw BadRequestError();
-    loggedinUser = user;
+	changeLoggedinUserTo(user);
+}
+
+void UserRepository::changeLoggedinUserTo(User* user) {
+	if (loggedinUser != NULL)
+		loggedinUser->logout();
+	loggedinUser = user;
 }
 
 User* UserRepository::getLoggedinUser() {

@@ -12,6 +12,7 @@ public:
     string getUsername();
     string getPassword();
     string getEmail();
+	void logout();
     void follow(Map &parameters);
 	void buyFilm(Map &parameters);
 	void addMoney(Map &parameters);

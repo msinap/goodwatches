@@ -77,6 +77,10 @@ int User::getAndCheckFilmId(Map &parameters) {
 	return filmId;
 }
 
+void User::logout() {
+	
+}
+
 string User::getUsername() {
     return data["username"];
 }

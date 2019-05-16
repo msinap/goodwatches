@@ -17,6 +17,8 @@ public:
     User* findUserWithUsername(string username);
     User* getUserWithId(int id);
 private:
+	void changeLoggedinUserTo(User* user);
+
     CommandManager* commandManager;
     FilmRepository* filmRepository;
     vector<User*> users;
