@@ -121,6 +121,31 @@ void checkNumeric(string s) {
             throw BadRequestError();
 }
 
+void checkEmail(string s) {
+	int atSignPlace = -1;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '@') {
+			if (atSignPlace != -1)
+				throw BadRequestError();
+			atSignPlace = i;
+		}
+	}
+	if (atSignPlace == -1 || atSignPlace == 0)
+		throw BadRequestError();
+	int dotPlace = -1;
+	for (int i = atSignPlace+1; i < s.size(); i++) {
+		if (s[i] == '.') {
+			if (dotPlace != -1)
+				throw BadRequestError();
+			if (i == atSignPlace+1 || i == s.size()-1)
+				throw BadRequestError();
+			dotPlace = i;
+		}
+	}
+	if (dotPlace == -1)
+		throw BadRequestError();
+}
+
 string addLeadingZeros(string num) {
     while (num.size() < 10)
         num = "0" + num;
