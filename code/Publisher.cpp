@@ -1,25 +1,27 @@
 #include "Publisher.h"
 #include "UserRepository.h"
 #include "FilmRepository.h"
+#include "NotificationsRepository.h"
+#include "Notifications.h"
 
-Publisher::Publisher(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
+Publisher::Publisher(Map &parameters, int id, UserRepository* ur, FilmRepository* fr)
     : User(parameters, id, ur, fr) {
 }
 
 void Publisher::addFollower(int id) {
-    followers.insert(id);
+    followerIds.insert(id);
 }
 
 void Publisher::outputFollowers(Map &parameters) {
     checkMayHave({}, parameters);
     set<vector<string>> output;
-    for (int userId : followers) {
-        User* user = userRepository->getUserWithId(userId);
-        vector<string> userOutput;
-        userOutput.push_back(intToString(userId));
-        userOutput.push_back(user->getUsername());
-        userOutput.push_back(user->getEmail());
-        output.insert(userOutput);
+    for (int followerId : followerIds) {
+        User* follower = userRepository->getUserById(followerId);
+        vector<string> followerOutput;
+        followerOutput.push_back(intToString(followerId));
+        followerOutput.push_back(follower->getUsername());
+        followerOutput.push_back(follower->getEmail());
+        output.insert(followerOutput);
     }
     print({"User Id", "User Username", "User Email"}, output, "List of Followers");
 }
@@ -52,13 +54,21 @@ void Publisher::deleteComment(Map &parameters) {
 }
 
 void Publisher::replyComment(Map &parameters) {
-	int id = getAndCheckFilmId(parameters);
-	filmRepository->getFilmById(id)->replyComment(parameters);
+	int filmId = getAndCheckFilmId(parameters);
+	Film* film = filmRepository->getFilmById(filmId);
+	film->replyComment(parameters);
+	int senderId = film->getSenderOfCommentId(stringToInt(parameters["coment_id"]));
+	User* sender = userRepository->getUserById(senderId);
+	sender->getNotificationsRepository()->addNotification(new ReplyToYourCommentNotification(data["username"], id));
 }
 
 void Publisher::postFilm(Map &parameters) {
-    filmRepository->addFilm(parameters);
+    filmRepository->addFilm(parameters, id);
     publishedFilmIds.insert(filmRepository->getLastId());
+	for (int followerId : followerIds) {
+		User* follower = userRepository->getUserById(followerId);
+		follower->getNotificationsRepository()->addNotification(new RegisterNewFilmNotification(data["username"], id));
+	}
 }
 
 void Publisher::editFilm(Map &parameters) {

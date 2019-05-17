@@ -7,7 +7,7 @@
 class CommentRepository {
 public:
     CommentRepository();
-    void addComment(string message);
+    void addComment(string message, int senderId);
     void outputAllComments();
     Comment* getCommentWithId(int id);
 private:

@@ -1,9 +1,11 @@
 #include "User.h"
 #include "UserRepository.h"
 #include "FilmRepository.h"
+#include "NotificationsRepository.h"
+#include "Notifications.h"
 
 User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
-    : data(parameters), id(_id), userRepository(ur), filmRepository(fr), money(0) {
+    : data(parameters), id(_id), userRepository(ur), filmRepository(fr), notificationsRepository(new NotificationsRepository()), money(0) {
     checkMustHave({"email", "username", "password", "age"}, data);
     checkMayHave ({"email", "username", "password", "age", "publisher"}, data);
     checkEmail(parameters["email"]);
@@ -22,16 +24,25 @@ void User::buyFilm(Map &parameters) {
 	checkMustHave({"film_id"}, parameters);
 	checkMayHave({"film_id"}, parameters);
 	int filmId = stringToInt(parameters["film_id"]);
-	int price = filmRepository->getFilmById(filmId)->getPriceAndSell();
+	Film* film = filmRepository->getFilmById(filmId);
+	int price = film->getPriceAndSell();
+
 	if (money - price < 0)
 		throw BadRequestError();
 	money -= price;
 	purchasedFilmIds.insert(filmId);
+
+	User* publisher = userRepository->getUserById(film->getPublisherId());
+	publisher->getNotificationsRepository()->addNotification(new BuyYourFilmNotification(data["username"], id, film->getName(), filmId));
 }
 
 void User::follow(Map &parameters) {
     checkMustHave({"user_id"}, parameters);
-    userRepository->getUserWithId(stringToInt(parameters["user_id"]))->addFollower(id);
+	checkMayHave({"user_id"}, parameters);
+	User* publisher = userRepository->getUserById(stringToInt(parameters["user_id"]));
+    publisher->addFollower(id);
+
+	publisher->getNotificationsRepository()->addNotification(new FollowYouNotification(data["username"], id));
 }
 
 void User::findFilms(Map &parameters) {
@@ -41,13 +52,20 @@ void User::findFilms(Map &parameters) {
 
 void User::rateFilm(Map &parameters) {
 	int filmId = getAndCheckFilmId(parameters);
-	filmRepository->getFilmById(filmId)->newRate(parameters, id);
+	Film* film = filmRepository->getFilmById(filmId);
+	film->newRate(parameters, id);
+	
+	User* publisher = userRepository->getUserById(film->getPublisherId());
+	publisher->getNotificationsRepository()->addNotification(new RateYourFilmNotification(data["username"], id, film->getName(), filmId));
 }
 
 void User::postComment(Map &parameters) {
 	int filmId = getAndCheckFilmId(parameters);
     Film* film = filmRepository->getFilmById(filmId);
-    film->addComment(parameters);
+    film->addComment(parameters, id);
+
+	User* publisher = userRepository->getUserById(film->getPublisherId());
+	publisher->getNotificationsRepository()->addNotification(new CommentOnYourFilmNotification(data["username"], id, film->getName(), filmId));
 }
 
 void User::showFilm(Map &parameters) {
@@ -77,10 +95,21 @@ int User::getAndCheckFilmId(Map &parameters) {
 	return filmId;
 }
 
-void User::logout() {
-	
+void User::seeUnreadNotifications() {
+	notificationsRepository->outputAllUnreadNotifications();
 }
 
+void User::seeReadNotifications(Map &parameters) {
+	notificationsRepository->outputLastReadNotifications(parameters);
+}
+
+void User::logout() {
+	notificationsRepository->readAllNotifications();
+}
+
+NotificationsRepository* User::getNotificationsRepository() {
+	return notificationsRepository;
+}
 string User::getUsername() {
     return data["username"];
 }

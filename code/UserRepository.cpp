@@ -39,7 +39,7 @@ User* UserRepository::getLoggedinUser() {
     return loggedinUser;
 }
 
-User* UserRepository::getUserWithId(int id) {
+User* UserRepository::getUserById(int id) {
     if (id < 1 || id >= users.size())
         throw BadRequestError();
     return users[id];

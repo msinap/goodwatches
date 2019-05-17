@@ -5,21 +5,25 @@
 
 class UserRepository;
 class FilmRepository;
+class NotificationsRepository;
 
 class User {
 public:
     User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr);
+	NotificationsRepository* getNotificationsRepository();
     string getUsername();
     string getPassword();
     string getEmail();
 	void logout();
     void follow(Map &parameters);
 	void buyFilm(Map &parameters);
+	void seeUnreadNotifications();
 	void addMoney(Map &parameters);
 	void rateFilm(Map &parameters);
 	void showFilm(Map &parameters);
     void findFilms(Map &parameters);
     void postComment(Map &parameters);
+	void seeReadNotifications(Map &parameters);
 	void outputPurchasedFilms(Map &parameters);
 	virtual void collectEarning();
 	virtual void addFollower(int id);
@@ -39,6 +43,7 @@ protected:
 	set<int> purchasedFilmIds;
     UserRepository* userRepository;
     FilmRepository* filmRepository;
+	NotificationsRepository* notificationsRepository;
 };
 
 #endif

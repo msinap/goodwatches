@@ -88,7 +88,15 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
         Map parameters = setValuesInKeys(remainingWordsOfLine);
         userRepository->getLoggedinUser()->outputFollowers(parameters);
         return;
-    }
+    }else if (word == "notifications") {
+		if (remainingWordsOfLine.empty()) {
+			userRepository->getLoggedinUser()->seeUnreadNotifications();
+			return;
+		}else {
+			if (getAndPopBack(remainingWordsOfLine) != "read")
+        		throw BadRequestError();
+		}
+	}
 
     if (getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
@@ -104,6 +112,8 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
         }
     }else if (word == "purchased") {
 		userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
+	}else if (word == "notifications") {
+		userRepository->getLoggedinUser()->seeReadNotifications(parameters);
 	}else {
         throw NotFoundError();
     }

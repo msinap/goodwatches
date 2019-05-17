@@ -2,8 +2,8 @@ CC := g++ -std=c++11
 
 all: a.out
 
-a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o
-	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o -o a.out
+a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o NotificationsRepository.o Notifications.o
+	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o make/NotificationsRepository.o make/Notifications.o -o a.out
 
 main.o: code/utility.h code/CommandManager.h code/main.cpp
 	$(CC) -c code/main.cpp -o make/main.o
@@ -34,6 +34,12 @@ CommentRepository.o: code/utility.h code/Comment.h code/CommentRepository.h code
 
 Comment.o: code/utility.h code/Comment.h code/Comment.cpp
 	$(CC) -c code/Comment.cpp -o make/Comment.o
+
+NotificationsRepository.o: code/utility.h code/Notifications.h code/NotificationsRepository.h code/NotificationsRepository.cpp
+	$(CC) -c code/NotificationsRepository.cpp -o make/NotificationsRepository.o
+
+Notifications.o: code/utility.h code/Notifications.h code/Notifications.cpp
+	$(CC) -c code/Notifications.cpp -o make/Notifications.o
 
 .PHONY: clean
 clean:

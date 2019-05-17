@@ -8,7 +8,7 @@ class UserRepository;
 
 class Publisher : public User {
 public:
-    Publisher(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr);
+    Publisher(Map &parameters, int id, UserRepository* ur, FilmRepository* fr);
 	virtual void collectEarning();
 	virtual void addFollower(int id);
     virtual void postFilm(Map &parameters);
@@ -22,7 +22,7 @@ protected:
     int getAndCheckFilmId(Map &parameters);
 
     set<int> publishedFilmIds;
-    set<int> followers;
+    set<int> followerIds;
 };
 
 #endif

@@ -10,7 +10,7 @@ class Publisher;
 class FilmRepository {
 public:
     FilmRepository(CommandManager* _commandManager);
-    void addFilm(Map &parameters);
+    void addFilm(Map &parameters, int publisherId);
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);
     void outputFilmsById(set<int> filmsId);

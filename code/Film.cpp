@@ -1,7 +1,7 @@
 #include "Film.h"
 
-Film::Film(Map &parameters, int _id)
-    : data(parameters), forSale(true), commentRepository(new CommentRepository()), uncollectedEarning(0) {
+Film::Film(Map &parameters, int _id, int _publisherId)
+    : data(parameters), forSale(true), commentRepository(new CommentRepository()), uncollectedEarning(0), publisherId(_publisherId) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
     checkNumeric(data["year"]);
     checkNumeric(data["length"]);
@@ -95,10 +95,14 @@ void Film::stopSale(Map &parameters) {
     forSale = false;
 }
 
-void Film::addComment(Map &parameters) {
+void Film::addComment(Map &parameters, int senderId) {
 	checkMustHave({"film_id", "content"}, parameters);
 	checkMayHave({"film_id", "content"}, parameters);
-	commentRepository->addComment(parameters["content"]);
+	commentRepository->addComment(parameters["content"], senderId);
+}
+
+int Film::getSenderOfCommentId(int commentId) {
+	return commentRepository->getCommentWithId(commentId)->getSenderId();
 }
 
 double Film::getRate() {
@@ -127,4 +131,12 @@ int Film::getEarning() {
 
 bool Film::isForSale() {
     return forSale;
+}
+
+int Film::getPublisherId() {
+	return publisherId;
+}
+
+string Film::getName() {
+	return data["name"];
 }

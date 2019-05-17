@@ -1,7 +1,7 @@
 #include "Comment.h"
 
-Comment::Comment(string _message, int _id)
-    : message(_message), id(_id), shown(true) {
+Comment::Comment(string _message, int _id, int _senderId)
+    : message(_message), id(_id), shown(true), senderId(_senderId) {
 }
 
 void Comment::reply(Map &parameters) {
@@ -26,4 +26,8 @@ vector<string> Comment::getOutput() {
 
 bool Comment::isShown() {
 	return shown;
+}
+
+int Comment::getSenderId() {
+	return senderId;
 }

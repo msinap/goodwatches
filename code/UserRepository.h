@@ -15,7 +15,7 @@ public:
     void login(Map &parameters);
     User* getLoggedinUser();
     User* findUserWithUsername(string username);
-    User* getUserWithId(int id);
+    User* getUserById(int id);
 private:
 	void changeLoggedinUserTo(User* user);
 

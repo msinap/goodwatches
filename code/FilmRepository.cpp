@@ -76,6 +76,6 @@ Film* FilmRepository::getFilmById(int id) {
     return films[id];
 }
 
-void FilmRepository::addFilm(Map &parameters) {
-    films.push_back(new Film(parameters, films.size()));
+void FilmRepository::addFilm(Map &parameters, int publisherId) {
+    films.push_back(new Film(parameters, films.size(), publisherId));
 }

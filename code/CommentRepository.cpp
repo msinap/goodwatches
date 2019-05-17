@@ -4,8 +4,8 @@ CommentRepository::CommentRepository() {
     comments.push_back(NULL);
 }
 
-void CommentRepository::addComment(string message) {
-    comments.push_back(new Comment(message, comments.size()));
+void CommentRepository::addComment(string message, int senderId) {
+    comments.push_back(new Comment(message, comments.size(), senderId));
 }
 
 Comment* CommentRepository::getCommentWithId(int id) {
