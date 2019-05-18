@@ -1,7 +1,7 @@
 #include "Film.h"
 
 Film::Film(Map &parameters, int _id, int _publisherId)
-    : data(parameters), forSale(true), commentRepository(new CommentRepository()), uncollectedEarning(0), publisherId(_publisherId) {
+    : data(parameters), forSale(true), commentRepository(new CommentRepository()), uncollectedEarning(0), publisherId(_publisherId), sumOfRates(0) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
     checkNumeric(data["year"]);
     checkNumeric(data["length"]);
@@ -24,6 +24,8 @@ vector<string> Film::getOutput(bool allDetails) {
 }
 
 void Film::outputDetails(Map &parameters) {
+	if (!forSale)
+		throw NotFoundError();
 	checkMustHave({"film_id"}, parameters);
 	checkMayHave({"film_id"}, parameters);
 	vector<string> output;
@@ -65,6 +67,8 @@ bool Film::areFiltersPassed(Map &parameters) {
 void Film::newRate(Map &parameters, int userId) {
 	checkMustHave({"film_id", "score"}, parameters);
 	checkMayHave({"film_id", "score"}, parameters);
+	if (!forSale)
+        throw NotFoundError();
 	int score = stringToInt(parameters["score"]);
 	if (score < 0 || score > 10)
 		throw BadRequestError();
@@ -73,31 +77,39 @@ void Film::newRate(Map &parameters, int userId) {
 }
 
 void Film::deleteComment(Map &parameters) {
+	if (!forSale)
+		throw NotFoundError();
 	int id = stringToInt(parameters["comment_id"]);
 	commentRepository->getCommentWithId(id)->hide(parameters);
 }
 
 void Film::replyComment(Map &parameters) {
+	if (!forSale)
+		throw NotFoundError();
 	int id = stringToInt(parameters["comment_id"]);
 	commentRepository->getCommentWithId(id)->reply(parameters);
 }
 
 void Film::edit(Map &parameters) {
     checkMayHave({"film_id", "name", "year", "length", "price", "summary", "director"}, parameters);
+	if (!forSale)
+		throw NotFoundError();
     for (auto x : parameters)
-        data.insert(x);
+        data[x.first] = x.second;
 }
 
 void Film::stopSale(Map &parameters) {
     checkMayHave({"film_id"}, parameters);
-    if (forSale == false)
-        throw BadRequestError();
+    if (!forSale)
+        throw NotFoundError();
     forSale = false;
 }
 
 void Film::addComment(Map &parameters, int senderId) {
 	checkMustHave({"film_id", "content"}, parameters);
 	checkMayHave({"film_id", "content"}, parameters);
+	if (!forSale)
+        throw NotFoundError();
 	commentRepository->addComment(parameters["content"], senderId);
 }
 

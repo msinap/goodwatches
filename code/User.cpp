@@ -72,7 +72,9 @@ void User::showFilm(Map &parameters) {
 	int filmId = stringToInt(parameters["film_id"]);
 	Film* film = filmRepository->getFilmById(filmId);
 	film->outputDetails(parameters);
-	filmRepository->outputBestFilms(purchasedFilmIds);
+	set<int> excludedFilmIds = purchasedFilmIds;
+	excludedFilmIds.insert(filmId);
+	filmRepository->outputBestFilms(excludedFilmIds);
 }
 
 void User::outputPurchasedFilms(Map &parameters) {

@@ -57,7 +57,7 @@ void Publisher::replyComment(Map &parameters) {
 	int filmId = getAndCheckFilmId(parameters);
 	Film* film = filmRepository->getFilmById(filmId);
 	film->replyComment(parameters);
-	int senderId = film->getSenderOfCommentId(stringToInt(parameters["coment_id"]));
+	int senderId = film->getSenderOfCommentId(stringToInt(parameters["comment_id"]));
 	User* sender = userRepository->getUserById(senderId);
 	sender->getNotificationsRepository()->addNotification(new ReplyToYourCommentNotification(data["username"], id));
 }

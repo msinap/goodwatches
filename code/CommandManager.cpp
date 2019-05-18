@@ -42,7 +42,7 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 		cout << "OK" << endl;
 		return;
 	}
-    if (getAndPopBack(remainingWordsOfLine) != "?")
+    if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "signup") {
@@ -71,7 +71,7 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 
 void CommandManager::proccessPutCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
-    if (getAndPopBack(remainingWordsOfLine) != "?")
+    if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "films") {
@@ -98,7 +98,7 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 		}
 	}
 
-    if (getAndPopBack(remainingWordsOfLine) != "?")
+    if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);
 
@@ -111,7 +111,7 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
             userRepository->getLoggedinUser()->findFilms(parameters);
         }
     }else if (word == "purchased") {
-		userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
+		userRepository->getLoggedinUser()->outputPurchasedFilms(parameters);
 	}else if (word == "notifications") {
 		userRepository->getLoggedinUser()->seeReadNotifications(parameters);
 	}else {
@@ -121,7 +121,7 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 
 void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
-    if (getAndPopBack(remainingWordsOfLine) != "?")
+    if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);
     if (word == "films") {
