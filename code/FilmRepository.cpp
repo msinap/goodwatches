@@ -42,7 +42,8 @@ void FilmRepository::outputFilmsById(set<int> filmsId) {
         vector<string> filmOutput = film->getOutput();
         output.insert(filmOutput);
     }
-    print({"Film Id", "Film Name", "Film Length", "Film price", "Rate", "Production Year", "Film Director"}, output, "");
+    print({"Film Id", "Film Name", "Film Length", "Film price", "Rate", "Production Year", "Film Director"},
+		   output, "");
 }
 
 void FilmRepository::outputBestFilms(set<int> excludedIds) {
