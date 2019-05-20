@@ -100,8 +100,15 @@ string makePrecisionTwo(string num) {
 	for (pointPlace = 0; pointPlace < num.size(); pointPlace ++)
 		if (num[pointPlace] == '.')
 			break;
-	for (int i = 0; i <= pointPlace + 2; i++)
+	for (int i = 0; i < pointPlace; i++)
 		ret += num[i];
+	if (num[pointPlace + 1] == '0' && num[pointPlace + 2] == '0')
+		return ret;
+	ret += num[pointPlace];
+	ret += num[pointPlace + 1];
+	if (num[pointPlace + 2] == '0')
+		return ret;
+	ret += num[pointPlace + 2];
 	return ret;
 }
 
