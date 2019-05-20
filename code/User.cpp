@@ -12,6 +12,7 @@ User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
     if(userRepository->findUserWithUsername(data["username"]) != NULL)
         throw BadRequestError();
     checkNumeric(parameters["age"]);
+	data["password"] = hashFletcherCRC(data["password"]);
 }
 
 void User::addMoney(Map &parameters) {

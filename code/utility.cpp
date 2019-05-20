@@ -8,6 +8,17 @@ string getAndPopBack(vector<string> &vec) {
     return ret;
 }
 
+string hashFletcherCRC(string s) {
+	int hash = 0, sum = 0;
+	for (int i = 0; i < s.size(); i++) {
+		hash += s[i];
+		hash = (hash >> 1) | ((1 & hash) << 15);
+		hash &= 0xffff;
+		sum = (sum + hash) & 0xffff;
+	}
+	return intToString((sum << 15) + hash);
+}
+
 void print(const vector<string> &header, set<vector<string>> output, const string &title) {
     if (title != "")
         cout << title << endl;

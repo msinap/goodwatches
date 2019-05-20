@@ -22,7 +22,7 @@ void UserRepository::login(Map &parameters) {
     User* user = findUserWithUsername(parameters["username"]);
     if (user == NULL)
         throw BadRequestError();
-    if (user->getPassword() != parameters["password"])
+    if (user->getPassword() != hashFletcherCRC(parameters["password"]))
         throw BadRequestError();
 	changeLoggedinUserTo(user);
 }

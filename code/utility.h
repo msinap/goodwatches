@@ -33,4 +33,6 @@ void print(const vector<string> &header, set<vector<string>> output, const strin
 void print(const vector<string> &header, vector<vector<string>> output, const string &title);
 void print(const vector<string> &vec);
 
+string hashFletcherCRC(string s);
+
 #endif
