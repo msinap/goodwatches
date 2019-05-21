@@ -37,7 +37,13 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 		userRepository->getLoggedinUser()->collectEarning();
 		cout << "OK" << endl;
 		return;
+	}else if (word == "logout") {
+		userRepository->logoutLoggedInUser();
+		cout << "OK" << endl;
+		return;
 	}
+
+
     if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
         throw BadRequestError();
     Map parameters = setValuesInKeys(remainingWordsOfLine);

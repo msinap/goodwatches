@@ -27,9 +27,16 @@ void UserRepository::login(Map &parameters) {
 	changeLoggedinUserTo(user);
 }
 
+void UserRepository::logoutLoggedInUser() {
+	if (loggedinUser == NULL)
+		throw BadRequestError();
+	loggedinUser->logout();
+	loggedinUser = NULL;
+}
+
 void UserRepository::changeLoggedinUserTo(User* user) {
 	if (loggedinUser != NULL)
-		loggedinUser->logout();
+		throw BadRequestError();
 	loggedinUser = user;
 }
 
