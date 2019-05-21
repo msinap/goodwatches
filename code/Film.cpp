@@ -2,7 +2,7 @@
 
 Film::Film(Map &parameters, int _id, int _publisherId)
     : data(parameters), forSale(true), commentRepository(new CommentRepository()), uncollectedEarning(0), 
-      publisherId(_publisherId), sumOfRates(0) {
+      publisherId(_publisherId), sumOfRates(0), adminShare(0) {
     checkMustHave({"name", "year", "length", "price", "summary", "director"}, data);
     checkNumeric(data["year"]);
     checkNumeric(data["length"]);
@@ -124,19 +124,25 @@ double Film::getRate() {
 	return (1.0 * sumOfRates) / (1.0 * userRates.size());
 }
 
-int Film::getPriceAndSell() {
+void Film::sell() {
 	double rate = getRate();
-	int price = stringToInt(data["price"]);
+	double price = getPrice();
+	double ratioForPublisher;
 	if (rate < 5)
-		uncollectedEarning += 0.80 * price;
+		ratioForPublisher = 0.80;
 	else if (rate < 8)
-		uncollectedEarning += 0.90 * price;
+		ratioForPublisher = 0.90;
 	else
-		uncollectedEarning += 0.95 * price;
-	return price;
+		ratioForPublisher = 0.95;
+	uncollectedEarning += ratioForPublisher * price;
+	adminShare += price - (ratioForPublisher * price);
 }
 
-int Film::getEarning() {
+int Film::getPrice() {
+	return stringToInt(data["price"]);
+}
+
+int Film::collectEarning() {
 	int ret = uncollectedEarning;
 	uncollectedEarning = 0;
 	return ret;
@@ -152,4 +158,8 @@ int Film::getPublisherId() {
 
 string Film::getName() {
 	return data["name"];
+}
+
+int Film::getAdminShare() {
+	return adminShare;
 }

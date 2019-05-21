@@ -35,13 +35,13 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
     string word = getAndPopBack(remainingWordsOfLine);
 	if (word == "money" && remainingWordsOfLine.empty()) {
 		userRepository->getLoggedinUser()->collectEarning();
-		cout << "OK" << endl;
+		//cout << "OK" << endl;
 		return;
 	}else if (word == "logout") {
 		if (!remainingWordsOfLine.empty())
 			throw BadRequestError();
 		userRepository->logoutLoggedInUser();
-		cout << "OK" << endl;
+		//cout << "OK" << endl;
 		return;
 	}
 
@@ -76,7 +76,7 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 	}else {
         throw NotFoundError();
     }
-    cout << "OK" << endl;
+    //cout << "OK" << endl;
 }
 
 void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {

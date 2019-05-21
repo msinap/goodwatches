@@ -9,23 +9,27 @@ class NotificationsRepository;
 
 class User {
 public:
+	User();
     User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr);
 	NotificationsRepository* getNotificationsRepository();
     string getUsername();
     string getPassword();
     string getEmail();
-	void logout();
-	void outputMoney();
-    void follow(Map &parameters);
-	void buyFilm(Map &parameters);
-	void seeUnreadNotifications();
-	void addMoney(Map &parameters);
-	void rateFilm(Map &parameters);
-	void showFilm(Map &parameters);
-    void findFilms(Map &parameters);
-    void postComment(Map &parameters);
-	void seeReadNotifications(Map &parameters);
-	void outputPurchasedFilms(Map &parameters);
+	
+	virtual void outputMoney();
+    
+	virtual void follow(Map &parameters);
+	virtual void buyFilm(Map &parameters);
+	virtual void seeUnreadNotifications();
+	virtual void addMoney(Map &parameters);
+	virtual void rateFilm(Map &parameters);
+	virtual void showFilm(Map &parameters);
+	virtual void makeAllNotificationsRead();
+    virtual void findFilms(Map &parameters);
+    virtual void postComment(Map &parameters);
+	virtual void seeReadNotifications(Map &parameters);
+	virtual void outputPurchasedFilms(Map &parameters);
+	
 	virtual void collectEarning();
 	virtual void addFollower(int id);
     virtual void postFilm(Map &parameters);

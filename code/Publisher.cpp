@@ -44,7 +44,7 @@ void Publisher::outputPublishedFilms(Map &parameters) {
 void Publisher::collectEarning() {
 	for (int filmId : publishedFilmIds) {
 		Film* film = filmRepository->getFilmById(filmId);
-		money += film->getEarning();
+		money += film->collectEarning();
 	}
 }
 

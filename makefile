@@ -2,8 +2,8 @@ CC := g++ -std=c++11
 
 all: a.out
 
-a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o NotificationsRepository.o Notifications.o
-	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o make/NotificationsRepository.o make/Notifications.o -o a.out
+a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o NotificationsRepository.o Notifications.o Admin.o
+	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o make/NotificationsRepository.o make/Notifications.o make/Admin.o -o a.out
 
 main.o: code/utility.h code/CommandManager.h code/main.cpp
 	$(CC) -c code/main.cpp -o make/main.o
@@ -14,7 +14,7 @@ utility.o: code/utility.h code/utility.cpp
 CommandManager.o: code/utility.h code/UserRepository.h code/FilmRepository.h code/CommandManager.h code/CommandManager.cpp
 	$(CC) -c code/CommandManager.cpp -o make/CommandManager.o
 
-UserRepository.o: code/utility.h code/User.h code/Publisher.h code/UserRepository.h code/UserRepository.cpp
+UserRepository.o: code/utility.h code/User.h code/Publisher.h code/Admin.h code/UserRepository.h code/UserRepository.cpp
 	$(CC) -c code/UserRepository.cpp -o make/UserRepository.o
 
 User.o: code/utility.h code/User.h code/User.cpp
@@ -40,6 +40,9 @@ NotificationsRepository.o: code/utility.h code/Notifications.h code/Notification
 
 Notifications.o: code/utility.h code/Notifications.h code/Notifications.cpp
 	$(CC) -c code/Notifications.cpp -o make/Notifications.o
+
+Admin.o: code/utility.h code/FilmRepository.h code/Admin.h code/Admin.cpp
+	$(CC) -c code/Admin.cpp -o make/Admin.o
 
 .PHONY: clean
 clean:

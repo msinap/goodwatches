@@ -2,11 +2,13 @@
 #include "CommandManager.h"
 
 UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* _filmRepository)
-    : commandManager(_commandManager), filmRepository(_filmRepository) {
+    : commandManager(_commandManager), filmRepository(_filmRepository), admin(new Admin(_filmRepository)) {
     users.push_back(NULL);
 }
 
 void UserRepository::addUser(Map &parameters) {
+	if (loggedinUser != NULL)
+		throw BadRequestError();
     if (parameters.find("publisher") == parameters.end() || parameters["publisher"] == "false") {
         users.push_back(new User(parameters, users.size(), this, filmRepository));
     } else if (parameters["publisher"] == "true") {
@@ -14,30 +16,26 @@ void UserRepository::addUser(Map &parameters) {
     } else {
         throw BadRequestError();
     }
-	changeLoggedinUserTo(users.back());
+	loggedinUser = users.back();
 }
 
 void UserRepository::login(Map &parameters) {
+	if (loggedinUser != NULL)
+		throw BadRequestError();
     checkMustHave({"username", "password"}, parameters);
     User* user = findUserWithUsername(parameters["username"]);
     if (user == NULL)
         throw BadRequestError();
     if (user->getPassword() != hashFletcherCRC(parameters["password"]))
         throw BadRequestError();
-	changeLoggedinUserTo(user);
+	loggedinUser = user;
 }
 
 void UserRepository::logoutLoggedInUser() {
 	if (loggedinUser == NULL)
 		throw BadRequestError();
-	loggedinUser->logout();
+	loggedinUser->makeAllNotificationsRead();
 	loggedinUser = NULL;
-}
-
-void UserRepository::changeLoggedinUserTo(User* user) {
-	if (loggedinUser != NULL)
-		throw BadRequestError();
-	loggedinUser = user;
 }
 
 User* UserRepository::getLoggedinUser() {
@@ -53,8 +51,14 @@ User* UserRepository::getUserById(int id) {
 }
 
 User* UserRepository::findUserWithUsername(string username) {
+	if (username == "admin")
+		return admin;
     for (int id = 1; id < users.size(); id ++)
         if (users[id]->getUsername() == username)
             return users[id];
     return NULL;
+}
+
+Admin* UserRepository::getAdmin() {
+	return admin;
 }

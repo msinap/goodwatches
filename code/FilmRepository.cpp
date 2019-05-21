@@ -79,3 +79,10 @@ Film* FilmRepository::getFilmById(int id) {
 void FilmRepository::addFilm(Map &parameters, int publisherId) {
     films.push_back(new Film(parameters, films.size(), publisherId));
 }
+
+int FilmRepository::getSumOfAdminShares() {
+	int sum = 0;
+	for (int id = 1; id < films.size(); id ++)
+		sum += films[id]->getAdminShare();
+	return sum;
+}

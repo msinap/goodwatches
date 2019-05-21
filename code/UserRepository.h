@@ -4,6 +4,7 @@
 #include "utility.h"
 #include "User.h"
 #include "Publisher.h"
+#include "Admin.h"
 #include "FilmRepository.h"
 
 class CommandManager;
@@ -17,13 +18,13 @@ public:
     User* getLoggedinUser();
     User* findUserWithUsername(string username);
     User* getUserById(int id);
+	Admin* getAdmin();
 private:
-	void changeLoggedinUserTo(User* user);
-
     CommandManager* commandManager;
     FilmRepository* filmRepository;
     vector<User*> users;
     User* loggedinUser;
+	Admin* admin;
 };
 
 #endif

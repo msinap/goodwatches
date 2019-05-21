@@ -7,6 +7,7 @@
 class Film {
 public:
     Film(Map &parameters, int _id, int _publisherId);
+	void sell();
     void edit(Map &parameters);
     void stopSale(Map &parameters);
 	void replyComment(Map &parameters);
@@ -17,12 +18,13 @@ public:
 	void addComment(Map &parameters, int senderId);
 	vector<string> getOutput(bool allDetails = true);
 	int getSenderOfCommentId(int commentId);
-	int getPriceAndSell();
 	int getPublisherId();
+	int collectEarning();
+	int getAdminShare();
 	double getRate();
 	bool isForSale();
-	int getEarning();
 	string getName();
+	int getPrice();
 private:
     Map data;
     bool forSale;
@@ -30,6 +32,7 @@ private:
 	map<int, int> userRates;
 	int sumOfRates;
 	int uncollectedEarning;
+	int adminShare;
     CommentRepository* commentRepository;
 };
 

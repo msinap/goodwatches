@@ -15,6 +15,7 @@ public:
     set<int> filterAllFilms(Map &parameters);
     void outputFilmsById(set<int> filmsId);
 	void outputBestFilms(set<int> excludedIds);
+	int getSumOfAdminShares();
     Film* getFilmById(int id);
     int getLastId();
 private:

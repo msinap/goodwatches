@@ -4,6 +4,10 @@
 #include "NotificationsRepository.h"
 #include "Notifications.h"
 
+User::User() 
+	: id(-1), money(0) {
+}
+
 User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
     : data(parameters), id(_id), userRepository(ur), filmRepository(fr), notificationsRepository(new NotificationsRepository()), money(0) {
     checkMustHave({"email", "username", "password", "age"}, data);
@@ -26,10 +30,11 @@ void User::buyFilm(Map &parameters) {
 	checkMayHave({"film_id"}, parameters);
 	int filmId = stringToInt(parameters["film_id"]);
 	Film* film = filmRepository->getFilmById(filmId);
-	int price = film->getPriceAndSell();
+	int price = film->getPrice();
 
 	if (money - price < 0)
 		throw BadRequestError();
+	film->sell();
 	money -= price;
 	purchasedFilmIds.insert(filmId);
 
@@ -106,7 +111,7 @@ void User::seeReadNotifications(Map &parameters) {
 	notificationsRepository->outputLastReadNotifications(parameters);
 }
 
-void User::logout() {
+void User::makeAllNotificationsRead() {
 	notificationsRepository->readAllNotifications();
 }
 
