@@ -59,9 +59,9 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 		userRepository->getLoggedinUser()->addMoney(parameters);
 	}else if (word == "buy") {
 		userRepository->getLoggedinUser()->buyFilm(parameters);
-	}if (word == "put_films") {
+	}else if (word == "put_films") {
         userRepository->getLoggedinUser()->editFilm(parameters);
-    }if (word == "delete_films") {
+    }else if (word == "delete_films") {
         userRepository->getLoggedinUser()->deleteFilm(parameters);
     }else if (word == "delete_comments") {
 		userRepository->getLoggedinUser()->deleteComment(parameters);
