@@ -110,6 +110,10 @@ void User::logout() {
 	notificationsRepository->readAllNotifications();
 }
 
+void User::outputMoney() {
+	print(vector<string> (1, intToString(money)));
+}
+
 NotificationsRepository* User::getNotificationsRepository() {
 	return notificationsRepository;
 }

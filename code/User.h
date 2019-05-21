@@ -15,6 +15,7 @@ public:
     string getPassword();
     string getEmail();
 	void logout();
+	void outputMoney();
     void follow(Map &parameters);
 	void buyFilm(Map &parameters);
 	void seeUnreadNotifications();

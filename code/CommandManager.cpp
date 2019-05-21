@@ -38,6 +38,8 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 		cout << "OK" << endl;
 		return;
 	}else if (word == "logout") {
+		if (!remainingWordsOfLine.empty())
+			throw BadRequestError();
 		userRepository->logoutLoggedInUser();
 		cout << "OK" << endl;
 		return;
@@ -91,6 +93,11 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 			if (getAndPopBack(remainingWordsOfLine) != "read")
         		throw BadRequestError();
 		}
+	}else if (word == "money") {
+		if (!remainingWordsOfLine.empty())
+			throw BadRequestError();
+		userRepository->getLoggedinUser()->outputMoney();
+		return;
 	}
 
     if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
