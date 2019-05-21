@@ -13,9 +13,7 @@ public:
 private:
     vector<string> splitLine(string line);
     void proccessPostCommands(vector<string> &remainingWordsOfLine);
-    void proccessPutCommands(vector<string> &remainingWordsOfLine);
     void proccessGetCommands(vector<string> &remainingWordsOfLine);
-    void proccessDeleteCommands(vector<string> &remainingWordsOfLine);
 
     UserRepository* userRepository;
     FilmRepository* filmRepository;

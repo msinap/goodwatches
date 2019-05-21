@@ -16,12 +16,8 @@ void CommandManager::inputCommands() {
             string word = getAndPopBack(wordsOfLine);
             if (word == "POST") {
                 proccessPostCommands(wordsOfLine);
-            }else if (word == "PUT") {
-                proccessPutCommands(wordsOfLine);
             }else if (word == "GET") {
                 proccessGetCommands(wordsOfLine);
-            }else if (word == "DELETE") {
-                proccessDeleteCommands(wordsOfLine);
             }else {
                 throw BadRequestError();
             }
@@ -63,20 +59,13 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
 		userRepository->getLoggedinUser()->addMoney(parameters);
 	}else if (word == "buy") {
 		userRepository->getLoggedinUser()->buyFilm(parameters);
-	}else {
-        throw NotFoundError();
-    }
-    cout << "OK" << endl;
-}
-
-void CommandManager::proccessPutCommands(vector<string> &remainingWordsOfLine) {
-    string word = getAndPopBack(remainingWordsOfLine);
-    if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
-        throw BadRequestError();
-    Map parameters = setValuesInKeys(remainingWordsOfLine);
-    if (word == "films") {
+	}if (word == "put_films") {
         userRepository->getLoggedinUser()->editFilm(parameters);
-    }else {
+    }if (word == "delete_films") {
+        userRepository->getLoggedinUser()->deleteFilm(parameters);
+    }else if (word == "delete_comments") {
+		userRepository->getLoggedinUser()->deleteComment(parameters);
+	}else {
         throw NotFoundError();
     }
     cout << "OK" << endl;
@@ -117,21 +106,6 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 	}else {
         throw NotFoundError();
     }
-}
-
-void CommandManager::proccessDeleteCommands(vector<string> &remainingWordsOfLine) {
-    string word = getAndPopBack(remainingWordsOfLine);
-    if (!remainingWordsOfLine.empty() && getAndPopBack(remainingWordsOfLine) != "?")
-        throw BadRequestError();
-    Map parameters = setValuesInKeys(remainingWordsOfLine);
-    if (word == "films") {
-        userRepository->getLoggedinUser()->deleteFilm(parameters);
-    }else if (word == "comments") {
-		userRepository->getLoggedinUser()->deleteComment(parameters);
-	}else {
-        throw NotFoundError();
-    }
-    cout << "OK" << endl;
 }
 
 map<string, string> CommandManager::setValuesInKeys(vector<string> &remainingWordsOfLine) {
