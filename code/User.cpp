@@ -35,7 +35,7 @@ void User::buyFilm(Map &parameters) {
 	int price = film->getPrice();
 
 	if (money - price < 0)
-		throw BadRequestError();
+		throw PermissionDeniedError();
 	film->sell();
 	money -= price;
 	filmRepository->addWeightToEdgesBetween(filmId, purchasedFilmIds);
