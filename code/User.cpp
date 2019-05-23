@@ -36,6 +36,7 @@ void User::buyFilm(Map &parameters) {
 		throw BadRequestError();
 	film->sell();
 	money -= price;
+	filmRepository->addWeightToEdgesBetween(filmId, purchasedFilmIds);
 	purchasedFilmIds.insert(filmId);
 
 	User* publisher = userRepository->getUserById(film->getPublisherId());
@@ -80,7 +81,7 @@ void User::showFilm(Map &parameters) {
 	film->outputDetails(parameters);
 	set<int> excludedFilmIds = purchasedFilmIds;
 	excludedFilmIds.insert(filmId);
-	filmRepository->outputBestFilms(excludedFilmIds);
+	filmRepository->outputRecommendedFilmsFor(filmId, excludedFilmIds);
 }
 
 void User::outputPurchasedFilms(Map &parameters) {

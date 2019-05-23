@@ -14,13 +14,15 @@ public:
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);
     void outputFilmsById(set<int> filmsId);
-	void outputBestFilms(set<int> excludedIds);
+	void outputRecommendedFilmsFor(int filmId, set<int> excludedIds);
+	void addWeightToEdgesBetween(int filmId, set<int> otherIds);
 	int getSumOfAdminShares();
     Film* getFilmById(int id);
     int getLastId();
 private:
     vector<Film*> films;
     CommandManager* commandManager;
+	map<pair<int, int>, int> adjacencyMatrix;
 };
 
 #endif

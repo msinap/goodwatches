@@ -46,22 +46,30 @@ void FilmRepository::outputFilmsById(set<int> filmsId) {
 		   output, "");
 }
 
-void FilmRepository::outputBestFilms(set<int> excludedIds) {
+void FilmRepository::addWeightToEdgesBetween(int filmId, set<int> otherIds) {
+	for (int otherId : otherIds) {
+		adjacencyMatrix[{filmId, otherId}] ++;
+		adjacencyMatrix[{otherId, filmId}] ++;
+	}
+}
+
+void FilmRepository::outputRecommendedFilmsFor(int filmId, set<int> excludedIds) {
 	set<pair<double, double>> sortedFilms;
-	for (int id = 1; id < films.size(); id++) {
-		if (excludedIds.find(id) != excludedIds.end())
+	for (int otherId = 1; otherId < films.size(); otherId++) {
+		if (excludedIds.find(otherId) != excludedIds.end())
 			continue;
-		Film* film = getFilmById(id);
+		Film* film = getFilmById(otherId);
 		if (!film->isForSale())
 			continue;
-		sortedFilms.insert({10.0 - film->getRate(), id});
-	}
-	
-	vector<vector<string>> output; 
+		sortedFilms.insert({-adjacencyMatrix[{filmId, otherId}], otherId});
+	}	
+	vector<vector<string>> output;
 	for (pair<double, double> sortMaterial : sortedFilms) {
 		int id = sortMaterial.second;
 		Film* film = getFilmById(id);
 		output.push_back(film->getOutput(false));
+		if (output.size() == 4)
+			break;
 	}
 	print({"Film Id", "Film Name", "Film Length", "Film Director"}, output, "\nRecommendation Film");
 }
