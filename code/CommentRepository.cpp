@@ -9,8 +9,8 @@ void CommentRepository::addComment(string message, int senderId) {
 }
 
 Comment* CommentRepository::getCommentWithId(int id) {
-    if (id < 0 || id >= comments.size())
-        throw BadRequestError();
+    if (id <= 0 || id >= comments.size())
+        throw NotFoundError();
     return comments[id];
 }
 

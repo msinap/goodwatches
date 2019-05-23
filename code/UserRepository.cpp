@@ -45,8 +45,8 @@ User* UserRepository::getLoggedinUser() {
 }
 
 User* UserRepository::getUserById(int id) {
-    if (id < 1 || id >= users.size())
-        throw BadRequestError();
+    if (id <= 0 || id >= users.size())
+        throw NotFoundError();
     return users[id];
 }
 

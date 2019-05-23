@@ -38,7 +38,7 @@ void NotificationsRepository::readAllNotifications() {
 
 Notification* NotificationsRepository::getNotificationById(int id) {
 	if (id <= 0 || id >= notifications.size())
-		throw BadRequestError();
+		throw NotFoundError();
 	return notifications[id];
 }
 

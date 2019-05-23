@@ -79,8 +79,8 @@ int FilmRepository::getLastId() {
 }
 
 Film* FilmRepository::getFilmById(int id) {
-    if (id == 0 || id >= films.size())
-        throw PermissionDeniedError();
+    if (id <= 0 || id >= films.size())
+        throw NotFoundError();
     return films[id];
 }
 

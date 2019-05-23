@@ -134,7 +134,7 @@ string User::getEmail() {
 }
 
 void User::addFollower(int id) {
-    throw BadRequestError();
+    throw PermissionDeniedError();
 }
 void User::postFilm(Map &parameters) {
     throw PermissionDeniedError();
