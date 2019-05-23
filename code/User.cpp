@@ -29,6 +29,8 @@ void User::buyFilm(Map &parameters) {
 	checkMustHave({"film_id"}, parameters);
 	checkMayHave({"film_id"}, parameters);
 	int filmId = stringToInt(parameters["film_id"]);
+	if (purchasedFilmIds.find(filmId) != purchasedFilmIds.end())
+		return;
 	Film* film = filmRepository->getFilmById(filmId);
 	int price = film->getPrice();
 
@@ -47,9 +49,8 @@ void User::follow(Map &parameters) {
     checkMustHave({"user_id"}, parameters);
 	checkMayHave({"user_id"}, parameters);
 	User* publisher = userRepository->getUserById(stringToInt(parameters["user_id"]));
-    publisher->addFollower(id);
-
-	publisher->getNotificationsRepository()->addNotification(new FollowYouNotification(data["username"], id));
+    if (publisher->addFollower(id))
+		publisher->getNotificationsRepository()->addNotification(new FollowYouNotification(data["username"], id));
 }
 
 void User::findFilms(Map &parameters) {
@@ -133,7 +134,7 @@ string User::getEmail() {
     return data["email"];
 }
 
-void User::addFollower(int id) {
+bool User::addFollower(int id) {
     throw PermissionDeniedError();
 }
 void User::postFilm(Map &parameters) {

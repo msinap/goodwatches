@@ -10,7 +10,7 @@ class Publisher : public User {
 public:
     Publisher(Map &parameters, int id, UserRepository* ur, FilmRepository* fr);
 	virtual void collectEarning();
-	virtual void addFollower(int id);
+	virtual bool addFollower(int id);
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);

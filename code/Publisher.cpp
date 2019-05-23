@@ -8,8 +8,10 @@ Publisher::Publisher(Map &parameters, int id, UserRepository* ur, FilmRepository
     : User(parameters, id, ur, fr) {
 }
 
-void Publisher::addFollower(int id) {
-    followerIds.insert(id);
+bool Publisher::addFollower(int id) {
+	bool ret = (followerIds.find(id) == followerIds.end());
+	followerIds.insert(id);
+	return ret;
 }
 
 void Publisher::outputFollowers(Map &parameters) {

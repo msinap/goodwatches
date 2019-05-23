@@ -14,7 +14,7 @@ void Comment::reply(Map &parameters) {
 
 void Comment::hide(Map &parameters) {
     if (!shown)
-        throw PermissionDeniedError();
+        throw NotFoundError();
     shown = false;
 }
 

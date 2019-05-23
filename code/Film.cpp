@@ -125,6 +125,8 @@ double Film::getRate() {
 }
 
 void Film::sell() {
+	if (!forSale)
+		throw NotFoundError();
 	double rate = getRate();
 	double price = getPrice();
 	double ratioForPublisher;

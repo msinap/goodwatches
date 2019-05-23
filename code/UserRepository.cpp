@@ -8,7 +8,7 @@ UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* 
 
 void UserRepository::addUser(Map &parameters) {
 	if (loggedinUser != NULL)
-		throw BadRequestError();
+		throw PermissionDeniedError();
     if (parameters.find("publisher") == parameters.end() || parameters["publisher"] == "false") {
         users.push_back(new User(parameters, users.size(), this, filmRepository));
     } else if (parameters["publisher"] == "true") {
@@ -21,7 +21,7 @@ void UserRepository::addUser(Map &parameters) {
 
 void UserRepository::login(Map &parameters) {
 	if (loggedinUser != NULL)
-		throw BadRequestError();
+		throw PermissionDeniedError();
     checkMustHave({"username", "password"}, parameters);
     User* user = findUserWithUsername(parameters["username"]);
     if (user == NULL)
@@ -33,7 +33,7 @@ void UserRepository::login(Map &parameters) {
 
 void UserRepository::logoutLoggedInUser() {
 	if (loggedinUser == NULL)
-		throw BadRequestError();
+		throw PermissionDeniedError();
 	loggedinUser->makeAllNotificationsRead();
 	loggedinUser = NULL;
 }
