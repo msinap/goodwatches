@@ -94,3 +94,10 @@ int FilmRepository::getSumOfAdminShares() {
 		sum += films[id]->getAdminShare();
 	return sum;
 }
+
+int FilmRepository::getSumOfUncollectedMoney() {
+	int sum = 0;
+	for (int id = 1; id < films.size(); id ++)
+		sum += films[id]->getUncollectedMoney();
+	return sum;
+}

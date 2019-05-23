@@ -7,8 +7,9 @@ Admin::Admin(FilmRepository* fr) {
 }
 
 void Admin::outputMoney() {
-	int money = filmRepository->getSumOfAdminShares();
-	print(vector<string> (1, intToString(money)));
+	int benefit = filmRepository->getSumOfAdminShares();
+	int uncollectedMoneyOfPublishers = filmRepository->getSumOfUncollectedMoney();
+	print(vector<string> (1, intToString(benefit + uncollectedMoneyOfPublishers)));
 }
 
 void Admin::makeAllNotificationsRead() {

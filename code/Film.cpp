@@ -163,3 +163,7 @@ string Film::getName() {
 int Film::getAdminShare() {
 	return adminShare;
 }
+
+int Film::getUncollectedMoney() {
+	return uncollectedEarning;
+}

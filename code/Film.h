@@ -18,6 +18,7 @@ public:
 	void addComment(Map &parameters, int senderId);
 	vector<string> getOutput(bool allDetails = true);
 	int getSenderOfCommentId(int commentId);
+	int getUncollectedMoney();
 	int getPublisherId();
 	int collectEarning();
 	int getAdminShare();

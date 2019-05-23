@@ -17,6 +17,7 @@ public:
 	void outputRecommendedFilmsFor(int filmId, set<int> excludedIds);
 	void addWeightToEdgesBetween(int filmId, set<int> otherIds);
 	int getSumOfAdminShares();
+	int getSumOfUncollectedMoney();
     Film* getFilmById(int id);
     int getLastId();
 private:
