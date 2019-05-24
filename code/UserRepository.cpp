@@ -8,7 +8,7 @@ UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* 
 
 void UserRepository::addUser(Map &parameters) {
 	if (loggedinUser != NULL)
-		throw PermissionDeniedError();
+		throw BadRequestError();
     if (parameters.find("publisher") == parameters.end() || parameters["publisher"] == "false") {
         users.push_back(new User(parameters, users.size(), this, filmRepository));
     } else if (parameters["publisher"] == "true") {
