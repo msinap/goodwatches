@@ -21,7 +21,7 @@ void UserRepository::addUser(Map &parameters) {
 
 void UserRepository::login(Map &parameters) {
 	if (loggedinUser != NULL)
-		throw PermissionDeniedError();
+		throw BadRequestError();
     checkMustHave({"username", "password"}, parameters);
     User* user = findUserWithUsername(parameters["username"]);
     if (user == NULL)
