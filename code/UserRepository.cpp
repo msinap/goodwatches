@@ -33,7 +33,7 @@ void UserRepository::login(Map &parameters) {
 
 void UserRepository::logoutLoggedInUser() {
 	if (loggedinUser == NULL)
-		throw PermissionDeniedError();
+		throw BadRequestError();
 	loggedinUser->makeAllNotificationsRead();
 	loggedinUser = NULL;
 }
