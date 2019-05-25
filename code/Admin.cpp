@@ -2,7 +2,7 @@
 
 Admin::Admin(FilmRepository* fr) {
 	filmRepository = fr;
-	data["name"] = "admin";
+	data["username"] = "admin";
 	data["password"] = hashFletcherCRC("admin");
 }
 

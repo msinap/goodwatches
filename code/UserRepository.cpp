@@ -2,8 +2,9 @@
 #include "CommandManager.h"
 
 UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* _filmRepository)
-    : commandManager(_commandManager), filmRepository(_filmRepository), admin(new Admin(_filmRepository)) {
+    : commandManager(_commandManager), filmRepository(_filmRepository) {
     users.push_back(NULL);
+	users.push_back(new Admin(_filmRepository));
 }
 
 void UserRepository::addUser(Map &parameters) {
@@ -47,12 +48,12 @@ User* UserRepository::getLoggedinUser() {
 User* UserRepository::getUserById(int id) {
     if (id <= 0 || id >= users.size())
         throw NotFoundError();
+	if (id == 1)
+		throw PermissionDeniedError();
     return users[id];
 }
 
 User* UserRepository::findUserWithUsername(string username) {
-	if (username == "admin")
-		return admin;
     for (int id = 1; id < users.size(); id ++)
         if (users[id]->getUsername() == username)
             return users[id];
@@ -60,5 +61,5 @@ User* UserRepository::findUserWithUsername(string username) {
 }
 
 Admin* UserRepository::getAdmin() {
-	return admin;
+	return dynamic_cast<Admin*>(users[1]);
 }

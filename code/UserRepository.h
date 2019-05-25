@@ -24,7 +24,6 @@ private:
     FilmRepository* filmRepository;
     vector<User*> users;
     User* loggedinUser;
-	Admin* admin;
 };
 
 #endif
