@@ -45,28 +45,25 @@ Admin.o: code/utility.h code/FilmRepository.h code/Admin.h code/Admin.cpp
 	$(CC) -c code/Admin.cpp -o make/Admin.o
 
 template_parser.o: utils/template_parser.cpp utils/template_parser.hpp utils/request.cpp utils/request.hpp utils/utilities.hpp utils/utilities.cpp
-	$(CC)  -c utils/template_parser.cpp -o make/template_parser.o
+	$(CC) -c utils/template_parser.cpp -o make/template_parser.o
 
 response.o: utils/response.cpp utils/response.hpp utils/include.hpp
-	$(CC)  -c utils/response.cpp -o make/response.o
+	$(CC) -c utils/response.cpp -o make/response.o
 
 request.o: utils/request.cpp utils/request.hpp utils/include.hpp utils/utilities.hpp
-	$(CC)  -c utils/request.cpp -o make/request.o
+	$(CC) -c utils/request.cpp -o make/request.o
 
 utilities.o: utils/utilities.cpp utils/utilities.hpp
-	$(CC)  -c utils/utilities.cpp -o make/utilities.o
+	$(CC) -c utils/utilities.cpp -o make/utilities.o
 
 server.o: server/server.cpp server/server.hpp server/route.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp utils/template_parser.hpp utils/template_parser.cpp
-	$(CC)  -c server/server.cpp -o make/server.o
+	$(CC) -c server/server.cpp -o make/server.o
 
 route.o: server/route.cpp server/route.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
-	$(CC)  -c server/route.cpp -o make/route.o
+	$(CC) -c server/route.cpp -o make/route.o
 
-Handlers.o: code/Handlers.cpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
-	$(CC)  -c code/Handlers.cpp -o make/Handlers.o
-
-MyServer.o: code/MyServer.cpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
-	$(CC)  -c code/MyServer.cpp -o make/MyServer.o
+MyServer.o: code/MyServer.h code/MyServer.cpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
+	$(CC) -c code/MyServer.cpp -o make/MyServer.o
 
 .PHONY: clean
 clean:
