@@ -118,6 +118,8 @@ void TemplateParser::addIncludesToCode() {
   string include = "#include <iostream>\n";
   include += "#include <string>\n";
   include += "#include <map>\n";
+  include += "#include <set>\n";
+  include += "#include <vector>\n";
   include += "#include <cstring>\n";
   include += "#include \"" + utilitiesHeaderPath + "\"\n";
   include += "using namespace std;\n";
