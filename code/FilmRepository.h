@@ -9,6 +9,7 @@ class Publisher;
 class FilmRepository {
 public:
     FilmRepository();
+	static FilmRepository* filmRepository;
     void addFilm(Map &parameters, int publisherId);
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);

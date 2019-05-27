@@ -1,6 +1,11 @@
 #include "FilmRepository.h"
 
+FilmRepository* FilmRepository::filmRepository = NULL;
+
 FilmRepository::FilmRepository() {
+	if (filmRepository != NULL)
+		return;
+	filmRepository = this;
     films.push_back(NULL);
 }
 

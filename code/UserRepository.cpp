@@ -1,8 +1,13 @@
 #include "UserRepository.h"
 #include "CommandManager.h"
 
+UserRepository* UserRepository::userRepository = NULL;
+
 UserRepository::UserRepository(FilmRepository* _filmRepository)
-    : filmRepository(_filmRepository) {
+    : filmRepository(_filmRepository), currentUserId(0) {
+	if (userRepository != NULL)
+		return;
+	userRepository = this;
     users.push_back(NULL);
 	users.push_back(new Admin(_filmRepository));
 }
@@ -37,6 +42,17 @@ void UserRepository::logoutCurrentUser() {
 		throw BadRequestError();
 	currentUser->makeAllNotificationsRead();
 	currentUser = NULL;
+}
+
+void UserRepository::changeCurrentUserTo(int id) {
+	if (id == 0) {
+		currentUser = NULL; 
+	}else if (id == 1) {
+		currentUser = getAdmin();
+	}else {
+		currentUser = getUserById(id);
+	}
+	currentUserId = id;
 }
 
 User* UserRepository::getCurrentUser() {

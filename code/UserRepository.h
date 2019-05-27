@@ -1,5 +1,5 @@
-#ifndef USERREPOSITORY
-#define USERREPOSITORY
+#ifndef USERREPOSITORY_H
+#define USERREPOSITORY_H
 
 #include "utility.h"
 #include "User.h"
@@ -10,9 +10,11 @@
 class UserRepository {
 public:
     UserRepository(FilmRepository* _filmRepository);
+	static UserRepository* userRepository;
     void addUser(Map &parameters);
     void login(Map &parameters);
 	void logoutCurrentUser();
+	void changeCurrentUserTo(int id);
     User* getCurrentUser();
     User* findUserWithUsername(string username);
     User* getUserById(int id);
@@ -21,6 +23,7 @@ private:
     FilmRepository* filmRepository;
     vector<User*> users;
     User* currentUser;
+	int currentUserId;
 	set<int> loggedInUserIds;
 };
 
