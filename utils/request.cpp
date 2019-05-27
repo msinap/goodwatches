@@ -157,3 +157,20 @@ void Request::deserializeFromFile(Request *req, string filePath) {
     req->setMethod(stoi(fields[0]) == GET ? GET : POST);
   }
 }
+
+
+map<string, string> Request::getQueryMap() {
+	map<string, string> ret;
+	for (auto it = query.begin(); !query.empty() && it != query.end(); it++) {
+		ret[it->first] = urlDecode(it->second);
+	}
+	return ret;
+}
+
+map<string, string> Request::getBodyMap() {
+	map<string, string> ret;
+	for (auto it = body.begin(); !body.empty() && it != body.end(); it++) {
+		ret[it->first] = urlDecode(it->second);
+	}
+	return ret;
+}

@@ -3,6 +3,8 @@
 #include "../utils/include.hpp"
 #include "../utils/utilities.hpp"
 #include <string>
+#include <map>
+using namespace std;
 
 class Request {
 public:
@@ -30,6 +32,8 @@ public:
   static void serializeToFile(Request *req, std::string filePath);
   static void deserializeFromFile(Request *req, std::string filePath);
 
+  map<string, string> getQueryMap();
+  map<string, string> getBodyMap();
 private:
   std::string path;
   Method method;
