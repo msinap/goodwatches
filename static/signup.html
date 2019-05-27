@@ -6,14 +6,17 @@
 	<body>
 		<form action="" target="_self" method="POST">
 			Username: <br> <input type="text" name="username"> <br>
-			Password: <br> <input type="text" name="password"> <br>
-			Rewrite Password: <br> <input type="text" name="password2"> <br>
-			Email: <br> <input type="text" name="email"> <br>
-			Age: <br> <input type="text" name="age"> <br>
+			Password: <br> <input type="password" name="password"> <br>
+			Rewrite Password: <br> <input type="password" name="password2"> <br>
+			Email: <br> <input type="email" name="email"> <br>
+			Age: <br> <input type="number" name="age"> <br>
 			User Type: <br>
-			<input type="radio" name="publisher" value="false" checked> Normal User <br>
-			<input type="radio" name="publisher" value="true"> Publisher <br>
-			<input type="submit" value="Submit"> <br>
+			<input type="radio" name="publisher" value="false" checked> Normal User
+			<input type="radio" name="publisher" value="true"> Publisher
+			<br>
+			<input type="submit" value="Submit"> 
+			<input type="reset" value="Reset">
+			<br>
 		</form>
 		<a href="/logout" target="_self" title="Logout"> Logout </a> <br>
 	</body>
