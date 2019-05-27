@@ -19,6 +19,7 @@ User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
 		throw BadRequestError();
     checkNumeric(parameters["age"]);
 	data["password"] = hashFletcherCRC(data["password"]);
+	data.erase("password2");
 }
 
 void User::addMoney(Map &parameters) {

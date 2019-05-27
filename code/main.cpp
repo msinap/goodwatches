@@ -17,6 +17,8 @@ int main(int argc, char **argv) {
 		server.get("/", new StartHandler());
 		server.get("/signup", new ShowPage("static/signup.html"));
 		server.post("/signup", new SignupHandler());
+		server.get("/login", new ShowPage("static/login.html"));
+		server.post("/login", new LoginHandler());
 		server.get("/logout", new LogoutHandler());
 		server.run();
 	}catch (Server::Exception &e) {

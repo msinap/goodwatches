@@ -17,6 +17,11 @@ public:
     Response* callback(Request*);
 };
 
+class LoginHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 class StartHandler : public RequestHandler {
 public:
     Response* callback(Request*);
