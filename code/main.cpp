@@ -17,7 +17,13 @@ int main(int argc, char **argv) {
 		server.get("/signup", new ShowPage("static/signup.html"));
 		server.post("/signup", new SignupHandler());
 		server.run();
-	} catch (Server::Exception e) {
+	}catch (Server::Exception e) {
 		cerr << e.getMessage() << endl;
+	}catch (BadRequestError) {
+		cerr << "Bad Request" << endl;
+	}catch (NotFoundError) {
+		cerr << "Not Found" << endl;
+	}catch (PermissionDeniedError) {
+		cerr << "Permission Denied" << endl;
 	}
 }
