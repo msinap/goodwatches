@@ -4,12 +4,11 @@
 #include "utility.h"
 #include "Film.h"
 
-class CommandManager;
 class Publisher;
 
 class FilmRepository {
 public:
-    FilmRepository(CommandManager* _commandManager);
+    FilmRepository();
     void addFilm(Map &parameters, int publisherId);
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);
@@ -22,7 +21,6 @@ public:
     int getLastId();
 private:
     vector<Film*> films;
-    CommandManager* commandManager;
 	map<pair<int, int>, int> adjacencyMatrix;
 };
 

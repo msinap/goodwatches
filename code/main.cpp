@@ -1,10 +1,14 @@
 #include "utility.h"
 #include "CommandManager.h"
+#include "UserRepository.h"
+#include "FilmRepository.h"
 #include "MyServer.h"
 #include "Handlers.h"
 
 int main(int argc, char **argv) {
-    CommandManager commandManager;
+	FilmRepository* filmRepository = new FilmRepository();
+    UserRepository* userRepository = new UserRepository(filmRepository);
+	//CommandManager commandManager;
     // commandManager.inputCommands();
 
 	try {

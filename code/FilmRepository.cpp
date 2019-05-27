@@ -1,7 +1,6 @@
 #include "FilmRepository.h"
 
-FilmRepository::FilmRepository(CommandManager* _commandManager)
-    : commandManager(_commandManager) {
+FilmRepository::FilmRepository() {
     films.push_back(NULL);
 }
 

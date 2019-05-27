@@ -1,8 +1,8 @@
 #include "UserRepository.h"
 #include "CommandManager.h"
 
-UserRepository::UserRepository(CommandManager* _commandManager, FilmRepository* _filmRepository)
-    : commandManager(_commandManager), filmRepository(_filmRepository) {
+UserRepository::UserRepository(FilmRepository* _filmRepository)
+    : filmRepository(_filmRepository) {
     users.push_back(NULL);
 	users.push_back(new Admin(_filmRepository));
 }

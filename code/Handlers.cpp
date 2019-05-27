@@ -2,10 +2,8 @@
 
 Response* SignupHandler::callback(Request* req) {
 	Map body = req->getBodyMap();
-    if (body["username"] == "root")
-        throw Server::Exception("Remote root access has been disabled.");
-    cout << "username: " << body["username"] << ",\tpassword: " << body["password"] << endl;
+	int sessionId = stringToInt(req->getSessionId());
 	Response* res = Response::redirect("/");
-    // res->setSessionId("SID");
+    res->setSessionId("SID");
     return res;
 }
