@@ -8,13 +8,11 @@
 #include <map>
 #include <set>
 #include <cmath>
+#include "MyServer.h"
 using namespace std;
 
 typedef map<string, string> Map;
 
-class BadRequestError {};
-class NotFoundError {};
-class PermissionDeniedError {};
 
 string getAndPopBack(vector<string> &vec);
 
