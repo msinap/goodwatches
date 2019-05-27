@@ -47,3 +47,13 @@ Response* AddFilmHandler::callback(Request* req) {
 	Response* res = Response::redirect("/login");
 	return res;
 }
+
+Response* AddMoneyHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map body = req->getBodyMap();
+
+	UserRepository::userRepository->getCurrentUser()->addMoney(body);
+	
+	Response* res = Response::redirect("/profile");
+	return res;
+}

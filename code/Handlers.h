@@ -32,4 +32,9 @@ public:
     Response* callback(Request*);
 };
 
+class AddMoneyHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 #endif

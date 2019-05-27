@@ -22,6 +22,8 @@ int main(int argc, char **argv) {
 		server.get("/logout", new LogoutHandler());
 		server.get("/addfilm", new ShowPage("static/addfilm.html"));
 		server.post("/addfilm", new AddFilmHandler());
+		server.get("/profile", new ShowPage("static/profile.html"));
+		server.post("/addmoney", new AddMoneyHandler());
 		server.run();
 	}catch (Server::Exception &e) {
 		cerr << e.getMessage() << endl;
