@@ -1,8 +1,8 @@
 #include "CommandManager.h"
 
 CommandManager::CommandManager() {
-    filmRepository = new FilmRepository(this);
-    userRepository = new UserRepository(this, filmRepository);
+    filmRepository = new FilmRepository();
+    userRepository = new UserRepository(filmRepository);
 }
 
 void CommandManager::inputCommands() {
@@ -34,13 +34,13 @@ void CommandManager::inputCommands() {
 void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
 	if (word == "money" && remainingWordsOfLine.empty()) {
-		userRepository->getLoggedinUser()->collectEarning();
+		userRepository->getCurrentUser()->collectEarning();
 		cout << "OK" << endl;
 		return;
 	}else if (word == "logout") {
 		if (!remainingWordsOfLine.empty())
 			throw BadRequestError();
-		userRepository->logoutLoggedInUser();
+		userRepository->logoutCurrentUser();
 		cout << "OK" << endl;
 		return;
 	}
@@ -54,25 +54,25 @@ void CommandManager::proccessPostCommands(vector<string> &remainingWordsOfLine) 
     }else if (word == "login") {
         userRepository->login(parameters);
     }else if (word == "films") {
-        userRepository->getLoggedinUser()->postFilm(parameters);
+        userRepository->getCurrentUser()->postFilm(parameters);
     }else if (word == "followers") {
-        userRepository->getLoggedinUser()->follow(parameters);
+        userRepository->getCurrentUser()->follow(parameters);
     }else if (word == "comments") {
-        userRepository->getLoggedinUser()->postComment(parameters);
+        userRepository->getCurrentUser()->postComment(parameters);
     }else if (word == "replies") {
-		userRepository->getLoggedinUser()->replyComment(parameters);
+		userRepository->getCurrentUser()->replyComment(parameters);
 	}else if (word == "rate") {
-		userRepository->getLoggedinUser()->rateFilm(parameters);
+		userRepository->getCurrentUser()->rateFilm(parameters);
 	}else if (word == "money") {
-		userRepository->getLoggedinUser()->addMoney(parameters);
+		userRepository->getCurrentUser()->addMoney(parameters);
 	}else if (word == "buy") {
-		userRepository->getLoggedinUser()->buyFilm(parameters);
+		userRepository->getCurrentUser()->buyFilm(parameters);
 	}else if (word == "put_films") {
-        userRepository->getLoggedinUser()->editFilm(parameters);
+        userRepository->getCurrentUser()->editFilm(parameters);
     }else if (word == "delete_films") {
-        userRepository->getLoggedinUser()->deleteFilm(parameters);
+        userRepository->getCurrentUser()->deleteFilm(parameters);
     }else if (word == "delete_comments") {
-		userRepository->getLoggedinUser()->deleteComment(parameters);
+		userRepository->getCurrentUser()->deleteComment(parameters);
 	}else {
         throw NotFoundError();
     }
@@ -83,11 +83,11 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
     string word = getAndPopBack(remainingWordsOfLine);
     if (word == "followers") {
         Map parameters = setValuesInKeys(remainingWordsOfLine);
-        userRepository->getLoggedinUser()->outputFollowers(parameters);
+        userRepository->getCurrentUser()->outputFollowers(parameters);
         return;
     }else if (word == "notifications") {
 		if (remainingWordsOfLine.empty()) {
-			userRepository->getLoggedinUser()->seeUnreadNotifications();
+			userRepository->getCurrentUser()->seeUnreadNotifications();
 			return;
 		}else {
 			if (getAndPopBack(remainingWordsOfLine) != "read")
@@ -96,7 +96,7 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 	}else if (word == "money") {
 		if (!remainingWordsOfLine.empty())
 			throw BadRequestError();
-		userRepository->getLoggedinUser()->outputMoney();
+		userRepository->getCurrentUser()->outputMoney();
 		return;
 	}
 
@@ -105,17 +105,17 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
     Map parameters = setValuesInKeys(remainingWordsOfLine);
 
     if(word == "published") {
-        userRepository->getLoggedinUser()->outputPublishedFilms(parameters);
+        userRepository->getCurrentUser()->outputPublishedFilms(parameters);
     }else if (word == "films") {
         if (parameters.find("film_id") != parameters.end()) {
-            userRepository->getLoggedinUser()->showFilm(parameters);
+            userRepository->getCurrentUser()->showFilm(parameters);
         }else {
-            userRepository->getLoggedinUser()->findFilms(parameters);
+            userRepository->getCurrentUser()->findFilms(parameters);
         }
     }else if (word == "purchased") {
-		userRepository->getLoggedinUser()->outputPurchasedFilms(parameters);
+		userRepository->getCurrentUser()->outputPurchasedFilms(parameters);
 	}else if (word == "notifications") {
-		userRepository->getLoggedinUser()->seeReadNotifications(parameters);
+		userRepository->getCurrentUser()->seeReadNotifications(parameters);
 	}else {
         throw NotFoundError();
     }

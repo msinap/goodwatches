@@ -8,7 +8,7 @@ UserRepository::UserRepository(FilmRepository* _filmRepository)
 }
 
 void UserRepository::addUser(Map &parameters) {
-	if (loggedinUser != NULL)
+	if (currentUser != NULL)
 		throw BadRequestError();
     if (parameters.find("publisher") == parameters.end() || parameters["publisher"] == "false") {
         users.push_back(new User(parameters, users.size(), this, filmRepository));
@@ -17,11 +17,11 @@ void UserRepository::addUser(Map &parameters) {
     } else {
         throw BadRequestError();
     }
-	loggedinUser = users.back();
+	currentUser = users.back();
 }
 
 void UserRepository::login(Map &parameters) {
-	if (loggedinUser != NULL)
+	if (currentUser != NULL)
 		throw BadRequestError();
     checkMustHave({"username", "password"}, parameters);
     User* user = findUserWithUsername(parameters["username"]);
@@ -29,20 +29,20 @@ void UserRepository::login(Map &parameters) {
         throw BadRequestError();
     if (user->getPassword() != hashFletcherCRC(parameters["password"]))
         throw BadRequestError();
-	loggedinUser = user;
+	currentUser = user;
 }
 
-void UserRepository::logoutLoggedInUser() {
-	if (loggedinUser == NULL)
+void UserRepository::logoutCurrentUser() {
+	if (currentUser == NULL)
 		throw BadRequestError();
-	loggedinUser->makeAllNotificationsRead();
-	loggedinUser = NULL;
+	currentUser->makeAllNotificationsRead();
+	currentUser = NULL;
 }
 
-User* UserRepository::getLoggedinUser() {
-    if (loggedinUser == NULL)
+User* UserRepository::getCurrentUser() {
+    if (currentUser == NULL)
         throw PermissionDeniedError();
-    return loggedinUser;
+    return currentUser;
 }
 
 User* UserRepository::getUserById(int id) {

@@ -12,15 +12,16 @@ public:
     UserRepository(FilmRepository* _filmRepository);
     void addUser(Map &parameters);
     void login(Map &parameters);
-	void logoutLoggedInUser();
-    User* getLoggedinUser();
+	void logoutCurrentUser();
+    User* getCurrentUser();
     User* findUserWithUsername(string username);
     User* getUserById(int id);
 	Admin* getAdmin();
 private:
     FilmRepository* filmRepository;
     vector<User*> users;
-    User* loggedinUser;
+    User* currentUser;
+	set<int> loggedInUserIds;
 };
 
 #endif
