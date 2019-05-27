@@ -2,8 +2,8 @@ CC := g++ -std=c++11
 
 all: a.out
 
-a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o NotificationsRepository.o Notifications.o Admin.o MyServer.o response.o request.o utilities.o server.o route.o template_parser.o
-	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o make/NotificationsRepository.o make/Notifications.o make/Admin.o make/MyServer.o make/response.o make/request.o make/utilities.o make/server.o make/route.o make/template_parser.o -o a.out
+a.out: main.o utility.o CommandManager.o UserRepository.o User.o Publisher.o FilmRepository.o Film.o CommentRepository.o Comment.o NotificationsRepository.o Notifications.o Admin.o MyServer.o response.o request.o utilities.o server.o route.o template_parser.o Handlers.o
+	$(CC) make/main.o make/utility.o make/CommandManager.o make/UserRepository.o make/User.o make/Publisher.o make/FilmRepository.o make/Film.o make/CommentRepository.o make/Comment.o make/NotificationsRepository.o make/Notifications.o make/Admin.o make/MyServer.o make/response.o make/request.o make/utilities.o make/server.o make/route.o make/template_parser.o make/Handlers.o -o a.out
 
 main.o: server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp code/utility.h code/CommandManager.h code/main.cpp 
 	$(CC) -c code/main.cpp -o make/main.o
@@ -64,6 +64,9 @@ route.o: server/route.cpp server/route.hpp utils/utilities.hpp utils/response.hp
 
 MyServer.o: code/MyServer.h code/MyServer.cpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
 	$(CC) -c code/MyServer.cpp -o make/MyServer.o
+
+Handlers.o: code/Handlers.cpp server/server.hpp utils/utilities.hpp utils/response.hpp utils/request.hpp utils/include.hpp
+	$(CC) -c code/Handlers.cpp -o make/Handlers.o
 
 .PHONY: clean
 clean:
