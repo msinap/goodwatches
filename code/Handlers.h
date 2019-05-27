@@ -12,4 +12,14 @@ public:
     Response* callback(Request*);
 };
 
+class LogoutHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
+class StartHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 #endif

@@ -23,6 +23,7 @@ void UserRepository::addUser(Map &parameters) {
         throw BadRequestError();
     }
 	currentUser = users.back();
+	loggedInUserIds.insert(currentUser->getId());
 }
 
 void UserRepository::login(Map &parameters) {
@@ -35,12 +36,14 @@ void UserRepository::login(Map &parameters) {
     if (user->getPassword() != hashFletcherCRC(parameters["password"]))
         throw BadRequestError();
 	currentUser = user;
+	loggedInUserIds.insert(currentUser->getId());
 }
 
 void UserRepository::logoutCurrentUser() {
 	if (currentUser == NULL)
 		throw BadRequestError();
 	currentUser->makeAllNotificationsRead();
+	loggedInUserIds.erase(currentUser->getId());
 	currentUser = NULL;
 }
 
@@ -80,5 +83,7 @@ Admin* UserRepository::getAdmin() {
 }
 
 int UserRepository::getCurrentUserId() {
+	if (currentUser == NULL)
+		return 0;
 	return currentUser->getId();
 }
