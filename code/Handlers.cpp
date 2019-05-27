@@ -4,7 +4,9 @@ Response* SignupHandler::callback(Request* req) {
 	Map body = req->getBodyMap();
 	int sessionId = stringToInt(req->getSessionId());
 	UserRepository::userRepository->changeCurrentUserTo(sessionId);
-	Response* res = Response::redirect("/");
-    res->setSessionId("SID");
+	UserRepository::userRepository->addUser(body);
+	Response* res = Response::redirect("/signup");
+    res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
+	cout << UserRepository::userRepository->getCurrentUserId() << endl;
     return res;
 }

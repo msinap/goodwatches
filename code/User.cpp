@@ -10,11 +10,13 @@ User::User()
 
 User::User(Map &parameters, int _id, UserRepository* ur, FilmRepository* fr)
     : data(parameters), id(_id), userRepository(ur), filmRepository(fr), notificationsRepository(new NotificationsRepository()), money(0) {
-    checkMustHave({"email", "username", "password", "age"}, data);
-    checkMayHave ({"email", "username", "password", "age", "publisher"}, data);
+    checkMustHave({"email", "username", "password", "age", "password2"}, data);
+    checkMayHave ({"email", "username", "password", "age", "publisher", "password2"}, data);
     checkEmail(parameters["email"]);
     if(userRepository->findUserWithUsername(data["username"]) != NULL)
-        throw BadRequestError();
+        throw Server::Exception("Username you entered is taken");
+	if (data["password"] != data["password2"])
+		throw BadRequestError();
     checkNumeric(parameters["age"]);
 	data["password"] = hashFletcherCRC(data["password"]);
 }
@@ -132,6 +134,9 @@ string User::getPassword() {
 }
 string User::getEmail() {
     return data["email"];
+}
+int User::getId() {
+	return id;
 }
 
 bool User::addFollower(int id) {

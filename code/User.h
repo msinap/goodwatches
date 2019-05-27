@@ -15,6 +15,7 @@ public:
     string getUsername();
     string getPassword();
     string getEmail();
+	int getId();
 	
 	virtual void outputMoney();
     

@@ -16,6 +16,7 @@ public:
 	void logoutCurrentUser();
 	void changeCurrentUserTo(int id);
     User* getCurrentUser();
+	int getCurrentUserId();
     User* findUserWithUsername(string username);
     User* getUserById(int id);
 	Admin* getAdmin();
@@ -23,7 +24,6 @@ private:
     FilmRepository* filmRepository;
     vector<User*> users;
     User* currentUser;
-	int currentUserId;
 	set<int> loggedInUserIds;
 };
 

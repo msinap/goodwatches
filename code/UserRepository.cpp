@@ -4,7 +4,7 @@
 UserRepository* UserRepository::userRepository = NULL;
 
 UserRepository::UserRepository(FilmRepository* _filmRepository)
-    : filmRepository(_filmRepository), currentUserId(0) {
+    : filmRepository(_filmRepository) {
 	if (userRepository != NULL)
 		return;
 	userRepository = this;
@@ -52,7 +52,6 @@ void UserRepository::changeCurrentUserTo(int id) {
 	}else {
 		currentUser = getUserById(id);
 	}
-	currentUserId = id;
 }
 
 User* UserRepository::getCurrentUser() {
@@ -78,4 +77,8 @@ User* UserRepository::findUserWithUsername(string username) {
 
 Admin* UserRepository::getAdmin() {
 	return dynamic_cast<Admin*>(users[1]);
+}
+
+int UserRepository::getCurrentUserId() {
+	return currentUser->getId();
 }
