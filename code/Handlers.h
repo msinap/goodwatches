@@ -27,4 +27,9 @@ public:
     Response* callback(Request*);
 };
 
+class AddFilmHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 #endif

@@ -10,6 +10,7 @@ UserRepository::UserRepository(FilmRepository* _filmRepository)
 	userRepository = this;
     users.push_back(NULL);
 	users.push_back(new Admin(_filmRepository));
+	loggedInUserIds.insert(0);
 }
 
 void UserRepository::addUser(Map &parameters) {
@@ -48,6 +49,8 @@ void UserRepository::logoutCurrentUser() {
 }
 
 void UserRepository::changeCurrentUserTo(int id) {
+	if (loggedInUserIds.find(id) == loggedInUserIds.end())
+		throw BadRequestError();
 	if (id == 0) {
 		currentUser = NULL; 
 	}else if (id == 1) {

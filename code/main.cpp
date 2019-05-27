@@ -20,6 +20,8 @@ int main(int argc, char **argv) {
 		server.get("/login", new ShowPage("static/login.html"));
 		server.post("/login", new LoginHandler());
 		server.get("/logout", new LogoutHandler());
+		server.get("/addfilm", new ShowPage("static/addfilm.html"));
+		server.post("/addfilm", new AddFilmHandler());
 		server.run();
 	}catch (Server::Exception &e) {
 		cerr << e.getMessage() << endl;

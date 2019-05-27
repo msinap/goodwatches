@@ -7,8 +7,7 @@ Response* StartHandler::callback(Request* req) {
 }
 
 Response* SignupHandler::callback(Request* req) {
-	int sessionId = stringToInt(req->getSessionId());
-	UserRepository::userRepository->changeCurrentUserTo(sessionId);
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map body = req->getBodyMap();
 
 	UserRepository::userRepository->addUser(body);
@@ -19,8 +18,7 @@ Response* SignupHandler::callback(Request* req) {
 }
 
 Response* LoginHandler::callback(Request* req) {
-	int sessionId = stringToInt(req->getSessionId());
-	UserRepository::userRepository->changeCurrentUserTo(sessionId);
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map body = req->getBodyMap();
 
 	UserRepository::userRepository->login(body);
@@ -31,12 +29,21 @@ Response* LoginHandler::callback(Request* req) {
 }
 
 Response* LogoutHandler::callback(Request* req) {
-	int sessionId = stringToInt(req->getSessionId());
-	UserRepository::userRepository->changeCurrentUserTo(sessionId);
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	
 	UserRepository::userRepository->logoutCurrentUser();
 	
 	Response* res = Response::redirect("/login");
 	res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
+	return res;
+}
+
+Response* AddFilmHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map body = req->getBodyMap();
+	
+	UserRepository::userRepository->getCurrentUser()->postFilm(body);
+	
+	Response* res = Response::redirect("/login");
 	return res;
 }
