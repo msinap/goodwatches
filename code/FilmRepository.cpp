@@ -71,8 +71,9 @@ void FilmRepository::addWeightToEdgesBetween(int filmId, set<int> otherIds) {
 	}
 }
 
-void FilmRepository::outputRecommendedFilmsFor(int filmId, set<int> excludedIds) {
+vector<int> FilmRepository::getRecommendedFilmIdsFor(int filmId, set<int> excludedIds) {
 	set<pair<double, double>> sortedFilms;
+	vector<int> returnIds;
 	for (int otherId = 1; otherId < films.size(); otherId++) {
 		if (excludedIds.find(otherId) != excludedIds.end())
 			continue;
@@ -85,11 +86,13 @@ void FilmRepository::outputRecommendedFilmsFor(int filmId, set<int> excludedIds)
 	for (pair<double, double> sortMaterial : sortedFilms) {
 		int id = sortMaterial.second;
 		Film* film = getFilmById(id);
+		returnIds.push_back(id);
 		output.push_back(film->getOutput(false));
 		if (output.size() == 4)
 			break;
 	}
-	print({"Film Id", "Film Name", "Film Length", "Film Director"}, output, "\nRecommendation Film");
+	return returnIds;
+	//print({"Film Id", "Film Name", "Film Length", "Film Director"}, output, "\nRecommendation Film");
 }
 
 int FilmRepository::getLastId() {

@@ -48,6 +48,12 @@ public:
     std::map<std::string, std::string> handle(Request *req);
 };
 
+class FilmHandler : public TemplateHandler {
+public:
+    FilmHandler(std::string filePath);
+    std::map<std::string, std::string> handle(Request *req);
+};
+
 string makeHtmlOfFilms(vector<int> ids, bool detailed = true);
 
 string makeTableOfFilm(int id, bool detailed);

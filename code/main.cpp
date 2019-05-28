@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
 		server.post("/addfilm", new AddFilmHandler());
 		server.get("/profile", new ProfileHandler("static/profile.html"));
 		server.get("/home", new HomeHandler("static/home.html"));
+		server.get("/film", new FilmHandler("static/film.html"));
 		server.get("/filmtable.css", new ShowFile("static/filmtable.css", "text/css"));
 		server.post("/addmoney", new AddMoneyHandler());
 		server.run();

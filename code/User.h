@@ -31,6 +31,7 @@ public:
 	virtual void seeReadNotifications(Map &parameters);
 	virtual void outputPurchasedFilms(Map &parameters);
 	virtual vector<int> findInPurchasedFilms(Map &parameters);
+	virtual vector<int> getRecommendedFilmIds(Map &parameters);
 	
 	virtual void collectEarning();
 	virtual bool addFollower(int id);

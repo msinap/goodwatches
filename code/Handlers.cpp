@@ -78,6 +78,17 @@ Map HomeHandler::handle(Request *req) {
 	return context;
 }
 
+FilmHandler::FilmHandler(string filePath) : TemplateHandler(filePath) {}
+Map FilmHandler::handle(Request *req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	User* currentUser = UserRepository::userRepository->getCurrentUser();
+	Map context, query = req->getQueryMap();
+
+	context["filmtable"] = makeTableOfFilm(stringToInt(query["film_id"]), true);
+	context["recommendedfilmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->getRecommendedFilmIds(query));
+	return context;
+}
+
 string makeHtmlOfFilms(vector<int> ids, bool detailed) {
 	stringstream tables;
 	for (int id : ids) {
@@ -109,7 +120,7 @@ string makeTableOfFilm(int id, bool detailed) {
 		<< " 			</tr> "
 		<< " 			<tr> "
 		<< " 				<td> Price:" << data["price"] << " </td> "
-		<< " 				<td> BUY </td> "
+		<< " 				<td> <a href='film?film_id=" << id << "'> Show Details </a> </td> "
 		<< " 			</tr> "
 		<< " 		</table> ";
 	}

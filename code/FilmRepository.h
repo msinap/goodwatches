@@ -14,7 +14,7 @@ public:
     set<int> filterFilms(Map &parameters, set<int> &filmsId);
     set<int> filterAllFilms(Map &parameters);
     void outputFilmsById(set<int> filmsId);
-	void outputRecommendedFilmsFor(int filmId, set<int> excludedIds);
+	vector<int> getRecommendedFilmIdsFor(int filmId, set<int> excludedIds);
 	void addWeightToEdgesBetween(int filmId, set<int> otherIds);
 	int getSumOfAdminShares();
 	int getSumOfUncollectedMoney();

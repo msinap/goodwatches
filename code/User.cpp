@@ -100,7 +100,15 @@ void User::showFilm(Map &parameters) {
 	film->outputDetails(parameters);
 	set<int> excludedFilmIds = purchasedFilmIds;
 	excludedFilmIds.insert(filmId);
-	filmRepository->outputRecommendedFilmsFor(filmId, excludedFilmIds);
+	filmRepository->getRecommendedFilmIdsFor(filmId, excludedFilmIds);
+}
+
+vector<int> User::getRecommendedFilmIds(Map &parameters) {
+	int filmId = stringToInt(parameters["film_id"]);
+	Film* film = filmRepository->getFilmById(filmId);
+	set<int> excludedFilmIds = purchasedFilmIds;
+	excludedFilmIds.insert(filmId);
+	return filmRepository->getRecommendedFilmIdsFor(filmId, excludedFilmIds);
 }
 
 void User::outputPurchasedFilms(Map &parameters) {
