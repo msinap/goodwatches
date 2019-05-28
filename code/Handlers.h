@@ -36,6 +36,11 @@ public:
     Response* callback(Request*);
 };
 
+class BuyHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 class ProfileHandler : public TemplateHandler {
 public:
     ProfileHandler(std::string filePath);
@@ -56,6 +61,6 @@ public:
 
 string makeHtmlOfFilms(vector<int> ids, bool detailed = true);
 
-string makeTableOfFilm(int id, bool detailed);
+string makeTableOfFilm(int id, bool detailed, string linkType = "film");
 
 #endif
