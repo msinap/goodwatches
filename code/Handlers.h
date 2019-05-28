@@ -42,6 +42,11 @@ public:
     std::map<std::string, std::string> handle(Request *req);
 };
 
+class HomeHandler : public TemplateHandler {
+public:
+    HomeHandler(std::string filePath);
+    std::map<std::string, std::string> handle(Request *req);
+};
 
 string makeHtmlOfFilms(vector<int> ids, bool detailed = true);
 

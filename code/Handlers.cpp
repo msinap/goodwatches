@@ -68,6 +68,16 @@ Map ProfileHandler::handle(Request *req) {
 	return context;
 }
 
+HomeHandler::HomeHandler(string filePath) : TemplateHandler(filePath) {}
+Map HomeHandler::handle(Request *req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	User* currentUser = UserRepository::userRepository->getCurrentUser();
+	Map context, query = req->getQueryMap();
+
+	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query));
+	return context;
+}
+
 string makeHtmlOfFilms(vector<int> ids, bool detailed) {
 	stringstream tables;
 	for (int id : ids) {

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' href='filmtable.css'>
+	</head>
+	<body>
+		<form action='' target='_self' method='GET'>
+			Filter : <br> <input type='text' name='director' placeholder='Director'> <br>
+			<input type='submit' value='Submit'>
+			<input type='reset' value='Reset'>
+			<br>
+		</form>
+		<%
+			cout << context["filmtables"];
+		%>
+		<a href='/signup' target='_self' title='Signup'> Signup </a> <br>
+		<a href='/logout' target='_self' title='Logout'> Logout </a> <br>
+	</body>
+</html>
