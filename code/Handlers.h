@@ -26,11 +26,6 @@ public:
     Response* callback(Request*);
 };
 
-class ProfileHandler : public RequestHandler {
-public:
-    Response* callback(Request*);
-};
-
 class AddFilmHandler : public RequestHandler {
 public:
     Response* callback(Request*);
@@ -39,6 +34,12 @@ public:
 class AddMoneyHandler : public RequestHandler {
 public:
     Response* callback(Request*);
+};
+
+class ProfileHandler : public TemplateHandler {
+public:
+    ProfileHandler(std::string filePath);
+    std::map<std::string, std::string> handle(Request *req);
 };
 
 

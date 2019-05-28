@@ -58,40 +58,14 @@ Response* AddMoneyHandler::callback(Request* req) {
 	return res;
 }
 
-Response* ProfileHandler::callback(Request* req) {
+ProfileHandler::ProfileHandler(string filePath) : TemplateHandler(filePath) {}
+Map ProfileHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	User* currentUser = UserRepository::userRepository->getCurrentUser();
-	Map query = req->getQueryMap();
+	Map context, query = req->getQueryMap();
 
-	Response *res = new Response;
-    res->setHeader("Content-Type", "text/html");
-	stringstream body;
-	body
-	<< " <!DOCTYPE html> "
-	<< " <html> "
-	<< " 	<head> "
-	<< "  		<link rel='stylesheet' href='filmtable.css'> "
-	<< " 	</head> "
-	<< " 	<body> "
-	<< " 		<form action='/addmoney' target='_self' method='POST'> "
-	<< " 			Increase Money : <br> <input type='number' name='amount' placeholder='Amount' required> <br> "
-	<< " 			<input type='submit' value='Submit'> "
-	<< " 			<input type='reset' value='Reset'> "
-	<< " 			<br> "
-	<< " 		</form> "
-	<< " 		<form action='' target='_self' method='GET'> "
-	<< " 			Filter : <br> <input type='text' name='director' placeholder='Director'> <br> "
-	<< " 			<input type='submit' value='Submit'> "
-	<< " 			<input type='reset' value='Reset'> "
-	<< " 			<br> "
-	<< " 		</form> "
-	<< makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query))
-	<< " 		<a href='/signup' target='_self' title='Signup'> Signup </a> <br> "
-	<< " 		<a href='/logout' target='_self' title='Logout'> Logout </a> <br> "
-	<< " 	</body> "
-	<< " </html> ";
-	res->setBody(body.str());
-	return res;
+	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query));
+	return context;
 }
 
 string makeHtmlOfFilms(vector<int> ids, bool detailed) {
