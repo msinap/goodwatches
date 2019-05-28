@@ -26,6 +26,7 @@ public:
 	bool isForSale();
 	string getName();
 	int getPrice();
+	Map getData();
 private:
     Map data;
     bool forSale;

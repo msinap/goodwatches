@@ -20,6 +20,8 @@ set<int> FilmRepository::filterFilms(Map &parameters, set<int> &filmsId) {
 }
 
 set<int> FilmRepository::filterAllFilms(Map &parameters) {
+	if (parameters["director"] == "")
+		parameters.erase("director");
 	checkMayHave({"name", "min_year", "max_year", "min_rate", "price", "director"}, parameters);
     if (parameters.find("price") != parameters.end())
         checkNumeric(parameters["price"]);

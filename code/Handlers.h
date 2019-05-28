@@ -41,4 +41,9 @@ public:
     Response* callback(Request*);
 };
 
+
+string makeHtmlOfFilms(vector<int> ids, bool detailed = true);
+
+string makeTableOfFilm(int id, bool detailed);
+
 #endif

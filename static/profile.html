@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<link rel='stylesheet' href='filmtable.css'>
 	</head>
 	<body>
 		<form action='/addmoney' target='_self' method='POST'>
 			Increase Money : <br> <input type='number' name='amount' placeholder='Amount' required> <br>
+			<input type='submit' value='Submit'>
+			<input type='reset' value='Reset'>
+			<br>
+		</form>
+		<form action='' target='_self' method='GET'>
+			Filter : <br> <input type='text' name='director' placeholder='Director'> <br>
 			<input type='submit' value='Submit'>
 			<input type='reset' value='Reset'>
 			<br>

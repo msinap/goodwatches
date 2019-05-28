@@ -56,9 +56,14 @@ void User::follow(Map &parameters) {
 		publisher->getNotificationsRepository()->addNotification(new FollowYouNotification(data["username"], id));
 }
 
-void User::findFilms(Map &parameters) {
+vector<int> User::findFilms(Map &parameters) {
     set<int> filteredFilmsId = filmRepository->filterAllFilms(parameters);
-    filmRepository->outputFilmsById(filteredFilmsId);
+	vector<int> ret;
+    for (int id : filteredFilmsId) {
+		ret.push_back(id);
+	}
+	return ret;
+	//filmRepository->outputFilmsById(filteredFilmsId);
 }
 
 void User::rateFilm(Map &parameters) {

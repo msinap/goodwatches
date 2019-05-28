@@ -36,7 +36,7 @@ void Admin::rateFilm(Map &parameters) {
 void Admin::showFilm(Map &parameters) {
 	throw PermissionDeniedError();
 }
-void Admin::findFilms(Map &parameters) {
+vector<int> Admin::findFilms(Map &parameters) {
 	throw PermissionDeniedError();
 }
 void Admin::postComment(Map &parameters) {

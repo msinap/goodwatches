@@ -169,3 +169,8 @@ int Film::getAdminShare() {
 int Film::getUncollectedMoney() {
 	return uncollectedEarning;
 }
+
+Map Film::getData() {
+	data["rate"] = makePrecisionTwo(to_string(getRate()));
+	return data;
+}
