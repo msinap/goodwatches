@@ -83,6 +83,7 @@ Map FilmHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["filmid"] = query["film_id"];
 	context["filmtable"] = makeTableOfFilm(stringToInt(query["film_id"]), true, "buy");
 	context["recommendedfilmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->getRecommendedFilmIds(query));
 	return context;
@@ -92,10 +93,20 @@ Response* BuyHandler::callback(Request* req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
-	cout << "# #1 " << endl;
 	UserRepository::userRepository->getCurrentUser()->buyFilm(query);
 	
 	Response* res = Response::redirect("/login");
+	return res;
+}
+
+Response* RateHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context, query = req->getQueryMap(), body = req->getBodyMap();
+	body["film_id"] = query["film_id"];
+
+	UserRepository::userRepository->getCurrentUser()->rateFilm(body);
+	
+	Response* res = Response::redirect("/film?film_id=" + query["film_id"]);
 	return res;
 }
 

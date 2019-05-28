@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
 		server.get("/filmtable.css", new ShowFile("static/filmtable.css", "text/css"));
 		server.post("/addmoney", new AddMoneyHandler());
 		server.get("/buy", new BuyHandler());
+		server.post("/rate", new RateHandler());
 		server.run();
 	}catch (Server::Exception &e) {
 		cerr << e.getMessage() << endl;
