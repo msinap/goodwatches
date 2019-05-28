@@ -64,7 +64,7 @@ Map ProfileHandler::handle(Request *req) {
 	User* currentUser = UserRepository::userRepository->getCurrentUser();
 	Map context, query = req->getQueryMap();
 
-	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query));
+	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPurchasedFilms(query));
 	return context;
 }
 

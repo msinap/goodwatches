@@ -30,6 +30,7 @@ public:
 	virtual vector<int> findFilms(Map &parameters);
 	virtual void seeReadNotifications(Map &parameters);
 	virtual void outputPurchasedFilms(Map &parameters);
+	virtual vector<int> findInPurchasedFilms(Map &parameters);
 	
 	virtual void collectEarning();
 	virtual bool addFollower(int id);

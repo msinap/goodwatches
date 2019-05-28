@@ -66,6 +66,16 @@ vector<int> User::findFilms(Map &parameters) {
 	//filmRepository->outputFilmsById(filteredFilmsId);
 }
 
+vector<int> User::findInPurchasedFilms(Map &parameters) {
+    set<int> filteredFilmsId = filmRepository->filterFilms(parameters, purchasedFilmIds);
+	vector<int> ret;
+    for (int id : filteredFilmsId) {
+		ret.push_back(id);
+	}
+	return ret;
+	//filmRepository->outputFilmsById(filteredFilmsId);
+}
+
 void User::rateFilm(Map &parameters) {
 	int filmId = getAndCheckFilmId(parameters);
 	Film* film = filmRepository->getFilmById(filmId);
