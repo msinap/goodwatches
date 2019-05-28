@@ -23,6 +23,7 @@ int main(int argc, char **argv) {
 		server.get("/addfilm", new ShowPage("static/addfilm.html"));
 		server.post("/addfilm", new AddFilmHandler());
 		server.get("/profile", new ProfileHandler());
+		server.get("/filmtable.css", new ShowFile("static/filmtable.css", "text/" + getExtension("static/filmtable.css")));
 		server.post("/addmoney", new AddMoneyHandler());
 		server.run();
 	}catch (Server::Exception &e) {
