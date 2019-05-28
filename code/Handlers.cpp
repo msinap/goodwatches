@@ -57,3 +57,28 @@ Response* AddMoneyHandler::callback(Request* req) {
 	Response* res = Response::redirect("/profile");
 	return res;
 }
+
+Response* ProfileHandler::callback(Request* req) {
+	Response *res = new Response;
+    res->setHeader("Content-Type", "text/html");
+	stringstream body;
+	body
+	<< " <!DOCTYPE html> "
+	<< " <html> "
+	<< " 	<head> "
+	<< "  "
+	<< " 	</head> "
+	<< " 	<body> "
+	<< " 		<form action='/addmoney' target='_self' method='POST'> "
+	<< " 			Increase Money : <br> <input type='number' name='amount' placeholder='Amount' required> <br> "
+	<< " 			<input type='submit' value='Submit'> "
+	<< " 			<input type='reset' value='Reset'> "
+	<< " 			<br> "
+	<< " 		</form> "
+	<< " 		<a href='/signup' target='_self' title='Signup'> Signup </a> <br> "
+	<< " 		<a href='/logout' target='_self' title='Logout'> Logout </a> <br> "
+	<< " 	</body> "
+	<< " </html> ";
+	res->setBody(body.str());
+	return res;
+}

@@ -3,7 +3,6 @@
 
 #include "../server/server.hpp"
 #include "utility.h"
-#include "CommandManager.h"
 #include "UserRepository.h"
 #include "FilmRepository.h"
 
@@ -23,6 +22,11 @@ public:
 };
 
 class StartHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
+class ProfileHandler : public RequestHandler {
 public:
     Response* callback(Request*);
 };

@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
 	FilmRepository* filmRepository = new FilmRepository();
     UserRepository* userRepository = new UserRepository(filmRepository);
 	//CommandManager commandManager;
-    // commandManager.inputCommands();
+    //commandManager.inputCommands();
 
 	try {
 		MyServer server(argc > 1 ? atoi(argv[1]) : 5000);
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 		server.get("/logout", new LogoutHandler());
 		server.get("/addfilm", new ShowPage("static/addfilm.html"));
 		server.post("/addfilm", new AddFilmHandler());
-		server.get("/profile", new ShowPage("static/profile.html"));
+		server.get("/profile", new ProfileHandler());
 		server.post("/addmoney", new AddMoneyHandler());
 		server.run();
 	}catch (Server::Exception &e) {

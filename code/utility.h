@@ -8,6 +8,7 @@
 #include <map>
 #include <set>
 #include <cmath>
+#include <sstream>
 #include "MyServer.h"
 using namespace std;
 
