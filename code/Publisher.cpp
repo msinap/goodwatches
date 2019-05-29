@@ -51,8 +51,11 @@ void Publisher::collectEarning() {
 }
 
 void Publisher::deleteComment(Map &parameters) {
+	cout << "# #1 " << endl;
 	int id = getAndCheckFilmId(parameters);
+	cout << "# #2 " << endl;
 	filmRepository->getFilmById(id)->deleteComment(parameters);
+	cout << "# #3 " << endl;
 }
 
 void Publisher::replyComment(Map &parameters) {

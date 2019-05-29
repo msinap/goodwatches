@@ -68,6 +68,16 @@ Response* BuyHandler::callback(Request* req) {
 	return res;
 }
 
+Response* DeleteHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context, query = req->getQueryMap();
+
+	UserRepository::userRepository->getCurrentUser()->deleteFilm(query);
+	
+	Response* res = Response::redirect("/publisher");
+	return res;
+}
+
 Response* RateHandler::callback(Request* req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap(), body = req->getBodyMap();

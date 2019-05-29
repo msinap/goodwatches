@@ -41,6 +41,11 @@ public:
     Response* callback(Request*);
 };
 
+class DeleteHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 class RateHandler : public RequestHandler {
 public:
     Response* callback(Request*);
