@@ -70,7 +70,7 @@ public:
     std::map<std::string, std::string> handle(Request *req);
 };
 
-string makeHtmlOfFilms(vector<int> ids, bool detailed = true);
+string makeHtmlOfFilms(vector<int> ids, bool detailed = true, string linkType = "film");
 
 string makeTableOfFilm(int id, bool detailed, string linkType = "film");
 

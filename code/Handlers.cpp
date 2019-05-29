@@ -1,7 +1,7 @@
 #include "Handlers.h"
 
 Response* StartHandler::callback(Request* req) {
-	Response* res = Response::redirect("/login");
+	Response* res = Response::redirect("/signup");
     res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
     return res;
 }
@@ -12,7 +12,7 @@ Response* SignupHandler::callback(Request* req) {
 
 	UserRepository::userRepository->addUser(body);
 	
-	Response* res = Response::redirect("/login");
+	Response* res = Response::redirect("/home");
     res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
     return res;
 }
@@ -23,7 +23,7 @@ Response* LoginHandler::callback(Request* req) {
 
 	UserRepository::userRepository->login(body);
 	
-	Response* res = Response::redirect("/signup");
+	Response* res = Response::redirect("/home");
     res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
     return res;
 }
@@ -44,7 +44,7 @@ Response* AddFilmHandler::callback(Request* req) {
 	
 	UserRepository::userRepository->getCurrentUser()->postFilm(body);
 	
-	Response* res = Response::redirect("/login");
+	Response* res = Response::redirect("/publisher");
 	return res;
 }
 
@@ -55,6 +55,27 @@ Response* AddMoneyHandler::callback(Request* req) {
 	UserRepository::userRepository->getCurrentUser()->addMoney(body);
 	
 	Response* res = Response::redirect("/profile");
+	return res;
+}
+
+Response* BuyHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context, query = req->getQueryMap();
+
+	UserRepository::userRepository->getCurrentUser()->buyFilm(query);
+	
+	Response* res = Response::redirect("/film?film_id=" + query["film_id"]);
+	return res;
+}
+
+Response* RateHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context, query = req->getQueryMap(), body = req->getBodyMap();
+	body["film_id"] = query["film_id"];
+
+	UserRepository::userRepository->getCurrentUser()->rateFilm(body);
+	
+	Response* res = Response::redirect("/film?film_id=" + query["film_id"]);
 	return res;
 }
 
@@ -81,7 +102,7 @@ Map PublisherHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
-	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPublishedFilms(query));
+	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPublishedFilms(query), true, "delete");
 	return context;
 }
 
@@ -92,36 +113,15 @@ Map FilmHandler::handle(Request *req) {
 
 	context["filmid"] = query["film_id"];
 	context["filmtable"] = makeTableOfFilm(stringToInt(query["film_id"]), true, "buy");
-	context["recommendedfilmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->getRecommendedFilmIds(query));
+	context["recommendedfilmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->getRecommendedFilmIds(query), false);
 	return context;
 }
 
-Response* BuyHandler::callback(Request* req) {
-	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
-	Map context, query = req->getQueryMap();
 
-	UserRepository::userRepository->getCurrentUser()->buyFilm(query);
-	
-	Response* res = Response::redirect("/login");
-	return res;
-}
-
-Response* RateHandler::callback(Request* req) {
-	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
-	Map context, query = req->getQueryMap(), body = req->getBodyMap();
-	body["film_id"] = query["film_id"];
-
-	UserRepository::userRepository->getCurrentUser()->rateFilm(body);
-	
-	Response* res = Response::redirect("/film?film_id=" + query["film_id"]);
-	return res;
-}
-
-
-string makeHtmlOfFilms(vector<int> ids, bool detailed) {
+string makeHtmlOfFilms(vector<int> ids, bool detailed, string linkType) {
 	stringstream tables;
 	for (int id : ids) {
-		tables << makeTableOfFilm(id, detailed) << "<br>";
+		tables << makeTableOfFilm(id, detailed, linkType) << "<br>";
 	}
 	return tables.str();
 }
