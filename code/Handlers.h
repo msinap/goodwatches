@@ -84,4 +84,6 @@ string makeHtmlOfFilms(vector<int> ids, bool detailed = true, string linkType = 
 
 string makeTableOfFilm(int id, bool detailed, string linkType = "film");
 
+string makeHtmlOfcomments(vector<string> comments);
+
 #endif

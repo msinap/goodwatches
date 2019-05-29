@@ -33,3 +33,7 @@ bool Comment::isShown() {
 int Comment::getSenderId() {
 	return senderId;
 }
+
+string Comment::getMessage() {
+	return message;
+}

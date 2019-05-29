@@ -11,6 +11,7 @@ public:
     vector<string> getOutput();
 	bool isShown();
 	int getSenderId();
+	string getMessage();
 private:
     int id;
 	int senderId;

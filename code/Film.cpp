@@ -174,3 +174,7 @@ Map Film::getData() {
 	data["rate"] = makePrecisionTwo(to_string(getRate()));
 	return data;
 }
+
+vector<string> Film::getComments() {
+	return commentRepository->getAllComments();
+}

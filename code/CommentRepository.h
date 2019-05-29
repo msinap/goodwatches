@@ -10,6 +10,7 @@ public:
     void addComment(string message, int senderId);
     void outputAllComments();
     Comment* getCommentWithId(int id);
+	vector<string> getAllComments();
 private:
     vector<Comment*> comments;
 };

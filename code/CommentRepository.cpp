@@ -34,3 +34,11 @@ void CommentRepository::outputAllComments() {
     }
     print(output);
 }
+
+vector<string> CommentRepository::getAllComments() {
+	vector<string> ret;
+	for (int id = 1; id < comments.size(); id++) {
+		ret.push_back(getCommentWithId(id)->getMessage());
+	}
+	return ret;
+}
