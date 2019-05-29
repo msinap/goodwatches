@@ -51,6 +51,11 @@ public:
     Response* callback(Request*);
 };
 
+class AddCommentHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 class ProfileHandler : public TemplateHandler {
 public:
     ProfileHandler(std::string filePath);

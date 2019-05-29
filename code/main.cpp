@@ -31,6 +31,7 @@ int main(int argc, char **argv) {
 		server.get("/buy", new BuyHandler());
 		server.post("/rate", new RateHandler());
 		server.get("/delete", new DeleteHandler());
+		server.post("/addcomment", new AddCommentHandler());
 		server.run();
 	}catch (Server::Exception &e) {
 		cerr << e.getMessage() << endl;

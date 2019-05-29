@@ -89,6 +89,17 @@ Response* RateHandler::callback(Request* req) {
 	return res;
 }
 
+Response* AddCommentHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context, query = req->getQueryMap(), body = req->getBodyMap();
+	body["film_id"] = query["film_id"];
+
+	UserRepository::userRepository->getCurrentUser()->postComment(body);
+	
+	Response* res = Response::redirect("/film?film_id=" + query["film_id"]);
+	return res;
+}
+
 ProfileHandler::ProfileHandler(string filePath) : TemplateHandler(filePath) {}
 Map ProfileHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));

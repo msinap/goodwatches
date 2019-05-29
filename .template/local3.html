@@ -27,5 +27,16 @@
 		<%
 			cout << context["recommendedfilmtables"];
 		%>
+		<br>
+		<form action='addcomment?film_id=
+				<%
+					cout << context["filmid"];
+				%>
+				' target='_self' method='POST'>
+			Your Comment: <br> <textarea name='content' rows='5' cols='30'></textarea> <br>
+			<input type='submit' value='Submit'>
+			<input type='reset' value='Reset'>
+			<br>
+		</form>
 	</body>
 </html>
