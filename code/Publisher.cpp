@@ -89,3 +89,12 @@ int Publisher::getAndCheckFilmId(Map &parameters) {
         throw PermissionDeniedError();
     return id;
 }
+
+vector<int> Publisher::findInPublishedFilms(Map &parameters) {
+	set<int> filteredFilmsId = filmRepository->filterFilms(parameters, publishedFilmIds);
+	vector<int> ret;
+    for (int id : filteredFilmsId) {
+		ret.push_back(id);
+	}
+	return ret;
+}

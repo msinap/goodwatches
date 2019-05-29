@@ -58,6 +58,12 @@ public:
     std::map<std::string, std::string> handle(Request *req);
 };
 
+class PublisherHandler : public TemplateHandler {
+public:
+    PublisherHandler(std::string filePath);
+    std::map<std::string, std::string> handle(Request *req);
+};
+
 class FilmHandler : public TemplateHandler {
 public:
     FilmHandler(std::string filePath);

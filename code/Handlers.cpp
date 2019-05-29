@@ -61,7 +61,6 @@ Response* AddMoneyHandler::callback(Request* req) {
 ProfileHandler::ProfileHandler(string filePath) : TemplateHandler(filePath) {}
 Map ProfileHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
-	User* currentUser = UserRepository::userRepository->getCurrentUser();
 	Map context, query = req->getQueryMap();
 
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPurchasedFilms(query));
@@ -71,10 +70,18 @@ Map ProfileHandler::handle(Request *req) {
 HomeHandler::HomeHandler(string filePath) : TemplateHandler(filePath) {}
 Map HomeHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
-	User* currentUser = UserRepository::userRepository->getCurrentUser();
 	Map context, query = req->getQueryMap();
 
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query));
+	return context;
+}
+
+PublisherHandler::PublisherHandler(string filePath) : TemplateHandler(filePath) {}
+Map PublisherHandler::handle(Request *req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context, query = req->getQueryMap();
+
+	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPublishedFilms(query));
 	return context;
 }
 

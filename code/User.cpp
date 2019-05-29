@@ -43,7 +43,6 @@ void User::buyFilm(Map &parameters) {
 	money -= price;
 	filmRepository->addWeightToEdgesBetween(filmId, purchasedFilmIds);
 	purchasedFilmIds.insert(filmId);
-	cout << "# #####################################################" << endl;
 
 	User* publisher = userRepository->getUserById(film->getPublisherId());
 	publisher->getNotificationsRepository()->addNotification(new BuyYourFilmNotification(data["username"], id, film->getName(), filmId));
@@ -127,9 +126,8 @@ void User::outputPurchasedFilms(Map &parameters) {
 
 int User::getAndCheckFilmId(Map &parameters) {
 	int filmId = stringToInt(parameters["film_id"]);
-	cout << "# #### " << filmId << endl;
 	if (purchasedFilmIds.find(filmId) == purchasedFilmIds.end())
-		cout << "# DD !?!?" << endl, throw PermissionDeniedError();
+		throw PermissionDeniedError();
 	return filmId;
 }
 
@@ -190,5 +188,8 @@ void User::deleteComment(Map &parameters) {
 	throw PermissionDeniedError();
 }
 void User::collectEarning() {
+	throw PermissionDeniedError();
+}
+vector<int> User::findInPublishedFilms(Map &parameters) {
 	throw PermissionDeniedError();
 }

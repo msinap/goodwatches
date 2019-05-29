@@ -18,6 +18,7 @@ public:
 	virtual void deleteComment(Map &parameters);
     virtual void outputFollowers(Map &parameters);
     virtual void outputPublishedFilms(Map &parameters);
+	virtual vector<int> findInPublishedFilms(Map &parameters);
 protected:
     int getAndCheckFilmId(Map &parameters);
 
