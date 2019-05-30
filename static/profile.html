@@ -6,24 +6,36 @@
 	</head>
 	<body>
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
-		<form action='/addmoney' target='_self' method='POST'>
-			Increase Money : <br> <input type='number' name='amount' placeholder='Amount' required> <br>
-			<input type='submit' value='Submit'>
-			<input type='reset' value='Reset'>
-			<br>
+		
+		<div class='mui-panel'>
+		<form action='/addmoney' target='_self' method='POST' class='mui-form--inline'>
+			<legend> Add Money </legend>
+			<div class='mui-textfield'>
+				<input type='number' name='amount' placeholder='Amount' required>
+			</div>
+			<button class='mui-btn mui-btn--small mui-btn--primary'> Submit </button>
+			<button type='reset' class="mui-btn mui-btn--small mui-btn--primary"> Reset </button>
 		</form>
-		<form action='' target='_self' method='GET'>
-			Filter : <br> <input type='text' name='director' placeholder='Director'> <br>
-			<input type='submit' value='Submit'>
-			<input type='reset' value='Reset'>
-			<br>
+		</div>
+
+		<div class='mui-panel'>
+		<form action='' target='_self' method='GET' class='mui-form--inline'>
+			<legend> Filter Director </legend>
+			<div class='mui-textfield'>
+				<input type='text' name='director' placeholder='Director Name'>
+				<label> Filter By Director </label>
+			</div>
+			<button class='mui-btn mui-btn--small mui-btn--primary'> Submit </button>
+			<button type='reset' class="mui-btn mui-btn--small mui-btn--primary"> Reset </button>
 		</form>
-		<br>
+		
+
 		Purchased Films:
-		<br>
 		<%
 			cout << context["filmtables"];
 		%>
+		</div>
+
 		<a href='/signup' target='_self' title='Signup'> Signup </a> <br>
 		<a href='/logout' target='_self' title='Logout'> Logout </a> <br>
 		</div></div>

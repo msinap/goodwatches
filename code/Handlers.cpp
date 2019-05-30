@@ -178,7 +178,7 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 	}
 	table
 	<< " </table> "
-	<< " </div><br> ";
+	<< " </div> ";
 	return table.str();
 }
 
@@ -186,7 +186,7 @@ string makeHtmlOfcomments(vector<string> comments) {
 	stringstream div;
 	div << "<div>";
 	for (string comment : comments) {
-		div << comment << "<br>";
+		div << "<div class='mui-panel'>" <<  comment << "</div>";
 	}
 	div << "</div>";
 	return div.str();
