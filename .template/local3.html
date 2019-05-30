@@ -2,8 +2,10 @@
 <html>
 	<head>
 		<link rel='stylesheet' href='filmtable.css'>
+		<link href="mui.min.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<div class="mui-container-fluid" class="mui-row"><div class="mui-col-md-8 mui-col-md-offset-2"> <br>
 		Details:
 		<br>
 		<%
@@ -39,8 +41,11 @@
 			<br>
 		</form>
 		<br>
+		Other Comments:
+		<br>
 		<%
 			cout << context["comments"];
 		%>
+		</div></div>
 	</body>
 </html>

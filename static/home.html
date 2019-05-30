@@ -2,18 +2,24 @@
 <html>
 	<head>
 		<link rel='stylesheet' href='filmtable.css'>
+		<link href="mui.min.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<div class="mui-container-fluid" class="mui-row"><div class="mui-col-md-8 mui-col-md-offset-2"> <br>
 		<form action='' target='_self' method='GET'>
 			Filter : <br> <input type='text' name='director' placeholder='Director'> <br>
 			<input type='submit' value='Submit'>
 			<input type='reset' value='Reset'>
 			<br>
 		</form>
+		<br>
+		List of All Films:
+		<br>
 		<%
 			cout << context["filmtables"];
 		%>
 		<a href='/signup' target='_self' title='Signup'> Signup </a> <br>
 		<a href='/logout' target='_self' title='Logout'> Logout </a> <br>
+		</div></div>
 	</body>
 </html>

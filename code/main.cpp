@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
 		server.get("/publisher", new PublisherHandler("static/publisher.html"));
 		server.get("/film", new FilmHandler("static/film.html"));
 		server.get("/filmtable.css", new ShowFile("static/filmtable.css", "text/css"));
+		server.get("/mui.min.css", new ShowFile("static/mui.min.css", "text/css"));
 		server.post("/addmoney", new AddMoneyHandler());
 		server.get("/buy", new BuyHandler());
 		server.post("/rate", new RateHandler());
