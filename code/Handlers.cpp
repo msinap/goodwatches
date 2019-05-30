@@ -153,7 +153,8 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 	Map data = FilmRepository::filmRepository->getFilmById(id)->getData();
 	stringstream table;
 	table
-	<< " <table style='width:50%'> "
+	<< " <br><div class='mui-panel'> "
+	<< " <table class='mui-table mui-table--bordered'> "
 	<< " 	<tr> "
 	<< " 		<td colspan='2'> Name:" << data["name"] << "</td> "
 	<< " 	</tr> "
@@ -173,9 +174,11 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 		<< "	<tr> "
 		<< "		<td> Price:" << data["price"] << " </td> "
 		<< "		<td> <a href='" << linkType << "?film_id=" << id << "'> " << (linkType == "film" ? "details" : linkType) << " </a> </td> "
-		<< "	</tr> "
-		<< "</table> ";
+		<< "	</tr> ";
 	}
+	table
+	<< " </table> "
+	<< " </div><br> ";
 	return table.str();
 }
 

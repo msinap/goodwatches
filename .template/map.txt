@@ -1,1 +1,1 @@
-filmtables=
+filmtables= <br><div class='mui-panel'>  <table class='mui-table mui-table--bordered'>  	<tr>  		<td colspan='2'> Name:1</td>  	</tr>  		<td> Director:1 </td>  		<td> Length:1 </td>  	</tr>  	<tr> 	<tr> 		<td> Rate:0 </td> 		<td> Year:1 </td> 	</tr> 	<tr> 		<td colspan='2'> Summary:1 </td> 	</tr> 	<tr> 		<td> Price:1 </td> 		<td> <a href='delete?film_id=1'> delete </a> </td> 	</tr>  </table>  </div><br> <br>
