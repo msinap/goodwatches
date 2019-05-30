@@ -1,1 +1,4 @@
-filmtables= <br><div class='mui-panel'>  <table class='mui-table mui-table--bordered'>  	<tr>  		<td colspan='2'> Name:1</td>  	</tr>  		<td> Director:1 </td>  		<td> Length:1 </td>  	</tr>  	<tr> 	<tr> 		<td> Rate:0 </td> 		<td> Year:1 </td> 	</tr> 	<tr> 		<td colspan='2'> Summary:1 </td> 	</tr> 	<tr> 		<td> Price:1 </td> 		<td> <a href='delete?film_id=1'> delete </a> </td> 	</tr>  </table>  </div><br> <br>
+comments=<div>khryli khoob bood<br>awliiiiiiiiiiiiiiiiiiiii<br>the best film everrrrrrr<br>;D<br>; )<br>:)<br></div>
+filmid=1
+filmtable= <br><div class='mui-panel'>  <table class='mui-table mui-table--bordered'>  	<tr>  		<td colspan='2'> Name:1</td>  	</tr>  		<td> Director:fws </td>  		<td> Length:160 </td>  	</tr>  	<tr> 	<tr> 		<td> Rate:4 </td> 		<td> Year:2000 </td> 	</tr> 	<tr> 		<td colspan='2'> Summary:dscdw </td> 	</tr> 	<tr> 		<td> Price:100 </td> 		<td> <a href='buy?film_id=1'> buy </a> </td> 	</tr>  </table>  </div><br> 
+recommendedfilmtables=

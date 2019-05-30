@@ -6,46 +6,67 @@
 	</head>
 	<body>
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
+
+		<div class='mui-panel'>
 		Details:
 		<br>
 		<%
 			cout << context["filmtable"];
 		%>
+		</div>
+
 		<br>
-			<form action='rate?film_id=
+		<div class='mui-panel'>
+			<form class='mui-form--inline' action='rate?film_id=
 				<%
 					cout << context["filmid"];
 				%>
 				' target='_self' method='POST'>
-				Rate: <br> <input type='number' min='1' max='10' step='1' name='score' required> <br>
-				<br>
-				<input type='submit' value='Submit'>
-				<input type='reset' value='Reset'>
-				<br>
+				<legend> Your Rating: </legend>
+				<div class="mui-textfield">
+					<input type='number' min='1' max='10' step='1' name='score' required>
+					<label> Score </label>
+				</div>
+				<button class="mui-btn mui-btn--small mui-btn--primary"> Submit </button>
 			</form>
+		</div>
 		<br>
+
+		<div class='mui-panel'>
 		Recommended Films:
 		<br>
 		<%
 			cout << context["recommendedfilmtables"];
 		%>
 		<br>
+		</div>
+		
+		<div class='mui-panel'>
 		<form action='addcomment?film_id=
 				<%
 					cout << context["filmid"];
 				%>
 				' target='_self' method='POST'>
-			Your Comment: <br> <textarea name='content' rows='5' cols='30'></textarea> <br>
-			<input type='submit' value='Submit'>
-			<input type='reset' value='Reset'>
+			<legend> Your Comment: </legend>
+			<div class="mui-textfield mui-textfield">
+				<textarea name='content' rows='5' cols='30'></textarea>
+				<label> Comment </label>
+			</div>
+			<button type="submit" class="mui-btn mui-btn--primary"> Submit </button>
+			<button type="reset" class="mui-btn mui-btn--primary"> Reset </button>
 			<br>
 		</form>
 		<br>
+		</div>
+		
+		<div class='mui-panel'>
 		Other Comments:
 		<br>
 		<%
 			cout << context["comments"];
 		%>
+		</div>
+
 		</div></div>
 	</body>
 </html>

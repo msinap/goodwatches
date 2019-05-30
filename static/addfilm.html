@@ -4,18 +4,41 @@
 		<link href='mui.min.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
-		<form action='' target='_self' method='POST'>
-			Name: <br> <input type='text' name='name' required> <br>
-			Price: <br> <input type='number' name='price' required> <br>
-			Production Year: <br> <input type='number' name='year' required> <br>
-			Length: <br> <input type='number' name='length' required> <br>
-			Director: <br> <input type='text' name='director' required> <br>
-			Summary: <br> <textarea name='summary' rows='5' cols='30'></textarea> <br>
-			<input type='submit' value='Submit'>
-			<input type='reset' value='Reset'>
+		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-4 mui-col-md-offset-4'> <br>
+
+		<div class='mui-panel'>
+		<form action='' target='_self' method='POST' class='mui-form'>
+			<legend> Publish Film </legend>
+			<div class="mui-textfield mui-textfield">
+				<input type='text' name='name' required>
+				<label> Name </label>
+			</div>
+			<div class="mui-textfield mui-textfield">
+				<input type='number' name='price' required>
+				<label> Price </label>
+			</div>
+			<div class="mui-textfield mui-textfield">
+				<input type='number' name='year' required>
+				<label> Production Year </label>
+			</div>
+			<div class="mui-textfield mui-textfield">
+				<input type='number' name='length' required>
+				<label> Length </label>
+			</div>
+			<div class="mui-textfield mui-textfield">
+				<input type='text' name='director' required>
+				<label> Director </label>
+			</div>
+			<div class="mui-textfield mui-textfield">
+				<textarea name='summary' rows='5' cols='30'></textarea>
+				<label> Summary </label>
+			</div>
+			<button type="submit" class="mui-btn mui-btn--primary"> Submit </button>
+			<button type="reset" class="mui-btn mui-btn--primary"> Reset </button>
 			<br>
 		</form>
+		</div>
+		
 		<a href='/logout' target='_self' title='Logout'> Logout </a> <br>
 		</div></div>
 	</body>
