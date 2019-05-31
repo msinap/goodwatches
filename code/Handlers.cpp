@@ -156,7 +156,7 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 	<< " <br><div class='mui-panel'> "
 	<< " <table class='mui-table mui-table--bordered'> "
 	<< " 	<tr> "
-	<< " 		<td colspan='2'> Name:" << data["name"] << "</td> "
+	<< " 		<td colspan='2'> Name: <a href='film?film_id=" << id << "'> " << data["name"] << "</a> </td> "
 	<< " 	</tr> "
 	<< " 		<td> Director:" << data["director"] << " </td> "
 	<< " 		<td> Length:" << data["length"] << " </td> "
@@ -173,7 +173,8 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 		<< "	</tr> "
 		<< "	<tr> "
 		<< "		<td> Price:" << data["price"] << " </td> "
-		<< "		<td> <a href='" << linkType << "?film_id=" << id << "'> " << (linkType == "film" ? "details" : linkType) << " </a> </td> "
+		<< "        <td> <button class='mui-btn mui-btn--small mui-btn--primary' onclick=\"window.location.href='" << linkType << "?film_id=" << id << 
+					"';\">" << (linkType == "film" ? "details" : linkType) << "</button> </td>"
 		<< "	</tr> ";
 	}
 	table

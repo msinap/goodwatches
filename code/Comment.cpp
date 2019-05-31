@@ -1,4 +1,5 @@
 #include "Comment.h"
+#include "UserRepository.h"
 
 Comment::Comment(string _message, int _id, int _senderId)
     : message(_message), id(_id), shown(true), senderId(_senderId) {
@@ -35,5 +36,6 @@ int Comment::getSenderId() {
 }
 
 string Comment::getMessage() {
-	return message;
+	string username = UserRepository::userRepository->getUserById(senderId)->getUsername();
+	return username + ": \" " +  message + " \"";
 }
