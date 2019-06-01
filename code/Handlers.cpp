@@ -114,6 +114,7 @@ Map ProfileHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["director"] = query["director"];
 	context["ispublisher"] = (UserRepository::userRepository->getCurrentUser()->isPublisher() ? "true" : "false");
 	context["money"] = UserRepository::userRepository->getCurrentUser()->getMoney();
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPurchasedFilms(query));
@@ -125,6 +126,7 @@ Map HomeHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["director"] = query["director"];
 	context["ispublisher"] = (UserRepository::userRepository->getCurrentUser()->isPublisher() ? "true" : "false");
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query));
 	return context;
@@ -135,6 +137,7 @@ Map PublisherHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["director"] = query["director"];
 	context["uncollected"] = UserRepository::userRepository->getCurrentUser()->getUncollectedMoney();
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPublishedFilms(query), true, "delete");
 	return context;

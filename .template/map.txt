@@ -1,1 +1,3 @@
-money=0
+director=da
+filmtables=
+ispublisher=true
