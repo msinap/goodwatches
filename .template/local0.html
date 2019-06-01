@@ -13,9 +13,15 @@
 					<td class="mui--appbar-height"> 
 						<button class="mui-btn mui-btn--large mui-btn--primary" onclick="window.location.href='/profile';"> Profile </button> 
 					</td>
-					<td class="mui--appbar-height"> 
+					<%
+						if (context["ispublisher"] == "true") {
+					%>
+						<td class="mui--appbar-height"> 
 						<button class="mui-btn mui-btn--large mui-btn--primary" onclick="window.location.href='/publisher';"> Publisher </button> 
-					</td>
+						</td>
+					<%
+						}
+					%>
 					<td class="mui--appbar-height" align="right"> 
 						<button class="mui-btn mui-btn--large mui-btn--primary" onclick="window.location.href='/logout';"> Logout </button> 
 					</td>

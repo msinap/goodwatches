@@ -9,6 +9,7 @@ class UserRepository;
 class Publisher : public User {
 public:
     Publisher(Map &parameters, int id, UserRepository* ur, FilmRepository* fr);
+	virtual bool isPublisher();
 	virtual void collectEarning();
 	virtual bool addFollower(int id);
 	virtual string getUncollectedMoney();

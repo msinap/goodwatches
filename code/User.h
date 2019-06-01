@@ -17,6 +17,7 @@ public:
     string getEmail();
 	int getId();
 	
+	virtual bool isPublisher();
 	virtual string getMoney();
     
 	virtual void follow(Map &parameters);

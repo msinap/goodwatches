@@ -107,3 +107,7 @@ string Publisher::getUncollectedMoney() {
 	}
 	return intToString(sum);
 }
+
+bool Publisher::isPublisher() {
+	return true;
+}

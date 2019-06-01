@@ -163,6 +163,9 @@ string User::getEmail() {
 int User::getId() {
 	return id;
 }
+bool User::isPublisher() {
+	return false;
+}
 
 bool User::addFollower(int id) {
     throw PermissionDeniedError();

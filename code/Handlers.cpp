@@ -114,6 +114,7 @@ Map ProfileHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["ispublisher"] = (UserRepository::userRepository->getCurrentUser()->isPublisher() ? "true" : "false");
 	context["money"] = UserRepository::userRepository->getCurrentUser()->getMoney();
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPurchasedFilms(query));
 	return context;
@@ -124,6 +125,7 @@ Map HomeHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["ispublisher"] = (UserRepository::userRepository->getCurrentUser()->isPublisher() ? "true" : "false");
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findFilms(query));
 	return context;
 }
@@ -144,6 +146,7 @@ Map FilmHandler::handle(Request *req) {
 	Map context, query = req->getQueryMap();
 	int filmId = stringToInt(query["film_id"]);
 
+	context["ispublisher"] = (UserRepository::userRepository->getCurrentUser()->isPublisher() ? "true" : "false");
 	context["filmid"] = query["film_id"];
 	context["filmtable"] = makeTableOfFilm(filmId, true, "buy");
 	context["recommendedfilmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->getRecommendedFilmIds(query), false);
