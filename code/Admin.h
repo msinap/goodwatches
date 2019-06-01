@@ -8,7 +8,7 @@
 class Admin : public User {
 public:
     Admin(FilmRepository* fr);
-	virtual void outputMoney();
+	virtual string getMoney();
 
 	virtual NotificationsRepository* getNotificationsRepository();
     virtual void follow(Map &parameters);

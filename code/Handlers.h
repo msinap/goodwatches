@@ -36,6 +36,11 @@ public:
     Response* callback(Request*);
 };
 
+class CollectMoneyHandler : public RequestHandler {
+public:
+    Response* callback(Request*);
+};
+
 class BuyHandler : public RequestHandler {
 public:
     Response* callback(Request*);

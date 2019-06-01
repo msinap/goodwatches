@@ -11,6 +11,7 @@ public:
     Publisher(Map &parameters, int id, UserRepository* ur, FilmRepository* fr);
 	virtual void collectEarning();
 	virtual bool addFollower(int id);
+	virtual string getUncollectedMoney();
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);

@@ -26,6 +26,10 @@
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
 		
 		<div class='mui-panel'>
+		Current Money:
+		<%
+			cout << context["money"];
+		%>
 		<form action='/addmoney' target='_self' method='POST' class='mui-form--inline'>
 			<legend> Add Money </legend>
 			<div class='mui-textfield'>

@@ -143,8 +143,9 @@ void User::makeAllNotificationsRead() {
 	notificationsRepository->readAllNotifications();
 }
 
-void User::outputMoney() {
-	print(vector<string> (1, intToString(money)));
+string User::getMoney() {
+	return intToString(money);
+	//print(vector<string> (1, intToString(money)));
 }
 
 NotificationsRepository* User::getNotificationsRepository() {
@@ -188,6 +189,9 @@ void User::deleteComment(Map &parameters) {
 	throw PermissionDeniedError();
 }
 void User::collectEarning() {
+	throw PermissionDeniedError();
+}
+string User::getUncollectedMoney() {
 	throw PermissionDeniedError();
 }
 vector<int> User::findInPublishedFilms(Map &parameters) {

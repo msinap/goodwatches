@@ -17,7 +17,7 @@ public:
     string getEmail();
 	int getId();
 	
-	virtual void outputMoney();
+	virtual string getMoney();
     
 	virtual void follow(Map &parameters);
 	virtual void buyFilm(Map &parameters);
@@ -35,6 +35,7 @@ public:
 	
 	virtual void collectEarning();
 	virtual bool addFollower(int id);
+	virtual string getUncollectedMoney();
     virtual void postFilm(Map &parameters);
     virtual void editFilm(Map &parameters);
     virtual void deleteFilm(Map &parameters);

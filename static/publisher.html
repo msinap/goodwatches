@@ -30,6 +30,16 @@
 			<button class="mui-btn mui-btn--primary" onclick="window.location.href='/addfilm';"> Add Film </button> 
 		</div>
 
+		<div class='mui-panel'>
+			Collect Earnings: <br>
+			Current Uncollected Earnings: 
+			<%
+				cout << context["uncollected"];
+			%>
+			<br>
+			<button class="mui-btn mui-btn--primary" onclick="window.location.href='/collectmoney';"> Collect Money </button> 
+		</div>
+
 
 		<div class='mui-panel'>
 		<form action='' target='_self' method='GET' class='mui-form--inline'>

@@ -26,8 +26,17 @@
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
 		
 		<div class='mui-panel'>
-			Publish Film:
-			<button class="mui-btn mui-btn--large mui-btn--primary" onclick="window.location.href='/addfilm';"> Add Film </button> 
+			Publish Film: <br>
+			<button class="mui-btn mui-btn--primary" onclick="window.location.href='/addfilm';"> Add Film </button> 
+		</div>
+
+		<div class='mui-panel'>
+			Collect Earnings: <br>
+			Current Uncollected Earnings: 
+			<%
+				cout << context["uncollected"];
+			%>
+			<button class="mui-btn mui-btn--primary" onclick="window.location.href='/collectmoney';"> Collect Money </button> 
 		</div>
 
 

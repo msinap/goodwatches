@@ -96,7 +96,7 @@ void CommandManager::proccessGetCommands(vector<string> &remainingWordsOfLine) {
 	}else if (word == "money") {
 		if (!remainingWordsOfLine.empty())
 			throw BadRequestError();
-		userRepository->getCurrentUser()->outputMoney();
+		userRepository->getCurrentUser()->getMoney();
 		return;
 	}
 

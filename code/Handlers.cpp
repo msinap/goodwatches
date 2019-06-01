@@ -58,6 +58,15 @@ Response* AddMoneyHandler::callback(Request* req) {
 	return res;
 }
 
+Response* CollectMoneyHandler::callback(Request* req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+
+	UserRepository::userRepository->getCurrentUser()->collectEarning();
+	
+	Response* res = Response::redirect("/publisher");
+	return res;
+}
+
 Response* BuyHandler::callback(Request* req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
@@ -105,6 +114,7 @@ Map ProfileHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["money"] = UserRepository::userRepository->getCurrentUser()->getMoney();
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPurchasedFilms(query));
 	return context;
 }
@@ -123,6 +133,7 @@ Map PublisherHandler::handle(Request *req) {
 	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
 	Map context, query = req->getQueryMap();
 
+	context["uncollected"] = UserRepository::userRepository->getCurrentUser()->getUncollectedMoney();
 	context["filmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->findInPublishedFilms(query), true, "delete");
 	return context;
 }

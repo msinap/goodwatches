@@ -98,3 +98,12 @@ vector<int> Publisher::findInPublishedFilms(Map &parameters) {
 	}
 	return ret;
 }
+
+string Publisher::getUncollectedMoney() {
+	int sum = 0;
+	for (int filmId : publishedFilmIds) {
+		Film* film = filmRepository->getFilmById(filmId);
+		sum += film->getUncollectedMoney();
+	}
+	return intToString(sum);
+}

@@ -29,6 +29,7 @@ int main(int argc, char **argv) {
 		server.get("/filmtable.css", new ShowFile("static/filmtable.css", "text/css"));
 		server.get("/mui.min.css", new ShowFile("static/mui.min.css", "text/css"));
 		server.post("/addmoney", new AddMoneyHandler());
+		server.get("/collectmoney", new CollectMoneyHandler());
 		server.get("/buy", new BuyHandler());
 		server.post("/rate", new RateHandler());
 		server.get("/delete", new DeleteHandler());

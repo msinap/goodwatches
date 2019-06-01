@@ -6,7 +6,7 @@ Admin::Admin(FilmRepository* fr) {
 	data["password"] = hashFletcherCRC("admin");
 }
 
-void Admin::outputMoney() {
+string Admin::getMoney() {
 	int benefit = filmRepository->getSumOfAdminShares();
 	int uncollectedMoneyOfPublishers = filmRepository->getSumOfUncollectedMoney();
 	print(vector<string> (1, intToString(benefit + uncollectedMoneyOfPublishers)));
