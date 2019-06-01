@@ -2,7 +2,7 @@
 
 Response* StartHandler::callback(Request* req) {
 	Response* res = Response::redirect("/signup");
-    res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
+    res->setSessionId("0");
     return res;
 }
 
@@ -149,6 +149,7 @@ Map FilmHandler::handle(Request *req) {
 	Map context, query = req->getQueryMap();
 	int filmId = stringToInt(query["film_id"]);
 
+	context["rate"] = FilmRepository::filmRepository->getFilmById(filmId)->getRateOfUser(UserRepository::userRepository->getCurrentUserId());
 	context["ispublisher"] = (UserRepository::userRepository->getCurrentUser()->isPublisher() ? "true" : "false");
 	context["filmid"] = query["film_id"];
 	context["filmtable"] = makeTableOfFilm(filmId, true, "buy");

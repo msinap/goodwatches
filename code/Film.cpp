@@ -77,6 +77,12 @@ void Film::newRate(Map &parameters, int userId) {
 	userRates[userId] = score;
 }
 
+string Film::getRateOfUser(int userId) {
+	if (userRates.find(userId) == userRates.end())
+		return "";
+	return intToString(userRates[userId]);
+}
+
 void Film::deleteComment(Map &parameters) {
 	if (!forSale)
 		throw NotFoundError();

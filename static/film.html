@@ -48,7 +48,7 @@
 				' target='_self' method='POST'>
 				<legend> Your Rating: </legend>
 				<div class="mui-textfield">
-					<input type='number' min='1' max='10' step='1' name='score' required>
+					<input type='number' min='1' max='10' step='1' name='score' required value='<% cout << context["rate"]; %>'>
 					<label> Score </label>
 				</div>
 				<button class="mui-btn mui-btn--small mui-btn--primary"> Submit </button>
