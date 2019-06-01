@@ -22,8 +22,8 @@ Response* LoginHandler::callback(Request* req) {
 	Map body = req->getBodyMap();
 
 	UserRepository::userRepository->login(body);
-	
-	Response* res = Response::redirect("/home");
+
+	Response* res = Response::redirect((UserRepository::userRepository->getCurrentUserId() != 1) ? "/home" : "/admin");
     res->setSessionId(intToString(UserRepository::userRepository->getCurrentUserId()));
     return res;
 }
@@ -148,6 +148,15 @@ Map FilmHandler::handle(Request *req) {
 	context["filmtable"] = makeTableOfFilm(filmId, true, "buy");
 	context["recommendedfilmtables"] = makeHtmlOfFilms(UserRepository::userRepository->getCurrentUser()->getRecommendedFilmIds(query), false);
 	context["comments"] = makeHtmlOfcomments(FilmRepository::filmRepository->getFilmById(filmId)->getComments());
+	return context;
+}
+
+AdminHandler::AdminHandler(string filePath) : TemplateHandler(filePath) {}
+Map AdminHandler::handle(Request *req) {
+	UserRepository::userRepository->changeCurrentUserTo(stringToInt(req->getSessionId()));
+	Map context;
+
+	context["money"] = UserRepository::userRepository->getCurrentUser()->getMoney();
 	return context;
 }
 

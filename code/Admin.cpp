@@ -4,12 +4,13 @@ Admin::Admin(FilmRepository* fr) {
 	filmRepository = fr;
 	data["username"] = "admin";
 	data["password"] = hashFletcherCRC("admin");
+	id = 1;
 }
 
 string Admin::getMoney() {
 	int benefit = filmRepository->getSumOfAdminShares();
 	int uncollectedMoneyOfPublishers = filmRepository->getSumOfUncollectedMoney();
-	print(vector<string> (1, intToString(benefit + uncollectedMoneyOfPublishers)));
+	return intToString(benefit + uncollectedMoneyOfPublishers);
 }
 
 void Admin::makeAllNotificationsRead() {

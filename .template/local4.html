@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel='stylesheet' href='filmtable.css'>
+		<link href='mui.min.css' rel='stylesheet' type='text/css'>
+	</head>
+	<header class="mui-appbar mui--z2">	
+		<table width="75%" align="center">
+				<tr>
+					<td class="mui--appbar-height" align="right"> 
+						<button class="mui-btn mui-btn--large mui-btn--primary" onclick="window.location.href='/logout';"> Logout </button> 
+					</td>
+				</tr>
+			</table>
+    </header>
+	<body>
+		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
+		
+		<div class='mui-panel'>
+		Site's Profit Until Now:
+		<%
+			cout << context["money"];
+		%>
+		</div>
+
+		</div></div>
+	</body>
+</html>
