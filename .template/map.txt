@@ -1,6 +1,3 @@
-comments=<div></div>
-filmid=1
-filmtable= <br><div class='mui-panel'>  <table class='mui-table mui-table--bordered'>  	<tr>  		<td colspan='2'> Name: <a href='film?film_id=1'> 1</a> </td>  	</tr>  		<td> Director:1 </td>  		<td> Length:1 </td>  	</tr>  	<tr> 	<tr> 		<td> Rate:0 </td> 		<td> Year:1 </td> 	</tr> 	<tr> 		<td colspan='2'> Summary:1 </td> 	</tr> 	<tr> 		<td> Price:1 </td>         <td> <button class='mui-btn mui-btn--small mui-btn--primary' onclick="window.location.href='buy?film_id=1';">buy</button> </td>	</tr>  </table>  </div> 
-ispublisher=true
-rate=
-recommendedfilmtables=
+director=
+filmtables=
+uncollected=0

@@ -46,7 +46,7 @@
 					cout << context["filmid"];
 				%>
 				' target='_self' method='POST'>
-				<legend> Your Rating: </legend>
+				<legend align='center'> Your Rating: </legend>
 				<div class="mui-textfield">
 					<input type='number' min='1' max='10' step='1' name='score' required value='<% cout << context["rate"]; %>'>
 					<label> Score </label>
@@ -71,7 +71,7 @@
 					cout << context["filmid"];
 				%>
 				' target='_self' method='POST'>
-			<legend> Your Comment: </legend>
+			<legend align='center'> Your Comment: </legend>
 			<div class="mui-textfield mui-textfield">
 				<textarea name='content' rows='3' cols='30'></textarea>
 				<label> Comment </label>
