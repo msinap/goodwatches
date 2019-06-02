@@ -171,7 +171,7 @@ Map AdminHandler::handle(Request *req) {
 string makeHtmlOfFilms(vector<int> ids, bool detailed, string linkType) {
 	stringstream tables;
 	for (int id : ids) {
-		tables << makeTableOfFilm(id, detailed, linkType) << "<br>";
+		tables << makeTableOfFilm(id, detailed, linkType);
 	}
 	return tables.str();
 }
@@ -180,7 +180,7 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 	Map data = FilmRepository::filmRepository->getFilmById(id)->getData();
 	stringstream table;
 	table
-	<< " <br><div class='mui-panel'> "
+	<< " <div class='mui-panel'> "
 	<< " <table class='mui-table mui-table--bordered'> "
 	<< " 	<tr> "
 	<< " 		<td colspan='2' class='mui--text-subhead'> Name: <a href='film?film_id=" << id << "'> " << data["name"] << "</a> </td> "
@@ -200,7 +200,7 @@ string makeTableOfFilm(int id, bool detailed, string linkType) {
 		<< "	</tr> "
 		<< "	<tr> "
 		<< "		<td> Price: " << data["price"] << " </td> "
-		<< "        <td> <button class='mui-btn mui-btn--small mui-btn--primary' onclick=\"window.location.href='" << linkType << 
+		<< "        <td> <button class='mui-btn mui-btn--small mui-btn--raised' onclick=\"window.location.href='" << linkType << 
 					"?film_id=" << id << "';\">" << (linkType == "film" ? "details" : linkType) << "</button> </td>"
 		<< "	</tr> ";
 	}

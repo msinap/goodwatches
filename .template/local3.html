@@ -32,8 +32,8 @@
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
 
 		<div class='mui-panel'>
-		Details:
-		<br>
+		<div class='mui--text-headline' align='center'> Film Details </div> <br>
+		
 		<%
 			cout << context["filmtable"];
 		%>
@@ -41,12 +41,13 @@
 
 		<br>
 		<div class='mui-panel'>
+			<div class='mui--text-headline' align='center'> Rate </div> <br>
+
 			<form class='mui-form--inline' action='rate?film_id=
 				<%
 					cout << context["filmid"];
 				%>
 				' target='_self' method='POST'>
-				<legend align='center'> Your Rating: </legend>
 				<div class="mui-textfield">
 					<input type='number' min='1' max='10' step='1' name='score' required value='<% cout << context["rate"]; %>'>
 					<label> Score </label>
@@ -55,40 +56,39 @@
 			</form>
 		</div>
 		<br>
-
-		<div class='mui-panel'>
-		Recommended Films:
-		<br>
-		<%
-			cout << context["recommendedfilmtables"];
-		%>
-		<br>
-		</div>
 		
 		<div class='mui-panel'>
+		<div class='mui--text-headline' align='center'> Comment </div> <br>
+
 		<form action='addcomment?film_id=
 				<%
 					cout << context["filmid"];
 				%>
 				' target='_self' method='POST'>
-			<legend align='center'> Your Comment: </legend>
 			<div class="mui-textfield mui-textfield">
-				<textarea name='content' rows='3' cols='30'></textarea>
-				<label> Comment </label>
+				<textarea name='content' rows='3' cols='30' required></textarea>
+				<label> Your Comment: </label>
 			</div>
 			<button type="submit" class="mui-btn mui-btn--primary"> Submit </button>
 			<button type="reset" class="mui-btn mui-btn--primary"> Reset </button>
-			<br>
+			<br> <br>
+
+			<div class='mui-panel'>
+				<div class='mui--text-subhead'> Other Comments: </div> <br>
+				<%
+					cout << context["comments"];
+				%>
+			</div>
 		</form>
-		<br>
 		</div>
-		
+
 		<div class='mui-panel'>
-		Other Comments:
-		<br><br>
-		<%
-			cout << context["comments"];
-		%>
+			<div class='mui--text-headline' align='center'> Recommended Films </div> <br>
+		
+			<%
+			cout << context["recommendedfilmtables"];
+			%>
+			<br>
 		</div>
 
 		</div></div>

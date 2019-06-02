@@ -26,35 +26,36 @@
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
 		
 		<div class='mui-panel'>
+			<div class='mui--text-headline' align='center'> Publish Film </div> <br>
 			<span class='mui--text-subhead'> Add New Film: &nbsp; </span>
 			<button class="mui-btn mui-btn--primary" onclick="window.location.href='/addfilm';"> Publish </button> 
 		</div>
 
 		<div class='mui-panel'>
-			<div class='mui--text-headline' align='center'> Collect Earnings </div>
+			<div class='mui--text-headline' align='center'> Collect Earnings </div> <br>
 			<span class='mui--text-subhead'>
-			Uncollected Earnings: &nbsp;
+			Uncollected Earnings:
 			<%
 				cout << context["uncollected"];
 			%>
 			</span>
-			&nbsp;
+			&nbsp;&nbsp;
 			<button class="mui-btn mui-btn--primary" onclick="window.location.href='/collectmoney';"> Collect </button> 
 		</div>
 
 
 		<div class='mui-panel'>
 		
-		<div class='mui--text-headline' align='center'> Published Films </div>
+		<div class='mui--text-headline' align='center'> Published Films </div> <br>
 		
-		<form action='' target='_self' method='GET' class='mui-form--inline'>
+		<form action='' target='_self' method='GET' class='mui-form--inline' align='center'>
 			<div class='mui-textfield'>
 				<input type='text' name='director' placeholder='Director Name' value='<%cout<<context["director"];%>' > 
-				<label> Filter By Director </label>
+				<label align='left'> Filter By Director </label>
 			</div>
 			<button class='mui-btn mui-btn--small mui-btn--primary'> Submit </button>
 		</form>
-
+		<br>
 		<%
 			cout << context["filmtables"];
 		%>

@@ -32,12 +32,17 @@
 		<div class='mui-container-fluid' class='mui-row'><div class='mui-col-md-8 mui-col-md-offset-2'> <br>
 		
 		<div class='mui-panel'>
-		Current Money:
+		<div class='mui--text-headline' align='center'> Money </div> <br>
+		
+		<div class='mui--text-subhead'>
+		Account's Money:
 		<%
 			cout << context["money"];
 		%>
+		</div>
+
 		<form action='/addmoney' target='_self' method='POST' class='mui-form--inline'>
-			<legend> Add Money </legend>
+			<span class='mui--text-subhead'> Add Money to Account: &nbsp; </legend>
 			<div class='mui-textfield'>
 				<input type='number' name='amount' placeholder='Amount' required>
 			</div>
@@ -46,16 +51,17 @@
 		</div>
 
 		<div class='mui-panel'>
-		<form action='' target='_self' method='GET' class='mui-form--inline'>
+		<div class='mui--text-headline' align='center'> Purchased Films </div> <br>
+
+		<form action='' target='_self' method='GET' class='mui-form--inline' align='center'>
 			<div class='mui-textfield'>
 				<input type='text' name='director' placeholder='Director Name' value='<%cout<<context["director"];%>' > 
-				<label> Filter By Director </label>
+				<label align='left'> Filter By Director </label>
 			</div>
 			<button class='mui-btn mui-btn--small mui-btn--primary'> Submit </button>
 		</form>
 		
 		<br>
-		Purchased Films:
 		<%
 			cout << context["filmtables"];
 		%>
